@@ -11,6 +11,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private int magazineCapacity;
     [SerializeField] private int maxAmmunitionCount;
     [SerializeField] private float fireRate;
+    [SerializeField] private float reloadTime;
     [SerializeField] private ProjectileData projectileData;
     [SerializeField] private FireModeType fireMode;
     [SerializeField] private Sprite onGroundSprite;
@@ -21,6 +22,7 @@ public class WeaponData : ScriptableObject
     public int MagazineCapacity => magazineCapacity;
     public int MaxAmmunitionCount => maxAmmunitionCount;
     public float FireRate => fireRate;
+    public float ReloadTime => reloadTime;
     public ProjectileData ProjectileData => projectileData;
     public FireModeType FireMode => fireMode;
     public Sprite OnGroundSprite => onGroundSprite;
