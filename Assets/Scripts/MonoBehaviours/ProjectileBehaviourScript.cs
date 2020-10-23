@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Security.Cryptography;
+using UnityEngine;
 public class ProjectileBehaviourScript : MonoBehaviour
 {
+    [SerializeField] private int aliveTime;
+    
     private ProjectileData _projectileData;
     private Vector2 _direction;
     private Rigidbody2D _rigidbody;
@@ -10,13 +15,14 @@ public class ProjectileBehaviourScript : MonoBehaviour
     {
         _projectileData = projectileData;
         _direction = spawnDirection;
+        
+        _rigidbody.isKinematic = _projectileData.IsKinematic;
+        _spriteRenderer.sprite = _projectileData.ProjectileSprite;
     }
     
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _rigidbody.isKinematic = _projectileData.IsKinematic;
-
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -26,6 +32,8 @@ public class ProjectileBehaviourScript : MonoBehaviour
         {
             _rigidbody.AddForce(_projectileData.ProjectileSpeed * _direction, ForceMode2D.Impulse);
         }
+
+        StartCoroutine(WaitForDestroy());
     }
 
     private void Update()
@@ -50,5 +58,17 @@ public class ProjectileBehaviourScript : MonoBehaviour
         {
             // projectile breaks
         }
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        Destroy(gameObject);
+    }
+
+    private IEnumerator WaitForDestroy()
+    {
+        yield return new WaitForSeconds(aliveTime);
+        Destroy(this.gameObject);
     }
 }

@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
-  m_Name: NewWeaponData
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  magazineCapacity: 0
-  maxAmmunitionCount: 0
-  fireRate: 1
-  projectileData: {fileID: 0}
+  magazineCapacity: 15
+  maxAmmunitionCount: 45
+  fireRate: 2
+  reloadTime: 2
+  projectileData: {fileID: 11400000, guid: 1170e62700ef5bb478973b72c7154636, type: 2}
   fireMode: 0
+  shootStrategy: {fileID: 11400000, guid: 19fea44de78b0b84a9b4d6913ac0e02b, type: 2}
   onGroundSprite: {fileID: 0}
   inInventorySprite: {fileID: 0}
   inactiveSprite: {fileID: 0}
-  activeSprite: {fileID: 0}
+  activeSprite: {fileID: 21300000, guid: f79e828e3db14444c8331334cb5a364c, type: 3}

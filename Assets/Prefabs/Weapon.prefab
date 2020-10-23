@@ -121,4 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58e9adf38d7a6846ba4d06fbc4d34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponData: {fileID: 0}
+  weaponOnGroundBehaviourPrefab: {fileID: 1223438287854157239, guid: c94bd5b1e4d3c4f46b36924df65c1505,
+    type: 3}
+  weaponData: {fileID: 0}
+  weaponState: 0
+  currentMagazineAmmunition: 0
+  currentTotalAmmunition: 0

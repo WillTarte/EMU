@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f89b99393d84492c8cfa7097e3e19757, type: 3}
-  m_Name: NewBulletData
+  m_Script: {fileID: 11500000, guid: 4302f340161a4627b80c484875fe9b8f, type: 3}
+  m_Name: RocketLauncherShootStrat
   m_EditorClassIdentifier: 
-  projectileSprite: {fileID: 0}
-  destroyedSprite: {fileID: 0}
-  projectileSpeed: 0
-  projectileBaseDamage: 0
-  isKinematic: 0
-  projectilePrefab: {fileID: 0}
+  canReload: 1
+  canShoot: 0
