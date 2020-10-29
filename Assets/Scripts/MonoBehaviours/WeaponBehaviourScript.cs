@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 /// <summary>
 /// Controls the behavior of a weapon. 
@@ -13,12 +12,12 @@ public class WeaponBehaviourScript : MonoBehaviour
     // 4. Make sure the weapon gameobject does not have more ammo than allowed by the WeaponData instance
     // 5. Make sure proper keybindings are set and used
     // 6. When player walks close to weapon OnGround, then display interactable prompt
-
-    [SerializeField] private GameObject weaponOnGroundBehaviourPrefab;
+    
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private WeaponState weaponState;
     [SerializeField] private int currentMagazineAmmunition;
     [SerializeField] private int currentTotalAmmunition;
+    private WeaponOnGroundBehaviour _weaponOnGroundBehaviour;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
     
@@ -42,7 +41,10 @@ public class WeaponBehaviourScript : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.sleepMode = RigidbodySleepMode2D.StartAsleep;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _weaponOnGroundBehaviour = GetComponent<WeaponOnGroundBehaviour>();
+        _weaponOnGroundBehaviour.Init(weaponData);
         
         //TODO remove this
         Direction = Vector2.right;
@@ -53,19 +55,20 @@ public class WeaponBehaviourScript : MonoBehaviour
         switch (weaponState)
         {
             case WeaponState.OnGround:
-                _spriteRenderer.sprite = weaponData.OnGroundSprite;
-                _rigidbody.isKinematic = false;
-                GameObject groundBehaviour = Instantiate(weaponOnGroundBehaviourPrefab, transform);
-                groundBehaviour.GetComponent<WeaponOnGroundInteractBehaviour>().Init(this);
-                groundBehaviour.SetActive(true);
+                _weaponOnGroundBehaviour.enabled = true;
+                _rigidbody.WakeUp();
                 break;
             case WeaponState.InInventory:
+                _weaponOnGroundBehaviour.enabled = false;
                 _spriteRenderer.sprite = weaponData.InInventorySprite;
+                _rigidbody.Sleep();
                 break;
             case WeaponState.Inactive:
+                _weaponOnGroundBehaviour.enabled = false;
                 _spriteRenderer.sprite = weaponData.InactiveSprite;
                 break;
             case WeaponState.Active:
+                _weaponOnGroundBehaviour.enabled = false;
                 _spriteRenderer.sprite = weaponData.ActiveSprite;
                 break;
             default:
