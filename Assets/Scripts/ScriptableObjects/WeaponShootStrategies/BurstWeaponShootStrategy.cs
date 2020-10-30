@@ -77,7 +77,7 @@ public class BurstWeaponShootStrategy: WeaponShootStrategy
                     angle = 180.0f + angle;
                 }
             }*/
-            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.transform.position, Quaternion.identity);
+            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
             Vector2 projDir =
                 Vector2.ClampMagnitude(new Vector2(weapon.Direction.x, (float) Math.Tan(angle) * weapon.Direction.x),1.0f);
             projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, projDir);

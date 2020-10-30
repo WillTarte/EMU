@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Security.Cryptography;
+﻿using System.Collections;
 using UnityEngine;
+
+/// <summary>
+/// Controls the behavior of a projectile
+/// </summary>
 public class ProjectileBehaviourScript : MonoBehaviour
 {
     [SerializeField] private int aliveTime;
@@ -46,6 +48,7 @@ public class ProjectileBehaviourScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        //todo
         if (other.gameObject.CompareTag("Enemy"))
         {
             // Make the enemy take damage
@@ -69,6 +72,6 @@ public class ProjectileBehaviourScript : MonoBehaviour
     private IEnumerator WaitForDestroy()
     {
         yield return new WaitForSeconds(aliveTime);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

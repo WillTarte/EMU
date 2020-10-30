@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public interface IWeaponShootStrategy
 {
-    //todo
+    //todo?
     void Shoot(/*Player player,*/ WeaponBehaviourScript weapon);
     void Reload(WeaponBehaviourScript weapon);
 }

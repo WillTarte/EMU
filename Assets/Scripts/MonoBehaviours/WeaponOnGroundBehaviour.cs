@@ -1,6 +1,9 @@
-﻿using System;
+﻿
 using UnityEngine;
 
+/// <summary>
+/// Controls the behavior of a weapon when it is on the ground
+/// </summary>
 public class WeaponOnGroundBehaviour : MonoBehaviour
 {
 

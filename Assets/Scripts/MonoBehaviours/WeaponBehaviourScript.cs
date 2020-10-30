@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+
 /// <summary>
 /// Controls the behavior of a weapon. 
 /// </summary>
@@ -8,11 +9,10 @@ public class WeaponBehaviourScript : MonoBehaviour
     // TODO: 
     // 1. Make the Active weapon follow the direction of the player.
     // 2. Change state of the weapon based on game state
-    // 3. Make the projectiles spawn at the end of the weapon
+    // 3. Make the projectiles spawn at the end of the weapon (+- done)
     // 4. Make sure the weapon gameobject does not have more ammo than allowed by the WeaponData instance
     // 5. Make sure proper keybindings are set and used
-    // 6. When player walks close to weapon OnGround, then display interactable prompt
-    
+
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private WeaponState weaponState;
     [SerializeField] private int currentMagazineAmmunition;
@@ -20,11 +20,33 @@ public class WeaponBehaviourScript : MonoBehaviour
     private WeaponOnGroundBehaviour _weaponOnGroundBehaviour;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
+    private Vector2 _direction;
     
+    
+    public Vector2 WeaponSpriteEndPosition => (Vector2) transform.position + (_direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
     public WeaponData WeaponData => weaponData;
-    public Vector2 Direction { get; private set; }
 
-    public WeaponState WeaponStateProp => weaponState;
+    public Vector2 Direction
+    {
+        get => _direction;
+        set
+        {
+            _direction = value;
+            if (_direction == Vector2.left)
+            {
+                _spriteRenderer.flipX = true;
+            } else if (_direction.Equals(Vector2.right))
+            {
+                _spriteRenderer.flipX = false;
+            }
+        }
+    }
+
+    public WeaponState WeaponStateProp
+    {
+        get => weaponState;
+        set => weaponState = value;
+    }
 
     public int CurrentMagazineAmmunition
     {
@@ -47,7 +69,7 @@ public class WeaponBehaviourScript : MonoBehaviour
         _weaponOnGroundBehaviour.Init(weaponData);
         
         //TODO remove this
-        Direction = Vector2.right;
+        Direction = Vector2.left;
     }
 
     private void Update()
@@ -81,11 +103,11 @@ public class WeaponBehaviourScript : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 Shoot();
-            } else if (Input.GetKeyDown(KeyCode.R))
+            } 
+            else if (Input.GetKeyDown(KeyCode.R))
             {
                 Reload();
             }
-            
         }
     }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -17,7 +16,6 @@ public class AutoWeaponShootStrategy: WeaponShootStrategy
     {
         if (canShoot && weapon.CurrentMagazineAmmunition > 0)
         {
-            //todo is this the right way to do full auto
             weapon.StartCoroutine(WaitForShot(weapon));
         }
     }
@@ -56,9 +54,8 @@ public class AutoWeaponShootStrategy: WeaponShootStrategy
     
     protected override void SpawnProjectile(WeaponBehaviourScript weapon)
     {
-        //todo direction
-        GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.transform.position, Quaternion.identity);
-        projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, Vector2.right);
+        GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
+        projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction);
         projectile.SetActive(true);
     }
 
