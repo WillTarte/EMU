@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Player.States;
-using UnityEngine;
-using Controller = Player.Controller;
+﻿using UnityEngine;
 
 namespace Player.States
 {
+    /// <summary>
+    /// The State where the player is not moving and on the ground
+    /// </summary>
     public class IdleState : BaseState
     {
         public override void Start()

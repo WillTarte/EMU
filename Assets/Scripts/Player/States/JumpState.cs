@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player.States
 {
+    /// <summary>
+    /// The State where the player is Jumping
+    /// </summary>
     public class JumpState : BaseState
     {
         public override void Start()

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Player.States
 {
+    /// <summary>
+    /// The state where the player is rolling
+    /// </summary>
     public class RollState : BaseState
     {
         public float XAxisRaw = 0.0f;
@@ -29,6 +32,9 @@ namespace Player.States
             base.Destroy();
         }
         
+        /// <summary>
+        /// Move the character a fixed amount per frame for the duration of the roll
+        /// </summary>
         void Move()
         {
             float moveBy = XAxisRaw * Controller.speed;

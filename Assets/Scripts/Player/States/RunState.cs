@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player.States
 {
+    /// <summary>
+    /// The State where the player is either moving left or right
+    /// </summary>
     public class RunState : BaseState
     {
         public bool IsFacingRight = true;
@@ -52,6 +52,9 @@ namespace Player.States
             base.Destroy();
         }
 
+        /// <summary>
+        /// Move the character a fixed amount per frame based on user input
+        /// </summary>
         void Move()
         {
             float x = Input.GetAxisRaw("Horizontal");

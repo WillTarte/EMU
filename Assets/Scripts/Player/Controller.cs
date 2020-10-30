@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Player.States;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
+﻿using Player.States;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -38,77 +33,6 @@ namespace Player
             _currentState?.Update();
         }
 
-        void HandleInput()
-        {
-            _shouldRoll = Input.GetKeyDown(KeyCode.LeftShift);
-            _shouldJump = Input.GetKeyDown(KeyCode.Space);
-        }
-
-        void Flip()
-        {
-            _isFacingRight = !_isFacingRight;
-
-            var scale = transform.localScale;
-            scale.x *= -1;
-
-            transform.localScale = scale;
-        }
-
-        void SetAnimation()
-        {
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                if (_shouldRoll)
-                {
-                    Animator.SetTrigger("Roll");
-                }
-                else if (_shouldJump)
-                {
-                    Animator.SetTrigger("Jump");
-                }
-                else
-                {
-                    Animator.SetInteger("AnimState", 1);
-                }
-
-                if (!_isFacingRight)
-                {
-                    Flip();
-                }
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (_shouldRoll)
-                {
-                    Animator.SetTrigger("Roll");
-                }
-                else if (_shouldJump)
-                {
-                    Animator.SetTrigger("Jump");
-                }
-                else
-                {
-                    Animator.SetInteger("AnimState", 1);
-                }
-
-                if (_isFacingRight)
-                {
-                    Flip();
-                }
-            }
-            else
-            {
-                if (_shouldJump)
-                {
-                    Animator.SetTrigger("Jump");
-                }
-                else
-                {
-                    Animator.SetInteger("AnimState", 0);
-                }
-            }
-        }
-        
         /// <summary>
         /// Method used to change state
         /// </summary>

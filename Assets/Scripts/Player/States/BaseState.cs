@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Controller = Player.Controller;
-
-namespace Player.States
+﻿namespace Player.States
 {
+    /// <summary>
+    /// Abstract class used to define an interface for all player states
+    /// </summary>
     public abstract class BaseState
     {
         public Controller Controller;
