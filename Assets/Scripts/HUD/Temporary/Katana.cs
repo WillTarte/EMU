@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Katana : MonoBehaviour
 {
-    public int healthPointMax = 100;
-    public int healthPointCurrent = 100;
+    private string type = "weapon_melee";
+    public int durability = 100;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +17,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void reload()
+    {
+        durability = 100;
+    }
+
+    public void use()
+    {
+        --durability;
     }
 }

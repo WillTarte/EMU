@@ -27,9 +27,9 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool XDown = Input.GetKey(KeyCode.X);
-        bool CDown = Input.GetKey(KeyCode.C);
-        bool VDown = Input.GetKey(KeyCode.V);
+        bool XDown = Input.GetKeyDown(KeyCode.X);
+        bool CDown = Input.GetKeyDown(KeyCode.C);
+        bool VDown = Input.GetKeyDown(KeyCode.V);
 
         if (XDown && !performingAction) StartCoroutine(LoseHealthPoint());
         if (CDown && !performingAction) StartCoroutine(RecoverAllHealthPoints());
