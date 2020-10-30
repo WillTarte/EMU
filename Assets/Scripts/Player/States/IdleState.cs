@@ -13,6 +13,8 @@ namespace Player.States
             base.Start();
             
             Debug.Log("Idle State");
+            
+            Controller.Rigidbody.velocity = new Vector2(0.0F, Controller.Rigidbody.velocity.y);
         }
 
         public override void Update()
@@ -21,16 +23,16 @@ namespace Player.States
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                base.Controller.ChangeState(new RunState {IsFacingRight = true});
+                Controller.ChangeState(new RunState {IsFacingRight = true});
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                base.Controller.ChangeState(new RunState {IsFacingRight = false});
+                Controller.ChangeState(new RunState {IsFacingRight = false});
             }
 
-            base.Controller.Animator.SetInteger("AnimState", 0);
-            base.Controller.Animator.SetBool("Grounded", true);
+            Controller.Animator.SetInteger("AnimState", 0);
+            Controller.Animator.SetBool("Grounded", true);
         }
 
         public override void Destroy()

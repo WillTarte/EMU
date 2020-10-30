@@ -15,7 +15,7 @@ namespace Player.States
 
             Debug.Log("Run State");
 
-            var scale = base.Controller.transform.localScale;
+            var scale = Controller.transform.localScale;
             scale.x = Mathf.Abs(scale.x);
 
             if (!IsFacingRight)
@@ -23,7 +23,7 @@ namespace Player.States
                 scale.x *= -1;
             }
 
-            base.Controller.transform.localScale = scale;
+            Controller.transform.localScale = scale;
         }
 
         public override void Update()
@@ -34,16 +34,15 @@ namespace Player.States
             
             if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
             {
-                base.Controller.ChangeState(new IdleState());
+                Controller.ChangeState(new IdleState());
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                base.Controller.Animator.SetTrigger("Roll");
-                // base.Controller.ChangeState(new RollState());
+                Controller.ChangeState(new RollState{XAxisRaw = Input.GetAxisRaw("Horizontal")});
             }
 
-            base.Controller.Animator.SetInteger("AnimState", 1);
+            Controller.Animator.SetInteger("AnimState", 1);
 
             Move();
         }
@@ -56,8 +55,8 @@ namespace Player.States
         void Move()
         {
             float x = Input.GetAxisRaw("Horizontal");
-            float moveBy = x * base.Controller.speed;
-            base.Controller.Rigidbody.velocity = new Vector2(moveBy, base.Controller.Rigidbody.velocity.y);
+            float moveBy = x * Controller.speed;
+            Controller.Rigidbody.velocity = new Vector2(moveBy, Controller.Rigidbody.velocity.y);
         }
 
         /// <summary>
@@ -88,10 +87,10 @@ namespace Player.States
         {
             IsFacingRight = !IsFacingRight;
 
-            var scale = base.Controller.transform.localScale;
+            var scale = Controller.transform.localScale;
             scale.x *= -1;
 
-            base.Controller.transform.localScale = scale;
+            Controller.transform.localScale = scale;
         }
     }
 }

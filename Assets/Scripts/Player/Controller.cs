@@ -132,6 +132,7 @@ namespace Player
         /// </summary>
         void OnRollEnd()
         {
+            Debug.Log("On Roll End");
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 ChangeState(new RunState {IsFacingRight = true});
