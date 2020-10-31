@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce397d909fa048f0aa0b4c5082e63b54, type: 3}
   m_Name: Ak47ShootStrategy
   m_EditorClassIdentifier: 
+  canReload: 1
+  canShoot: 1

@@ -17,5 +17,5 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileBaseDamage: 5
   isKinematic: 1
-  projectilePrefab: {fileID: 3998066587341369951, guid: f53055b5bb3a7b04c944013646519483,
+  projectilePrefab: {fileID: 3998066587341369951, guid: e642545ee404a2949bce7a923922b921,
     type: 3}

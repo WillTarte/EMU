@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
   m_Name: Throwable
   m_EditorClassIdentifier: 
-  magazineCapacity: 0
-  maxAmmunitionCount: 0
-  fireRate: 0
-  reloadTime: 0
-  projectileData: {fileID: 0}
+  magazineCapacity: 10
+  maxAmmunitionCount: 10
+  fireRate: 1
+  reloadTime: 1
+  projectileData: {fileID: 11400000, guid: ad43bb06e7a9bbf409e1a9459814dfb6, type: 2}
   fireMode: 0
-  shootStrategy: {fileID: 0}
-  onGroundSprite: {fileID: 0}
+  shootStrategy: {fileID: 11400000, guid: 23a3cb9618b9158448490816fb3fccd5, type: 2}
+  onGroundSprite: {fileID: -3679137457588113559, guid: 1e8427827d503cf4cbde93026bfb4c9c,
+    type: 3}
   inInventorySprite: {fileID: 0}
   inactiveSprite: {fileID: 0}
-  activeSprite: {fileID: 0}
+  activeSprite: {fileID: 5974094147323836763, guid: 1e8427827d503cf4cbde93026bfb4c9c,
+    type: 3}
