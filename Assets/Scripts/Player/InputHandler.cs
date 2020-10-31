@@ -11,6 +11,7 @@ public class InputHandler
     {
         if (Input.GetKeyDown(KeyCode.Space)) return _jumpCmd;
         else if (Input.GetKeyDown(KeyCode.R)) return _reloadCmd;
+        else if (Input.GetMouseButton(0)) return _shootCmd;
         else return null;
     }
 }

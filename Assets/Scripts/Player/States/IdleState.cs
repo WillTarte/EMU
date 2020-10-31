@@ -30,12 +30,12 @@ namespace Player.States
             
             Controller.UpdateTextureDirection();
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 Controller.ChangeState(new RunState());
             }
             
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 Controller.ChangeState(new RunState());
             }

@@ -19,7 +19,7 @@ namespace Player
         public Animator Animator { get; private set; }
         
         public bool IsGrounded { get; private set; }
-        public bool IsFacingRight { get; private set; }
+        public bool IsFacingRight { get; private set; } // TODO: Should also flip weapons
         
         #endregion
 
