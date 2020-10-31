@@ -28,14 +28,16 @@ namespace Player.States
                 cmd?.Execute(Controller);
             }
             
+            Controller.UpdateTextureDirection();
+            
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                Controller.ChangeState(new RunState {IsFacingRight = true});
+                Controller.ChangeState(new RunState());
             }
             
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                Controller.ChangeState(new RunState {IsFacingRight = false});
+                Controller.ChangeState(new RunState());
             }
 
             if (!Controller.IsGrounded)

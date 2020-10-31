@@ -8,24 +8,12 @@ namespace Player.States
     /// </summary>
     public class RunState : BaseState
     {
-        public bool IsFacingRight = true;
-
         public override void Start()
         {
             base.Start();
 
             Debug.Log("Run State");
 
-            var scale = Controller.transform.localScale;
-            scale.x = Mathf.Abs(scale.x);
-
-            if (!IsFacingRight)
-            {
-                scale.x *= -1;
-            }
-
-            Controller.transform.localScale = scale;
-            
             Controller.Animator.SetInteger("AnimState", 1);
         }
 
@@ -38,8 +26,7 @@ namespace Player.States
                 cmd?.Execute(Controller);
             }
             
-            UpdateTextureDirection();
-            
+            Controller.UpdateTextureDirection();
             
             if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
             {
@@ -55,46 +42,12 @@ namespace Player.States
                 Controller.ChangeState(new RollState{XAxisRaw = Input.GetAxisRaw("Horizontal")});
             }
 
-            Move(Input.GetAxisRaw("Horizontal"));
+            Controller.Move(Input.GetAxisRaw("Horizontal"));
         }
 
         public override void Destroy()
         {
             base.Destroy();
-        }
-        
-        /// <summary>
-        /// Set the direction of the texture based on keyboard input
-        /// </summary>
-        void UpdateTextureDirection()
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                if (!IsFacingRight)
-                {
-                    Flip();
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                if (IsFacingRight)
-                {
-                    Flip();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Flip the texture around the y axis
-        /// </summary>
-        void Flip()
-        {
-            IsFacingRight = !IsFacingRight;
-
-            var scale = Controller.transform.localScale;
-            scale.x *= -1;
-
-            Controller.transform.localScale = scale;
         }
     }
 }

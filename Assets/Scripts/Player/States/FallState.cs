@@ -19,12 +19,14 @@ namespace Player.States
         {
             base.Update(cmd);
 
+            Controller.UpdateTextureDirection();
+            
             if (Controller.IsGrounded)
             {
                 Controller.ChangeState(new IdleState());
             }
             
-            Move(Input.GetAxisRaw("Horizontal"));
+            Controller.Move(Input.GetAxisRaw("Horizontal"));
         }
 
         public override void Destroy()

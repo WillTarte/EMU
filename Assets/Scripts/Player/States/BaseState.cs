@@ -15,6 +15,7 @@ namespace Player.States
         /// </summary>
         public virtual void Start()
         {
+            Controller.ResetSpriteFlip();
         }
 
         /// <summary>
@@ -31,16 +32,6 @@ namespace Player.States
         /// </summary>
         public virtual void Destroy()
         {
-        }
-        
-        /// <summary>
-        /// Method called to move the Player by a fixed amount
-        /// </summary>
-        /// <param name="fixedSpeed"></param>
-        protected void Move(float fixedSpeed)
-        {
-            float moveBy = fixedSpeed * Controller.speed;
-            Controller.Rigidbody.velocity = new Vector2(moveBy, Controller.Rigidbody.velocity.y);
         }
     }
 }
