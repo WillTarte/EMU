@@ -4,31 +4,32 @@ using UnityEngine;
 namespace Player.States
 {
     /// <summary>
-    /// The state where the player is rolling
+    /// The State where the player is Falling
     /// </summary>
-    public class RollState : BaseState
+    public class FallState : BaseState
     {
-        public float XAxisRaw = 0.0f;
-        
         public override void Start()
         {
             base.Start();
-            
-            Debug.Log("Roll State");
-            
-            Controller.Animator.SetTrigger("Roll");
+
+            Debug.Log("Fall State");
         }
 
         public override void Update(Command cmd)
         {
             base.Update(cmd);
 
-            Move(XAxisRaw);
+            if (Controller.IsGrounded)
+            {
+                Controller.ChangeState(new IdleState());
+            }
+            
+            Move(Input.GetAxisRaw("Horizontal"));
         }
 
         public override void Destroy()
         {
             base.Destroy();
         }
-    }   
+    }
 }

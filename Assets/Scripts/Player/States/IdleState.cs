@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Player.Commands;
+using UnityEngine;
 
 namespace Player.States
 {
@@ -14,11 +15,13 @@ namespace Player.States
             Debug.Log("Idle State");
             
             Controller.Rigidbody.velocity = new Vector2(0.0F, Controller.Rigidbody.velocity.y);
+            
+            Controller.Animator.SetInteger("AnimState", 0);
         }
 
-        public override void Update()
+        public override void Update(Command cmd)
         {
-            base.Update();
+            base.Update(cmd);
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -30,8 +33,10 @@ namespace Player.States
                 Controller.ChangeState(new RunState {IsFacingRight = false});
             }
 
-            Controller.Animator.SetInteger("AnimState", 0);
-            Controller.Animator.SetBool("Grounded", true);
+            if (!Controller.IsGrounded)
+            {
+                Controller.ChangeState(new FallState());
+            }
         }
 
         public override void Destroy()

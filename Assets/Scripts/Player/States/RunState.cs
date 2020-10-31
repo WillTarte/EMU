@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Player.Commands;
+using UnityEngine;
 
 namespace Player.States
 {
@@ -24,11 +25,13 @@ namespace Player.States
             }
 
             Controller.transform.localScale = scale;
+            
+            Controller.Animator.SetInteger("AnimState", 1);
         }
 
-        public override void Update()
+        public override void Update(Command cmd)
         {
-            base.Update();
+            base.Update(cmd);
 
             UpdateTextureDirection();
             
@@ -42,26 +45,14 @@ namespace Player.States
                 Controller.ChangeState(new RollState{XAxisRaw = Input.GetAxisRaw("Horizontal")});
             }
 
-            Controller.Animator.SetInteger("AnimState", 1);
-
-            Move();
+            Move(Input.GetAxisRaw("Horizontal"));
         }
 
         public override void Destroy()
         {
             base.Destroy();
         }
-
-        /// <summary>
-        /// Move the character a fixed amount per frame based on user input
-        /// </summary>
-        void Move()
-        {
-            float x = Input.GetAxisRaw("Horizontal");
-            float moveBy = x * Controller.speed;
-            Controller.Rigidbody.velocity = new Vector2(moveBy, Controller.Rigidbody.velocity.y);
-        }
-
+        
         /// <summary>
         /// Set the direction of the texture based on keyboard input
         /// </summary>

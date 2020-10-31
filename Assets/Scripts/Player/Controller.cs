@@ -1,4 +1,5 @@
-﻿using Player.States;
+﻿using System;
+using Player.States;
 using UnityEngine;
 
 namespace Player
@@ -7,22 +8,24 @@ namespace Player
     {
         private BaseState _currentState;
 
-        private bool _isFacingRight = true;
-
-        private bool _shouldRoll = false;
-        private bool _shouldJump = false;
-
+        public InputHandler InputHandler { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
 
+        public bool IsGrounded { get; private set; }
+
         public float speed = 5.0F;
-        public float jumpForce = 500.0F;
+        public float jumpForce = 400.0F;
 
         // Start is called before the first frame update
         void Start()
         {
+            InputHandler = new InputHandler();
+            
             Rigidbody = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
+
+            IsGrounded = false;
             
             ChangeState(new IdleState());
         }
@@ -30,7 +33,9 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            _currentState?.Update();
+            var command = InputHandler.HandleInput();
+            
+            _currentState?.Update(command);
         }
 
         /// <summary>
@@ -39,7 +44,6 @@ namespace Player
         /// <param name="newState">New state.</param>
         public void ChangeState(BaseState newState)
         {
-            
             _currentState?.Destroy();
 
             _currentState = newState;
@@ -50,7 +54,7 @@ namespace Player
                 _currentState.Start();
             }
         }
-
+        
         /// <summary>
         /// Event function called at the end of the Roll animation
         /// </summary>
@@ -69,6 +73,16 @@ namespace Player
             { 
                 ChangeState(new IdleState());
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            IsGrounded = true;
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            IsGrounded = false;
         }
     }
 }

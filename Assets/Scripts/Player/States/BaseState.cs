@@ -1,4 +1,7 @@
-﻿namespace Player.States
+﻿using Player.Commands;
+using UnityEngine;
+
+namespace Player.States
 {
     /// <summary>
     /// Abstract class used to define an interface for all player states
@@ -17,8 +20,12 @@
         /// <summary>
         /// Method called to update the state - same as MonoBehaviour's Update()
         /// </summary>
-        public virtual void Update()
+        public virtual void Update(Command cmd)
         {
+            cmd?.Execute(Controller);
+            
+            Controller.Animator.SetFloat("AirSpeedY", Controller.Rigidbody.velocity.y);
+            Controller.Animator.SetBool("Grounded", Controller.IsGrounded);
         }
 
         /// <summary>
@@ -26,6 +33,16 @@
         /// </summary>
         public virtual void Destroy()
         {
+        }
+        
+        /// <summary>
+        /// Method called to move the Player by a fixed amount
+        /// </summary>
+        /// <param name="fixedSpeed"></param>
+        protected void Move(float fixedSpeed)
+        {
+            float moveBy = fixedSpeed * Controller.speed;
+            Controller.Rigidbody.velocity = new Vector2(moveBy, Controller.Rigidbody.velocity.y);
         }
     }
 }
