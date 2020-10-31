@@ -23,26 +23,18 @@ namespace Player.States
 
             if (cmd is JumpCommand)
             {
-                cmd?.Execute(Controller);
+                cmd.Execute(Controller);
             }
             
             Controller.UpdateTextureDirection();
+            Controller.Move(Input.GetAxisRaw("Horizontal"));
             
             if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
             {
-                Controller.Animator.SetInteger("AnimState", 0);
-                
                 Controller.ChangeState(new IdleState());
             }
             
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                Controller.Animator.SetInteger("AnimState", 0);
-                
-                Controller.ChangeState(new RollState{XAxisRaw = Input.GetAxisRaw("Horizontal")});
-            }
-
-            Controller.Move(Input.GetAxisRaw("Horizontal"));
+            Controller.CheckForRoll();
         }
 
         public override void Destroy()

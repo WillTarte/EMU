@@ -106,6 +106,17 @@ namespace Player
             transform.localScale = scale;
         }
 
+        public void CheckForRoll()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                if (IsGrounded)
+                {
+                    ChangeState(new RollState {XAxisRaw = Input.GetAxisRaw("Horizontal")});
+                }
+            }
+        }
+
         /// <summary>
         /// Method used to change state
         /// </summary>

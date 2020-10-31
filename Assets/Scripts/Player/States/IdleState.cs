@@ -25,11 +25,11 @@ namespace Player.States
 
             if (cmd is JumpCommand)
             {
-                cmd?.Execute(Controller);
+                cmd.Execute(Controller);
             }
             
             Controller.UpdateTextureDirection();
-            
+
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Controller.ChangeState(new RunState());
