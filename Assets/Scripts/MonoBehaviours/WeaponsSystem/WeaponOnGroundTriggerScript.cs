@@ -1,57 +1,59 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-public class WeaponOnGroundTriggerScript : MonoBehaviour
+namespace MonoBehaviours.WeaponsSystem
 {
-    private GameObject _promptPrefab = null;
-    private GameObject _promptInstance = null;
-    private BoxCollider2D _boxCollider;
-    private Rigidbody2D _rigidbody;
-    private bool playerInside = false;
-
-    public void Init(GameObject promptPrefab)
+    public class WeaponOnGroundTriggerScript : MonoBehaviour
     {
-        _promptPrefab = promptPrefab;
-    }
+        private GameObject _promptPrefab = null;
+        private GameObject _promptInstance = null;
+        private BoxCollider2D _boxCollider;
+        private Rigidbody2D _rigidbody;
+        private bool _playerInside = false;
 
-    private void Awake()
-    {
-        _boxCollider = GetComponent<BoxCollider2D>();
-        _boxCollider.isTrigger = true;
-        _boxCollider.size = new Vector2(5, 5);
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _rigidbody.isKinematic = true;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && playerInside)
+        public void Init(GameObject promptPrefab)
         {
-            // TODO when character controller is done
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PickUp(transform.parent.gameObject);
-            transform.parent.gameObject.GetComponent<WeaponBehaviourScript>().WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
-            Debug.Log("Picked up!!!");
-            transform.parent.parent = GameObject.FindGameObjectWithTag("Player").transform;
-
+            _promptPrefab = promptPrefab;
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        private void Awake()
         {
-            _promptInstance = Instantiate(_promptPrefab, transform.parent.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
-            playerInside = true;
+            _boxCollider = GetComponent<BoxCollider2D>();
+            _boxCollider.isTrigger = true;
+            _boxCollider.size = new Vector2(5, 5);
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _rigidbody.isKinematic = true;
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        private void Update()
         {
-            Destroy(_promptInstance);
-            playerInside = false;
+            if (Input.GetKeyDown(KeyCode.E) && _playerInside)
+            {
+                // TODO when character controller is done
+                //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PickUp(transform.parent.gameObject);
+                var parent = transform.parent;
+                parent.gameObject.GetComponent<WeaponBehaviourScript>().WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
+                Debug.Log("Picked up!!!");
+                parent.parent = GameObject.FindGameObjectWithTag("Player").transform;
+
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _promptInstance = Instantiate(_promptPrefab, transform.parent.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+                _playerInside = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Destroy(_promptInstance);
+                _playerInside = false;
+            }
         }
     }
 }

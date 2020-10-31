@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 0}
-  weaponState: 3
+  weaponState: 2
   currentMagazineAmmunition: 0
   currentTotalAmmunition: 0
 --- !u!114 &49826601344462349
@@ -160,5 +160,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16444bee23594ec59eb69ca701c49013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptPrefab: {fileID: 709781030951268166, guid: 9432a6d5e3d8dad498171b50da9ce522,
+  promptPrefab: {fileID: 709781030951268166, guid: b5b7f623102b80d45816bfb9a6898c86,
     type: 3}

@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-public class OptionsMenu : MonoBehaviour
+namespace MonoBehaviours
 {
-    [SerializeField] private AudioMixer audioMixer;
-    
-    public void SetVolume(int vol)
+    public class OptionsMenu : MonoBehaviour
     {
-        audioMixer.SetFloat("MasterVolume", (-80 + vol * 8)); // volume goes from 0 to -80
+        [SerializeField] private AudioMixer audioMixer;
+    
+        public void SetVolume(int vol)
+        {
+            audioMixer.SetFloat("MasterVolume", (-80 + vol * 8)); // volume goes from 0 to -80
+        }
     }
 }
