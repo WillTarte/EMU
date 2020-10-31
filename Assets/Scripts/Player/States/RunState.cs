@@ -33,15 +33,25 @@ namespace Player.States
         {
             base.Update(cmd);
 
+            if (cmd is JumpCommand)
+            {
+                cmd?.Execute(Controller);
+            }
+            
             UpdateTextureDirection();
+            
             
             if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
             {
+                Controller.Animator.SetInteger("AnimState", 0);
+                
                 Controller.ChangeState(new IdleState());
             }
-
+            
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                Controller.Animator.SetInteger("AnimState", 0);
+                
                 Controller.ChangeState(new RollState{XAxisRaw = Input.GetAxisRaw("Horizontal")});
             }
 

@@ -13,6 +13,7 @@ namespace Player
         public Animator Animator { get; private set; }
 
         public bool IsGrounded { get; private set; }
+        public bool IsFacingRight { get; set; }
 
         public float speed = 5.0F;
         public float jumpForce = 400.0F;
@@ -38,6 +39,12 @@ namespace Player
             _currentState?.Update(command);
         }
 
+        public void Move(float fixedSpeed)
+        {
+            float moveBy = fixedSpeed * speed;
+            Rigidbody.velocity = new Vector2(moveBy, Rigidbody.velocity.y);
+        }
+        
         /// <summary>
         /// Method used to change state
         /// </summary>
@@ -63,11 +70,13 @@ namespace Player
             Debug.Log("On Roll End");
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                ChangeState(new RunState {IsFacingRight = true});
+                IsFacingRight = true;
+                ChangeState(new RunState());
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                ChangeState(new RunState {IsFacingRight = false});
+                IsFacingRight = false;
+                ChangeState(new RunState());
             }
             else
             { 

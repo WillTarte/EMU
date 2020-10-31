@@ -23,11 +23,16 @@ namespace Player.States
         {
             base.Update(cmd);
 
+            if (cmd is JumpCommand)
+            {
+                cmd?.Execute(Controller);
+            }
+            
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Controller.ChangeState(new RunState {IsFacingRight = true});
             }
-
+            
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Controller.ChangeState(new RunState {IsFacingRight = false});

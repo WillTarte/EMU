@@ -22,8 +22,6 @@ namespace Player.States
         /// </summary>
         public virtual void Update(Command cmd)
         {
-            cmd?.Execute(Controller);
-            
             Controller.Animator.SetFloat("AirSpeedY", Controller.Rigidbody.velocity.y);
             Controller.Animator.SetBool("Grounded", Controller.IsGrounded);
         }
