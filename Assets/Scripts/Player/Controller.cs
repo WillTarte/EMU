@@ -31,7 +31,9 @@ namespace Player
 
         #region Public variables
         
+        [Range(1, 10)]
         public float speed = 5.0F;
+        [Range(100, 1000)]
         public float jumpForce = 400.0F;
 
         #endregion

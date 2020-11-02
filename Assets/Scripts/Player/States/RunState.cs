@@ -25,15 +25,16 @@ namespace Player.States
             {
                 cmd.Execute(Controller);
             }
-            
+
             Controller.UpdateTextureDirection();
             Controller.MoveX(Input.GetAxisRaw("Horizontal"));
-            
-            if (!Controller.IsPressingLeft && !Controller.IsPressingRight)
+
+            if ((!Controller.IsPressingLeft && !Controller.IsPressingRight) ||
+                (Controller.IsPressingLeft && Controller.IsPressingRight))
             {
                 Controller.ChangeState(new IdleState());
             }
-            
+
             if (Controller.IsPressingUp || Controller.IsPressingDown)
             {
                 if (Controller.CanClimb)
@@ -41,7 +42,7 @@ namespace Player.States
                     Controller.ChangeState(new ClimbState());
                 }
             }
-            
+
             Controller.CheckForRoll();
         }
 
