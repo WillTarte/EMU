@@ -27,13 +27,21 @@ namespace Player
         }
 
         public bool IsGrounded { get; private set; }
+        public bool CanClimb { get; private set; }
         public bool IsFacingRight { get; private set; } // TODO: Should also flip weapons
+
+        public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        public bool IsPressingUp => Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        public bool IsPressingDown => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 
         #endregion
 
         #region Public variables
         
+        [Range(1, 10)]
         public float speed = 5.0F;
+        [Range(100, 1000)]
         public float jumpForce = 400.0F;
 
         #endregion
@@ -41,7 +49,7 @@ namespace Player
         #region Private Methods
         
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _inputHandler = new InputHandler();
             
@@ -56,7 +64,7 @@ namespace Player
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             _currentState?.Update(_inputHandler.HandleInput());
             if (IsFacingRight
@@ -89,14 +97,14 @@ namespace Player
         /// </summary>
         public void UpdateTextureDirection()
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (IsPressingRight)
             {
                 if (!IsFacingRight)
                 {
                     FlipSprite();
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (IsPressingLeft)
             {
                 if (IsFacingRight)
                 {
@@ -105,10 +113,16 @@ namespace Player
             }
         }
         
-        public void Move(float fixedSpeed)
+        public void MoveX(float fixedSpeed)
         {
             float moveBy = fixedSpeed * speed;
             Rigidbody.velocity = new Vector2(moveBy, Rigidbody.velocity.y);
+        }
+
+        public void MoveY(float fixedSpeed)
+        {
+            float moveBy = fixedSpeed * speed;
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, moveBy);
         }
 
         public void ResetSpriteFlip()
@@ -184,6 +198,14 @@ namespace Player
             {
                 IsGrounded = true;   
             }
+
+            if (other.gameObject.CompareTag("Platform"))
+            {
+                if (Rigidbody.velocity.y >= 0.0F)
+                {
+                    IsGrounded = true;
+                }
+            }
         }
 
         private void OnCollisionExit2D(Collision2D other)
@@ -192,22 +214,46 @@ namespace Player
             {
                 IsGrounded = false;   
             }
+            
+            if (other.gameObject.CompareTag("Platform"))
+            {
+                IsGrounded = false;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.transform.parent == null || (!other.transform.parent.CompareTag("Weapon") && !other.CompareTag("WeaponOnGroundTrigger")) /*&& !other.CompareTag("Throwable")*/) return;
-            if (NearestPickup != null)
+
+            if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") && other.CompareTag("WeaponOnGroundTrigger"))
             {
-                if (Vector2.Distance(transform.position, NearestPickup.transform.position) >
-                    Vector2.Distance(transform.position, other.transform.parent.transform.position))
+                if (NearestPickup != null)
+                {
+                    if (Vector2.Distance(transform.position, NearestPickup.transform.position) >
+                        Vector2.Distance(transform.position, other.transform.parent.transform.position))
+                    {
+                        NearestPickup = other.transform.parent.gameObject;
+                    }
+                }
+                else
                 {
                     NearestPickup = other.transform.parent.gameObject;
                 }
             }
-            else
+            
+            
+            if (other.gameObject.CompareTag("Ladders"))
             {
-                NearestPickup = other.transform.parent.gameObject;
+                Debug.Log("Ladder hit");
+                CanClimb = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Ladders"))
+            {
+                Debug.Log("Ladder left");
+                CanClimb = false;
             }
         }
 
