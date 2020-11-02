@@ -105,19 +105,6 @@ namespace MonoBehaviours.WeaponsSystem
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            // TODO: Move this Input stuff to player game object
-            if (weaponState == WeaponState.Active)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    Shoot();
-                } 
-                else if (Input.GetKeyDown(KeyCode.R))
-                {
-                    Reload();
-                }
-            }
         }
 
         private void OnDestroy()
@@ -132,11 +119,21 @@ namespace MonoBehaviours.WeaponsSystem
     
         public void Shoot()
         {
+            if (weaponState != WeaponState.Active)
+            {
+                Debug.Log("Tried to shoot with " + gameObject.name + " but was not active");
+                return;
+            }
             weaponData.ShootStrategy.Shoot(this);
         }
 
         public void Reload()
         {
+            if (weaponState != WeaponState.Active)
+            {
+                Debug.Log("Tried to reload with " + gameObject.name + " but was not active");
+                return;
+            }
             weaponData.ShootStrategy.Reload(this);
         }
 

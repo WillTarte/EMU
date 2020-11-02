@@ -19,6 +19,11 @@ namespace Player.States
         {
             base.Update(cmd);
 
+            if (cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand)
+            {
+                cmd.Execute(Controller);
+            }
+
             Controller.UpdateTextureDirection();
             
             if (Controller.IsGrounded)

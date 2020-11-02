@@ -10,17 +10,25 @@ namespace Player
         
         private BaseState _currentState;
         private InputHandler _inputHandler;
-        
+        private GameObject _nearestPickup;
+
         #endregion
 
         #region Interface Variables
         
         public Rigidbody2D Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
-        
+        public InventoryManager InventoryManager { get; private set; }
+
+        public GameObject NearestPickup
+        {
+            get => _nearestPickup;
+            private set => _nearestPickup = value;
+        }
+
         public bool IsGrounded { get; private set; }
         public bool IsFacingRight { get; private set; } // TODO: Should also flip weapons
-        
+
         #endregion
 
         #region Public variables
@@ -39,6 +47,7 @@ namespace Player
             
             Rigidbody = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
+            InventoryManager = GetComponent<InventoryManager>();
 
             IsGrounded = false;
             IsFacingRight = true;
@@ -50,6 +59,15 @@ namespace Player
         void Update()
         {
             _currentState?.Update(_inputHandler.HandleInput());
+            if (IsFacingRight
+                ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
+                : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
+            {
+                if (InventoryManager.GetActiveWeapon() != null)
+                {
+                    InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+                }
+            }
         }
 
         private void FlipSprite()
@@ -177,7 +195,24 @@ namespace Player
                 IsGrounded = false;   
             }
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.transform.parent == null || (!other.transform.parent.CompareTag("Weapon") && !other.CompareTag("WeaponOnGroundTrigger")) /*&& !other.CompareTag("Throwable")*/) return;
+            if (NearestPickup != null)
+            {
+                if (Vector2.Distance(transform.position, NearestPickup.transform.position) >
+                    Vector2.Distance(transform.position, other.transform.parent.transform.position))
+                {
+                    NearestPickup = other.transform.parent.gameObject;
+                }
+            }
+            else
+            {
+                NearestPickup = other.transform.parent.gameObject;
+            }
+        }
+
         #endregion
     }
 }

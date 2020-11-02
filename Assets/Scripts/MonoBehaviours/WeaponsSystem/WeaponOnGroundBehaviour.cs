@@ -35,6 +35,7 @@ namespace MonoBehaviours.WeaponsSystem
 
             _triggerCollider = new GameObject {layer = 10};
             _triggerCollider.transform.parent = transform;
+            _triggerCollider.tag = "WeaponOnGroundTrigger";
             _triggerCollider.AddComponent<BoxCollider2D>();
             _triggerCollider.AddComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
             _triggerCollider.AddComponent<WeaponOnGroundTriggerScript>().Init(promptPrefab);

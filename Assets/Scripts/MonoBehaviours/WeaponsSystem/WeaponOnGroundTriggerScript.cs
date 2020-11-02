@@ -24,20 +24,6 @@ namespace MonoBehaviours.WeaponsSystem
             _rigidbody.isKinematic = true;
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E) && _playerInside)
-            {
-                // TODO when character controller is done
-                //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PickUp(transform.parent.gameObject);
-                var parent = transform.parent;
-                parent.gameObject.GetComponent<WeaponBehaviourScript>().WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
-                Debug.Log("Picked up!!!");
-                parent.parent = GameObject.FindGameObjectWithTag("Player").transform;
-
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
