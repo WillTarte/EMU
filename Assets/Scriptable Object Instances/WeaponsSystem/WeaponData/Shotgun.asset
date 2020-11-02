@@ -19,7 +19,7 @@ MonoBehaviour:
   projectileData: {fileID: 11400000, guid: 1170e62700ef5bb478973b72c7154636, type: 2}
   fireMode: 0
   shootStrategy: {fileID: 11400000, guid: 19fea44de78b0b84a9b4d6913ac0e02b, type: 2}
-  onGroundSprite: {fileID: 0}
+  onGroundSprite: {fileID: 21300000, guid: f79e828e3db14444c8331334cb5a364c, type: 3}
   inInventorySprite: {fileID: 0}
   inactiveSprite: {fileID: 0}
   activeSprite: {fileID: 21300000, guid: f79e828e3db14444c8331334cb5a364c, type: 3}

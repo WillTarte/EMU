@@ -23,7 +23,7 @@ namespace Player
         public GameObject NearestPickup
         {
             get => _nearestPickup;
-            private set => _nearestPickup = value;
+            set => _nearestPickup = value;
         }
 
         public bool IsGrounded { get; private set; }
@@ -182,7 +182,6 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("Ground hit");
                 IsGrounded = true;   
             }
         }
@@ -191,7 +190,6 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("Ground left");
                 IsGrounded = false;   
             }
         }

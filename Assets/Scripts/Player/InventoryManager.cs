@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
+﻿using System.Collections.Generic;
 using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -34,7 +32,8 @@ namespace Player
             if (_weaponSlots[_currentActiveWeaponSlot] != null)
             {
                 _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
-                _weaponSlots[_currentActiveWeaponSlot].transform.position = Camera.main.ScreenToWorldPoint(gameObject.GetComponent<SpriteRenderer>().sprite.pivot);
+                var weaponPos = gameObject.transform.position + GetComponent<SpriteRenderer>().sprite.bounds.center;
+                _weaponSlots[_currentActiveWeaponSlot].transform.position = weaponPos;
             }
         }
 
@@ -46,7 +45,61 @@ namespace Player
         {
             return _weaponSlots[_currentActiveWeaponSlot];
         }
+        
+        public void SwitchActiveWeapon(KeyCode keyPressed)
+        {
+            switch (keyPressed)
+            {
+                case KeyCode.Alpha1:
+                {
+                    _currentActiveWeaponSlot = InventorySlot.First;
+                    if (_weaponSlots[InventorySlot.Second] != null)
+                        _weaponSlots[InventorySlot.Second].WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
+                    break;
+                }
+                case KeyCode.Alpha2:
+                {
+                    _currentActiveWeaponSlot = InventorySlot.Second;
+                    if (_weaponSlots[InventorySlot.First] != null)
+                        _weaponSlots[InventorySlot.First].WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
+                    break;
+                }
+            }
+        }
 
+        /// <summary>
+        /// Adds a weapon to the inventory.
+        /// </summary>
+        /// <param name="weapon">The weapon gameobject to add to the inventory</param>
+        /// <returns>A boolean indicating if the addition was successful</returns>
+        public bool AddWeapon(GameObject weapon)
+        {
+            var weaponScript = weapon.GetComponent<WeaponBehaviourScript>();
+            if (weaponScript == null) return false;
+            
+            if (weapon.CompareTag("Weapon"))
+            {
+                var openSlot = GetFirstOpenSlot();
+                if (openSlot.HasValue)
+                {
+                    return AddWeapon(openSlot.Value, weaponScript);
+                }
+                else
+                {
+                    return AddWeapon(_currentActiveWeaponSlot, weaponScript);
+                }
+            } 
+            else if (weapon.CompareTag("Throwable"))
+            {
+                return AddWeapon(InventorySlot.Throwable, weaponScript);
+            }
+            else
+            {
+                Debug.Log("Tried to add weapon that didn't have a valid tag.");
+                return false; 
+            }
+        }
+        
         /// <summary>
         /// Adds a weapon to the inventory, at the given inventory slot. If there already is a weapon there, drops it.
         /// </summary>
@@ -81,70 +134,19 @@ namespace Player
                 return true;
             }
         }
-
-        /// <summary>
-        /// Adds a weapon to the inventory.
-        /// </summary>
-        /// <param name="weapon">The weapon gameobject to add to the inventory</param>
-        /// <returns>A boolean indicating if the addition was successful</returns>
-        public bool AddWeapon(GameObject weapon)
+        
+        private InventorySlot? GetFirstOpenSlot()
         {
-            var weaponScript = weapon.GetComponent<WeaponBehaviourScript>();
-            if (weaponScript == null) return false;
-            
-            if (weapon.CompareTag("Weapon"))
+            if (_weaponSlots[InventorySlot.First] == null)
             {
+                return InventorySlot.First;
+            }
+            else if (_weaponSlots[InventorySlot.Second] == null)
+            {
+                return InventorySlot.Second;
+            }
 
-                if (_weaponSlots[InventorySlot.First] != null && _weaponSlots[InventorySlot.Second] != null
-                    || _weaponSlots[InventorySlot.First] == null && _weaponSlots[InventorySlot.Second] == null)
-                {
-                    return AddWeapon(_currentActiveWeaponSlot, weaponScript);
-                }
-                else
-                {
-                    if (weaponScript.WeaponData.name.Equals(_weaponSlots[InventorySlot.First]?.WeaponData.name))
-                    {
-                        return AddWeapon(InventorySlot.First, weaponScript);
-                    }
-                    else if (weaponScript.WeaponData.name.Equals(_weaponSlots[InventorySlot.Second]?.WeaponData.name))
-                    {
-                        return AddWeapon(InventorySlot.Second, weaponScript);
-                    }
-                    
-                    return AddWeapon(_weaponSlots[InventorySlot.First] == null ? InventorySlot.First : InventorySlot.Second, weaponScript);
-                }
-            } 
-            else if (weapon.CompareTag("Throwable"))
-            {
-                return AddWeapon(InventorySlot.Throwable, weaponScript);
-            }
-            else
-            {
-                Debug.Log("Tried to add weapon that didn't have a valid tag.");
-                return false; 
-            }
-        }
-
-        public void SwitchActiveWeapon(KeyCode keyPressed)
-        {
-            if (keyPressed == KeyCode.Alpha1)
-            {
-                if (_weaponSlots[_currentActiveWeaponSlot] != null)
-                    _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
-                _currentActiveWeaponSlot = InventorySlot.First;
-                if (_weaponSlots[_currentActiveWeaponSlot] != null)
-                    _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
-            } 
-            else if (keyPressed == KeyCode.Alpha2)
-            {
-                if (_weaponSlots[_currentActiveWeaponSlot] != null)
-                    _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
-                
-                _currentActiveWeaponSlot = InventorySlot.Second;
-                
-                if (_weaponSlots[_currentActiveWeaponSlot] != null)
-                    _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
-            }
+            return null;
         }
     }
 
