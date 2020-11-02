@@ -12,7 +12,7 @@ namespace Player.States
         {
             base.Start();
             
-            Debug.Log("Idle State");
+            //Debug.Log("Idle State");
             
             Controller.Rigidbody.velocity = new Vector2(0.0F, Controller.Rigidbody.velocity.y);
             

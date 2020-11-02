@@ -178,7 +178,7 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("Ground hit");
+                //Debug.Log("Ground hit");
                 IsGrounded = true;   
             }
         }
@@ -187,7 +187,7 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("Ground left");
+                //Debug.Log("Ground left");
                 IsGrounded = false;   
             }
         }

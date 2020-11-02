@@ -12,7 +12,7 @@ namespace Player.States
         {
             base.Start();
 
-            Debug.Log("Run State");
+            //Debug.Log("Run State");
 
             Controller.Animator.SetInteger("AnimState", 1);
         }

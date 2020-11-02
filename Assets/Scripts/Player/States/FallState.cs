@@ -12,7 +12,7 @@ namespace Player.States
         {
             base.Start();
 
-            Debug.Log("Fall State");
+            //Debug.Log("Fall State");
         }
 
         public override void Update(Command cmd)
