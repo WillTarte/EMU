@@ -16,6 +16,7 @@ namespace Player.States
         public virtual void Start()
         {
             Controller.ResetSpriteFlip();
+            Controller.Rigidbody.gravityScale = 1.0F;
         }
 
         /// <summary>

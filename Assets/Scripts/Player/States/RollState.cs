@@ -23,7 +23,7 @@ namespace Player.States
         {
             base.Update(cmd);
 
-            Controller.Move(XAxisRaw);
+            Controller.MoveX(XAxisRaw);
         }
 
         public override void Destroy()
