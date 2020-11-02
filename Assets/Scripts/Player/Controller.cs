@@ -181,6 +181,14 @@ namespace Player
                 //Debug.Log("Ground hit");
                 IsGrounded = true;   
             }
+
+            if (other.gameObject.CompareTag("Platform"))
+            {
+                if (Rigidbody.velocity.y >= 0.0F)
+                {
+                    IsGrounded = true;
+                }
+            }
         }
 
         private void OnCollisionExit2D(Collision2D other)
@@ -189,6 +197,11 @@ namespace Player
             {
                 //Debug.Log("Ground left");
                 IsGrounded = false;   
+            }
+            
+            if (other.gameObject.CompareTag("Platform"))
+            {
+                IsGrounded = false;
             }
         }
 

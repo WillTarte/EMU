@@ -20,6 +20,8 @@ namespace Player.States
         {
             base.Update(cmd);
 
+            Controller.UpdateTextureDirection();
+            
             if (!Controller.CanClimb)
             {
                 Controller.ChangeState(new IdleState());

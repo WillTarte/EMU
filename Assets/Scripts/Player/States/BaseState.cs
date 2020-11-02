@@ -16,6 +16,7 @@ namespace Player.States
         public virtual void Start()
         {
             Controller.ResetSpriteFlip();
+            
             Controller.Rigidbody.gravityScale = 1.0F;
         }
 
@@ -24,6 +25,8 @@ namespace Player.States
         /// </summary>
         public virtual void Update(Command cmd)
         {
+            Physics2D.IgnoreLayerCollision(0, 8, Controller.Rigidbody.velocity.y > 0.0F);
+
             Controller.Animator.SetFloat("AirSpeedY", Controller.Rigidbody.velocity.y);
             Controller.Animator.SetBool("Grounded", Controller.IsGrounded);
         }
