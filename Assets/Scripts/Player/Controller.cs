@@ -19,8 +19,14 @@ namespace Player
         public Animator Animator { get; private set; }
         
         public bool IsGrounded { get; private set; }
+        public bool CanClimb { get; private set; }
         public bool IsFacingRight { get; private set; } // TODO: Should also flip weapons
-        
+
+        public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        public bool IsPressingUp => Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        public bool IsPressingDown => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+
         #endregion
 
         #region Public variables
@@ -33,7 +39,7 @@ namespace Player
         #region Private Methods
         
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _inputHandler = new InputHandler();
             
@@ -47,7 +53,7 @@ namespace Player
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             _currentState?.Update(_inputHandler.HandleInput());
         }
@@ -71,14 +77,14 @@ namespace Player
         /// </summary>
         public void UpdateTextureDirection()
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (IsPressingRight)
             {
                 if (!IsFacingRight)
                 {
                     FlipSprite();
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (IsPressingLeft)
             {
                 if (IsFacingRight)
                 {
@@ -87,10 +93,16 @@ namespace Player
             }
         }
         
-        public void Move(float fixedSpeed)
+        public void MoveX(float fixedSpeed)
         {
             float moveBy = fixedSpeed * speed;
             Rigidbody.velocity = new Vector2(moveBy, Rigidbody.velocity.y);
+        }
+
+        public void MoveY(float fixedSpeed)
+        {
+            float moveBy = fixedSpeed * speed;
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, moveBy);
         }
 
         public void ResetSpriteFlip()
@@ -177,7 +189,25 @@ namespace Player
                 IsGrounded = false;   
             }
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Ladders"))
+            {
+                Debug.Log("Ladder hit");
+                CanClimb = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Ladders"))
+            {
+                Debug.Log("Ladder left");
+                CanClimb = false;
+            }
+        }
+
         #endregion
     }
 }

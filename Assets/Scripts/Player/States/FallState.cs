@@ -26,7 +26,15 @@ namespace Player.States
                 Controller.ChangeState(new IdleState());
             }
             
-            Controller.Move(Input.GetAxisRaw("Horizontal"));
+            if (Controller.IsPressingUp || Controller.IsPressingDown)
+            {
+                if (Controller.CanClimb)
+                {
+                    Controller.ChangeState(new ClimbState());
+                }
+            }
+            
+            Controller.MoveX(Input.GetAxisRaw("Horizontal"));
         }
 
         public override void Destroy()

@@ -27,11 +27,19 @@ namespace Player.States
             }
             
             Controller.UpdateTextureDirection();
-            Controller.Move(Input.GetAxisRaw("Horizontal"));
+            Controller.MoveX(Input.GetAxisRaw("Horizontal"));
             
-            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+            if (!Controller.IsPressingLeft && !Controller.IsPressingRight)
             {
                 Controller.ChangeState(new IdleState());
+            }
+            
+            if (Controller.IsPressingUp || Controller.IsPressingDown)
+            {
+                if (Controller.CanClimb)
+                {
+                    Controller.ChangeState(new ClimbState());
+                }
             }
             
             Controller.CheckForRoll();

@@ -27,17 +27,20 @@ namespace Player.States
             {
                 cmd.Execute(Controller);
             }
-            
+
             Controller.UpdateTextureDirection();
 
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Controller.IsPressingRight || Controller.IsPressingLeft)
             {
                 Controller.ChangeState(new RunState());
             }
-            
-            if (Input.GetKey(KeyCode.LeftArrow))
+
+            if (Controller.IsPressingUp || Controller.IsPressingDown)
             {
-                Controller.ChangeState(new RunState());
+                if (Controller.CanClimb)
+                {
+                    Controller.ChangeState(new ClimbState());
+                }
             }
 
             if (!Controller.IsGrounded)
