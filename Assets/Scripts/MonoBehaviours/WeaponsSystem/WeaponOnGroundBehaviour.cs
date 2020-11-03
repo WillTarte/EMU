@@ -1,4 +1,5 @@
 ﻿
+using System;
 using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ namespace MonoBehaviours.WeaponsSystem
     /// </summary>
     public class WeaponOnGroundBehaviour : MonoBehaviour
     {
-
+        private const string GameobjectName = "WeaponOnGroundTriggerHitbox";
+        
         [SerializeField] private GameObject promptPrefab;
         private GameObject _triggerCollider;
         private WeaponData _weaponData;
@@ -34,6 +36,7 @@ namespace MonoBehaviours.WeaponsSystem
             _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
 
             _triggerCollider = new GameObject {layer = 10};
+            _triggerCollider.name = GameobjectName;
             _triggerCollider.transform.parent = transform;
             _triggerCollider.tag = "WeaponOnGroundTrigger";
             _triggerCollider.AddComponent<BoxCollider2D>();

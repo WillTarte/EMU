@@ -282,6 +282,11 @@ namespace Player
                 Debug.Log("Ladder left");
                 CanClimb = false;
             }
+            else if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
+                     other.CompareTag("WeaponOnGroundTrigger"))
+            {
+                NearestPickup = null;
+            }
         }
 
         #endregion
