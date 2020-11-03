@@ -272,6 +272,9 @@ TextureImporter:
   - first:
       213: 21300178
     second: HeroKnight_89
+  - first:
+      213: 1227722658420683368
+    second: HeroKnight_90
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -360,10 +363,10 @@ TextureImporter:
       name: HeroKnight_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 440
-        width: 100
-        height: 55
+        x: 18
+        y: 442
+        width: 44
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -381,10 +384,10 @@ TextureImporter:
       name: HeroKnight_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 440
-        width: 100
-        height: 55
+        x: 117
+        y: 442
+        width: 44
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,10 +405,10 @@ TextureImporter:
       name: HeroKnight_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 440
-        width: 100
-        height: 55
+        x: 216
+        y: 442
+        width: 45
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,10 +426,10 @@ TextureImporter:
       name: HeroKnight_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 440
-        width: 100
-        height: 55
+        x: 316
+        y: 442
+        width: 45
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -444,10 +447,10 @@ TextureImporter:
       name: HeroKnight_4
       rect:
         serializedVersion: 2
-        x: 400
-        y: 440
-        width: 100
-        height: 55
+        x: 416
+        y: 442
+        width: 45
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +468,10 @@ TextureImporter:
       name: HeroKnight_5
       rect:
         serializedVersion: 2
-        x: 500
-        y: 440
-        width: 100
-        height: 55
+        x: 517
+        y: 442
+        width: 44
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,10 +489,10 @@ TextureImporter:
       name: HeroKnight_6
       rect:
         serializedVersion: 2
-        x: 600
-        y: 440
-        width: 100
-        height: 55
+        x: 618
+        y: 442
+        width: 44
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,10 +510,10 @@ TextureImporter:
       name: HeroKnight_7
       rect:
         serializedVersion: 2
-        x: 700
-        y: 440
-        width: 100
-        height: 55
+        x: 718
+        y: 442
+        width: 44
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,10 +531,10 @@ TextureImporter:
       name: HeroKnight_8
       rect:
         serializedVersion: 2
-        x: 800
-        y: 440
-        width: 100
-        height: 55
+        x: 818
+        y: 442
+        width: 42
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -549,10 +552,10 @@ TextureImporter:
       name: HeroKnight_9
       rect:
         serializedVersion: 2
-        x: 900
-        y: 440
-        width: 100
-        height: 55
+        x: 917
+        y: 442
+        width: 44
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -570,10 +573,10 @@ TextureImporter:
       name: HeroKnight_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 385
-        width: 100
-        height: 55
+        x: 17
+        y: 387
+        width: 45
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -591,10 +594,10 @@ TextureImporter:
       name: HeroKnight_11
       rect:
         serializedVersion: 2
-        x: 100
-        y: 385
-        width: 100
-        height: 55
+        x: 116
+        y: 387
+        width: 47
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -612,10 +615,10 @@ TextureImporter:
       name: HeroKnight_12
       rect:
         serializedVersion: 2
-        x: 200
-        y: 385
-        width: 100
-        height: 55
+        x: 216
+        y: 387
+        width: 45
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -633,10 +636,10 @@ TextureImporter:
       name: HeroKnight_13
       rect:
         serializedVersion: 2
-        x: 300
-        y: 385
-        width: 100
-        height: 55
+        x: 317
+        y: 387
+        width: 44
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -654,10 +657,10 @@ TextureImporter:
       name: HeroKnight_14
       rect:
         serializedVersion: 2
-        x: 400
-        y: 385
-        width: 100
-        height: 55
+        x: 417
+        y: 387
+        width: 45
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -675,10 +678,10 @@ TextureImporter:
       name: HeroKnight_15
       rect:
         serializedVersion: 2
-        x: 500
-        y: 385
-        width: 100
-        height: 55
+        x: 517
+        y: 387
+        width: 45
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -696,10 +699,10 @@ TextureImporter:
       name: HeroKnight_16
       rect:
         serializedVersion: 2
-        x: 600
-        y: 385
-        width: 100
-        height: 55
+        x: 617
+        y: 387
+        width: 47
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -717,10 +720,10 @@ TextureImporter:
       name: HeroKnight_17
       rect:
         serializedVersion: 2
-        x: 700
-        y: 385
-        width: 100
-        height: 55
+        x: 717
+        y: 387
+        width: 43
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -738,10 +741,10 @@ TextureImporter:
       name: HeroKnight_18
       rect:
         serializedVersion: 2
-        x: 800
-        y: 385
-        width: 100
-        height: 55
+        x: 821
+        y: 387
+        width: 41
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -759,10 +762,10 @@ TextureImporter:
       name: HeroKnight_19
       rect:
         serializedVersion: 2
-        x: 900
-        y: 385
-        width: 100
-        height: 55
+        x: 935
+        y: 387
+        width: 32
+        height: 45
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -780,10 +783,10 @@ TextureImporter:
       name: HeroKnight_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 330
-        width: 100
-        height: 55
+        x: 22
+        y: 332
+        width: 75
+        height: 50
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -801,10 +804,10 @@ TextureImporter:
       name: HeroKnight_21
       rect:
         serializedVersion: 2
-        x: 100
-        y: 330
-        width: 100
-        height: 55
+        x: 122
+        y: 332
+        width: 49
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -822,10 +825,10 @@ TextureImporter:
       name: HeroKnight_22
       rect:
         serializedVersion: 2
-        x: 200
-        y: 330
-        width: 100
-        height: 55
+        x: 225
+        y: 332
+        width: 38
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -843,10 +846,10 @@ TextureImporter:
       name: HeroKnight_23
       rect:
         serializedVersion: 2
-        x: 300
-        y: 330
-        width: 100
-        height: 55
+        x: 335
+        y: 332
+        width: 28
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -864,10 +867,10 @@ TextureImporter:
       name: HeroKnight_24
       rect:
         serializedVersion: 2
-        x: 400
-        y: 330
-        width: 100
-        height: 55
+        x: 435
+        y: 332
+        width: 27
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -885,10 +888,10 @@ TextureImporter:
       name: HeroKnight_25
       rect:
         serializedVersion: 2
-        x: 500
-        y: 330
-        width: 100
-        height: 55
+        x: 511
+        y: 332
+        width: 86
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -906,10 +909,10 @@ TextureImporter:
       name: HeroKnight_26
       rect:
         serializedVersion: 2
-        x: 600
-        y: 330
-        width: 100
-        height: 55
+        x: 611
+        y: 332
+        width: 70
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -927,10 +930,10 @@ TextureImporter:
       name: HeroKnight_27
       rect:
         serializedVersion: 2
-        x: 700
-        y: 330
-        width: 100
-        height: 55
+        x: 710
+        y: 332
+        width: 51
+        height: 40
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -948,10 +951,10 @@ TextureImporter:
       name: HeroKnight_28
       rect:
         serializedVersion: 2
-        x: 800
-        y: 330
-        width: 100
-        height: 55
+        x: 810
+        y: 332
+        width: 51
+        height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -969,10 +972,10 @@ TextureImporter:
       name: HeroKnight_29
       rect:
         serializedVersion: 2
-        x: 900
-        y: 330
-        width: 100
-        height: 55
+        x: 914
+        y: 332
+        width: 47
+        height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -990,10 +993,10 @@ TextureImporter:
       name: HeroKnight_30
       rect:
         serializedVersion: 2
-        x: 0
-        y: 275
-        width: 100
-        height: 55
+        x: 19
+        y: 277
+        width: 43
+        height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1011,10 +1014,10 @@ TextureImporter:
       name: HeroKnight_31
       rect:
         serializedVersion: 2
-        x: 100
-        y: 275
-        width: 100
-        height: 55
+        x: 135
+        y: 277
+        width: 29
+        height: 45
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1032,10 +1035,10 @@ TextureImporter:
       name: HeroKnight_32
       rect:
         serializedVersion: 2
-        x: 200
-        y: 275
-        width: 100
-        height: 55
+        x: 234
+        y: 277
+        width: 66
+        height: 50
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1053,10 +1056,10 @@ TextureImporter:
       name: HeroKnight_33
       rect:
         serializedVersion: 2
-        x: 300
-        y: 275
-        width: 100
-        height: 55
+        x: 333
+        y: 277
+        width: 67
+        height: 46
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1074,10 +1077,10 @@ TextureImporter:
       name: HeroKnight_34
       rect:
         serializedVersion: 2
-        x: 400
-        y: 275
-        width: 100
-        height: 55
+        x: 433
+        y: 277
+        width: 67
+        height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1095,10 +1098,10 @@ TextureImporter:
       name: HeroKnight_35
       rect:
         serializedVersion: 2
-        x: 500
-        y: 275
-        width: 100
-        height: 55
+        x: 533
+        y: 277
+        width: 56
+        height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1116,10 +1119,10 @@ TextureImporter:
       name: HeroKnight_36
       rect:
         serializedVersion: 2
-        x: 600
-        y: 275
-        width: 100
-        height: 55
+        x: 640
+        y: 277
+        width: 36
+        height: 35
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1137,10 +1140,10 @@ TextureImporter:
       name: HeroKnight_37
       rect:
         serializedVersion: 2
-        x: 700
-        y: 275
-        width: 100
-        height: 55
+        x: 720
+        y: 277
+        width: 41
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1158,10 +1161,10 @@ TextureImporter:
       name: HeroKnight_38
       rect:
         serializedVersion: 2
-        x: 800
-        y: 275
-        width: 100
-        height: 55
+        x: 818
+        y: 277
+        width: 42
+        height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1179,10 +1182,10 @@ TextureImporter:
       name: HeroKnight_39
       rect:
         serializedVersion: 2
-        x: 900
-        y: 275
-        width: 100
-        height: 55
+        x: 918
+        y: 280
+        width: 43
+        height: 37
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1200,10 +1203,10 @@ TextureImporter:
       name: HeroKnight_40
       rect:
         serializedVersion: 2
-        x: 0
-        y: 220
-        width: 100
-        height: 55
+        x: 18
+        y: 227
+        width: 43
+        height: 35
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1221,10 +1224,10 @@ TextureImporter:
       name: HeroKnight_41
       rect:
         serializedVersion: 2
-        x: 100
-        y: 220
-        width: 100
-        height: 55
+        x: 117
+        y: 224
+        width: 45
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1242,10 +1245,10 @@ TextureImporter:
       name: HeroKnight_42
       rect:
         serializedVersion: 2
-        x: 200
-        y: 220
-        width: 100
-        height: 55
+        x: 217
+        y: 224
+        width: 45
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1263,10 +1266,10 @@ TextureImporter:
       name: HeroKnight_43
       rect:
         serializedVersion: 2
-        x: 300
-        y: 220
-        width: 100
-        height: 55
+        x: 317
+        y: 224
+        width: 45
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1284,10 +1287,10 @@ TextureImporter:
       name: HeroKnight_44
       rect:
         serializedVersion: 2
-        x: 400
-        y: 220
-        width: 100
-        height: 55
+        x: 417
+        y: 224
+        width: 45
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1305,10 +1308,10 @@ TextureImporter:
       name: HeroKnight_45
       rect:
         serializedVersion: 2
-        x: 500
-        y: 220
-        width: 100
-        height: 55
+        x: 519
+        y: 222
+        width: 43
+        height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1326,10 +1329,10 @@ TextureImporter:
       name: HeroKnight_46
       rect:
         serializedVersion: 2
-        x: 600
-        y: 220
-        width: 100
-        height: 55
+        x: 616
+        y: 222
+        width: 45
+        height: 37
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1347,10 +1350,10 @@ TextureImporter:
       name: HeroKnight_47
       rect:
         serializedVersion: 2
-        x: 700
-        y: 220
-        width: 100
-        height: 55
+        x: 717
+        y: 222
+        width: 44
+        height: 37
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1368,10 +1371,10 @@ TextureImporter:
       name: HeroKnight_48
       rect:
         serializedVersion: 2
-        x: 800
-        y: 220
-        width: 100
-        height: 55
+        x: 819
+        y: 222
+        width: 43
+        height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1389,10 +1392,10 @@ TextureImporter:
       name: HeroKnight_49
       rect:
         serializedVersion: 2
-        x: 900
-        y: 220
-        width: 100
-        height: 55
+        x: 917
+        y: 222
+        width: 47
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1410,10 +1413,10 @@ TextureImporter:
       name: HeroKnight_50
       rect:
         serializedVersion: 2
-        x: 0
-        y: 165
-        width: 100
-        height: 55
+        x: 19
+        y: 167
+        width: 46
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1431,10 +1434,10 @@ TextureImporter:
       name: HeroKnight_51
       rect:
         serializedVersion: 2
-        x: 100
-        y: 165
-        width: 100
-        height: 55
+        x: 115
+        y: 167
+        width: 53
+        height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1851,10 +1854,10 @@ TextureImporter:
       name: HeroKnight_71
       rect:
         serializedVersion: 2
-        x: 100
-        y: 55
-        width: 100
-        height: 55
+        x: 136
+        y: 57
+        width: 31
+        height: 33
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1872,10 +1875,10 @@ TextureImporter:
       name: HeroKnight_72
       rect:
         serializedVersion: 2
-        x: 200
-        y: 55
-        width: 100
-        height: 55
+        x: 236
+        y: 57
+        width: 45
+        height: 23
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1893,10 +1896,10 @@ TextureImporter:
       name: HeroKnight_73
       rect:
         serializedVersion: 2
-        x: 300
-        y: 55
-        width: 100
-        height: 55
+        x: 344
+        y: 57
+        width: 32
+        height: 22
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1914,10 +1917,10 @@ TextureImporter:
       name: HeroKnight_74
       rect:
         serializedVersion: 2
-        x: 400
-        y: 55
-        width: 100
-        height: 55
+        x: 440
+        y: 57
+        width: 24
+        height: 21
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1935,10 +1938,10 @@ TextureImporter:
       name: HeroKnight_75
       rect:
         serializedVersion: 2
-        x: 500
-        y: 55
-        width: 100
-        height: 55
+        x: 540
+        y: 57
+        width: 24
+        height: 23
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1956,10 +1959,10 @@ TextureImporter:
       name: HeroKnight_76
       rect:
         serializedVersion: 2
-        x: 600
-        y: 55
-        width: 100
-        height: 55
+        x: 640
+        y: 57
+        width: 24
+        height: 23
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1977,10 +1980,10 @@ TextureImporter:
       name: HeroKnight_77
       rect:
         serializedVersion: 2
-        x: 700
-        y: 55
-        width: 100
-        height: 55
+        x: 740
+        y: 57
+        width: 22
+        height: 26
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1998,10 +2001,10 @@ TextureImporter:
       name: HeroKnight_78
       rect:
         serializedVersion: 2
-        x: 800
-        y: 55
-        width: 100
-        height: 55
+        x: 838
+        y: 57
+        width: 25
+        height: 26
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2019,10 +2022,10 @@ TextureImporter:
       name: HeroKnight_79
       rect:
         serializedVersion: 2
-        x: 900
-        y: 55
-        width: 100
-        height: 55
+        x: 923
+        y: 57
+        width: 39
+        height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2040,10 +2043,10 @@ TextureImporter:
       name: HeroKnight_80
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 55
+        x: 18
+        y: 13
+        width: 45
+        height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2061,10 +2064,10 @@ TextureImporter:
       name: HeroKnight_81
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 100
-        height: 55
+        x: 120
+        y: 11
+        width: 43
+        height: 35
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2082,10 +2085,10 @@ TextureImporter:
       name: HeroKnight_82
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 100
-        height: 55
+        x: 222
+        y: 2
+        width: 41
+        height: 44
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2103,10 +2106,10 @@ TextureImporter:
       name: HeroKnight_83
       rect:
         serializedVersion: 2
-        x: 300
+        x: 331
         y: 0
-        width: 100
-        height: 55
+        width: 32
+        height: 46
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2124,10 +2127,10 @@ TextureImporter:
       name: HeroKnight_84
       rect:
         serializedVersion: 2
-        x: 400
+        x: 433
         y: 0
-        width: 100
-        height: 55
+        width: 30
+        height: 46
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2145,10 +2148,10 @@ TextureImporter:
       name: HeroKnight_85
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 55
+        x: 531
+        y: 1
+        width: 31
+        height: 49
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2166,10 +2169,10 @@ TextureImporter:
       name: HeroKnight_86
       rect:
         serializedVersion: 2
-        x: 600
-        y: 0
-        width: 100
-        height: 55
+        x: 631
+        y: 1
+        width: 31
+        height: 49
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2187,10 +2190,10 @@ TextureImporter:
       name: HeroKnight_87
       rect:
         serializedVersion: 2
-        x: 700
-        y: 0
-        width: 100
-        height: 55
+        x: 731
+        y: 1
+        width: 31
+        height: 50
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2208,10 +2211,10 @@ TextureImporter:
       name: HeroKnight_88
       rect:
         serializedVersion: 2
-        x: 800
-        y: 0
-        width: 100
-        height: 55
+        x: 831
+        y: 1
+        width: 31
+        height: 51
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2229,10 +2232,10 @@ TextureImporter:
       name: HeroKnight_89
       rect:
         serializedVersion: 2
-        x: 900
-        y: 0
-        width: 100
-        height: 55
+        x: 931
+        y: 1
+        width: 31
+        height: 51
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -4,7 +4,7 @@
     {
         public override void Execute(Controller controller)
         {
-            // TODO: Should call a method similar to `controller.ActiveWeapon.Reload()`
+            controller.InventoryManager.GetActiveWeapon()?.Reload();
         }
     }   
 }

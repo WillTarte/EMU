@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 29354406410690254}
   - component: {fileID: 29354406410690255}
   - component: {fileID: 29354406410690252}
+  - component: {fileID: -8936025592915904648}
   - component: {fileID: 29354406410690253}
   - component: {fileID: 29354406410690249}
   - component: {fileID: 29354406410690248}
-  m_Layer: 0
+  - component: {fileID: 1779377515201310125}
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +101,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 350.72
+--- !u!114 &-8936025592915904648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29354406410690242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9000a961054e44965925a936fdf4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &29354406410690253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106,13 +120,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29354406410690242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.859375}
+  m_Offset: {x: -0.09721434, y: 0.859375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -123,7 +137,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.125, y: 1.71875}
+  m_Size: {x: 2.478412, y: 1.71875}
   m_EdgeRadius: 0
 --- !u!50 &29354406410690249
 Rigidbody2D:
@@ -165,3 +179,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!68 &1779377515201310125
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29354406410690242}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 582fa47188c8ef74bbd69fa64b8ec19d, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.9902288, y: 0.049737602}
+  - {x: -0.9992718, y: 1.2939034}
+  - {x: 0.385063, y: 1.3255547}
+  - {x: 0.40767145, y: 0.05878079}
+  - {x: -0.9041969, y: 0.04605087}
+  - {x: -0.99022883, y: 0.04521605}

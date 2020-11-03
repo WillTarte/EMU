@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Weapon
   - Ground
   - Ladders
+  - WeaponOnGroundTrigger
   - Platform
   layers:
   - Default
@@ -16,6 +18,9 @@ TagManager:
   - UI
   - 
   - 
+  - Weapon
+  - Player
+  - Trigger
   - Passthrough
   - 
   - 
