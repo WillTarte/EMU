@@ -16,7 +16,9 @@ namespace Player
 
         #region Interface Variables
         
+        public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
+        public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
 
@@ -52,15 +54,24 @@ namespace Player
         private void Start()
         {
             _inputHandler = new InputHandler();
-            
+
+            EdgeCollider = GetComponent<EdgeCollider2D>();
             Rigidbody = GetComponent<Rigidbody2D>();
+            SpriteRendererProp = GetComponent<SpriteRenderer>();
             Animator = GetComponent<Animator>();
             InventoryManager = GetComponent<InventoryManager>();
 
             IsGrounded = false;
             IsFacingRight = true;
+
+            SetEdgeColliderPoints();
             
             ChangeState(new IdleState());
+        }
+
+        private void FixedUpdate()
+        {
+            SetEdgeColliderPoints();
         }
 
         // Update is called once per frame
@@ -88,6 +99,22 @@ namespace Player
             transform.localScale = scale;
         }
         
+        private void SetEdgeColliderPoints()
+        {
+            var sprite = SpriteRendererProp.sprite;
+            Vector2 spriteCenter = sprite.bounds.center;
+            Vector2 spriteExtents = sprite.bounds.extents;
+
+            Vector2[] edgeColliderPoints = {
+                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+            };
+            EdgeCollider.points = edgeColliderPoints;
+        }
+
         #endregion
         
         #region Public Methods
@@ -112,7 +139,7 @@ namespace Player
                 }
             }
         }
-        
+
         public void MoveX(float fixedSpeed)
         {
             float moveBy = fixedSpeed * speed;
