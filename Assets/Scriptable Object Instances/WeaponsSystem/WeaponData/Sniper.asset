@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: 
+  magazineCapacity: 20
+  maxAmmunitionCount: 50
+  fireRate: 0.5
+  reloadTime: 4
+  projectileData: {fileID: 11400000, guid: 1170e62700ef5bb478973b72c7154636, type: 2}
+  fireMode: 1
+  shootStrategy: {fileID: 11400000, guid: 94cdf14ec036d2c4f8cf3bff8b83b50e, type: 2}
+  onGroundSprite: {fileID: 5082939881079045580, guid: 1e8427827d503cf4cbde93026bfb4c9c,
+    type: 3}
+  inInventorySprite: {fileID: 0}
+  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 5082939881079045580, guid: 1e8427827d503cf4cbde93026bfb4c9c,
+    type: 3}
