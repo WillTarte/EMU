@@ -31,7 +31,7 @@ namespace Player
         {
             if (_weaponSlots[_currentActiveWeaponSlot] != null)
             {
-                _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponBehaviourScript.WeaponState.Active;
+                _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponState.Active;
                 var weaponPos = gameObject.transform.position + GetComponent<SpriteRenderer>().sprite.bounds.center;
                 _weaponSlots[_currentActiveWeaponSlot].transform.position = weaponPos;
             }
@@ -54,14 +54,14 @@ namespace Player
                 {
                     _currentActiveWeaponSlot = InventorySlot.First;
                     if (_weaponSlots[InventorySlot.Second] != null)
-                        _weaponSlots[InventorySlot.Second].WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
+                        _weaponSlots[InventorySlot.Second].WeaponStateProp = WeaponState.InInventory;
                     break;
                 }
                 case KeyCode.Alpha2:
                 {
                     _currentActiveWeaponSlot = InventorySlot.Second;
                     if (_weaponSlots[InventorySlot.First] != null)
-                        _weaponSlots[InventorySlot.First].WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
+                        _weaponSlots[InventorySlot.First].WeaponStateProp = WeaponState.InInventory;
                     break;
                 }
             }
@@ -119,8 +119,8 @@ namespace Player
                 }
                 else
                 {
-                    _weaponSlots[slot].WeaponStateProp = WeaponBehaviourScript.WeaponState.OnGround;
-                    weaponScript.WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
+                    _weaponSlots[slot].WeaponStateProp = WeaponState.OnGround;
+                    weaponScript.WeaponStateProp = WeaponState.InInventory;
                     _weaponSlots[slot] = weaponScript;
                     Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true; 
@@ -128,7 +128,7 @@ namespace Player
             }
             else
             {
-                weaponScript.WeaponStateProp = WeaponBehaviourScript.WeaponState.InInventory;
+                weaponScript.WeaponStateProp = WeaponState.InInventory;
                 _weaponSlots[slot] = weaponScript;
                 Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                 return true;

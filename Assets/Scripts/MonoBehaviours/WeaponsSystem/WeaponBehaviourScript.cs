@@ -11,11 +11,7 @@ namespace MonoBehaviours.WeaponsSystem
     public class WeaponBehaviourScript : MonoBehaviour
     {
         // TODO: 
-        // 1. Make the Active weapon follow the direction of the player.
-        // 2. Change state of the weapon based on game state
-        // 3. Make the projectiles spawn at the end of the weapon (+- done)
-        // 4. Make sure the weapon gameobject does not have more ammo than allowed by the WeaponData instance
-        // 5. Make sure proper keybindings are set and used
+        // 1. Make sure the weapon gameobject does not have more ammo than allowed by the WeaponData instance
 
         [SerializeField] private WeaponData weaponData;
         [SerializeField] private WeaponState weaponState;
@@ -76,9 +72,6 @@ namespace MonoBehaviours.WeaponsSystem
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _weaponOnGroundBehaviour = GetComponent<WeaponOnGroundBehaviour>();
             _weaponOnGroundBehaviour.Init(weaponData);
-        
-            //TODO remove this
-            Direction = Vector2.left;
         }
 
         private void Update()
@@ -136,13 +129,13 @@ namespace MonoBehaviours.WeaponsSystem
             }
             weaponData.ShootStrategy.Reload(this);
         }
-
-        public enum WeaponState
-        {
-            OnGround,
-            InInventory,
-            Inactive,
-            Active
-        }
+    }
+    
+    public enum WeaponState
+    {
+        OnGround,
+        InInventory,
+        Inactive,
+        Active
     }
 }
