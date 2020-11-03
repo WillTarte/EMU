@@ -28,7 +28,7 @@ namespace Player
 
         public bool IsGrounded { get; private set; }
         public bool CanClimb { get; private set; }
-        public bool IsFacingRight { get; private set; } // TODO: Should also flip weapons
+        public bool IsFacingRight { get; private set; }
 
         public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);

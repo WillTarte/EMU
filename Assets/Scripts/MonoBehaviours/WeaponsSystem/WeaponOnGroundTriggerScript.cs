@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace MonoBehaviours.WeaponsSystem
 {
@@ -22,6 +23,11 @@ namespace MonoBehaviours.WeaponsSystem
             _boxCollider.size = new Vector2(5, 5);
             _rigidbody = GetComponent<Rigidbody2D>();
             _rigidbody.isKinematic = true;
+        }
+
+        private void Update()
+        {
+            transform.position = transform.parent.position;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
