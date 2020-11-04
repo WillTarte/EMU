@@ -125,8 +125,7 @@ namespace Player
                 {
                     _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
                     Destroy(weaponScript.gameObject);
-                    AddWeaponHUD(slot, weaponScript);
-                    Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                    Debug.Log("Added ammo frome" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true;
                 }
                 else
