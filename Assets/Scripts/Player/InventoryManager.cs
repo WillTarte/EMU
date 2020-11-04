@@ -62,7 +62,7 @@ namespace Player
                 case KeyCode.Alpha1:
                 {
                     _currentActiveWeaponSlot = InventoryIndex.First;
-                    ChangeSelectedWeaponHUD(InventoryIndex.First);
+                    ChangeSelectedWeaponHUD?.Invoke(InventoryIndex.First);
                     if (_weaponSlots[InventoryIndex.Second] != null)
                         _weaponSlots[InventoryIndex.Second].WeaponStateProp = WeaponState.InInventory;
                     break;
@@ -70,7 +70,7 @@ namespace Player
                 case KeyCode.Alpha2:
                 {
                     _currentActiveWeaponSlot = InventoryIndex.Second;
-                    ChangeSelectedWeaponHUD(InventoryIndex.Second);
+                    ChangeSelectedWeaponHUD?.Invoke(InventoryIndex.Second);
                     if (_weaponSlots[InventoryIndex.First] != null)
                         _weaponSlots[InventoryIndex.First].WeaponStateProp = WeaponState.InInventory;
                     break;
@@ -139,7 +139,7 @@ namespace Player
                     _weaponSlots[slot].WeaponStateProp = WeaponState.OnGround;
                     weaponScript.WeaponStateProp = WeaponState.InInventory;
                     _weaponSlots[slot] = weaponScript;
-                    AddWeaponHUD(slot, weaponScript);
+                    AddWeaponHUD?.Invoke(slot, weaponScript);
                     Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true; 
                 }
@@ -148,7 +148,7 @@ namespace Player
             {
                 weaponScript.WeaponStateProp = WeaponState.InInventory;
                 _weaponSlots[slot] = weaponScript;
-                AddWeaponHUD(slot, weaponScript);
+                AddWeaponHUD?.Invoke(slot, weaponScript);
                 Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                 return true;
             }

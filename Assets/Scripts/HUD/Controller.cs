@@ -5,8 +5,6 @@ namespace HUD
 {
     public class Controller : MonoBehaviour
     {
-        // !! Don't forget to attach a Player game object to the HUD !!
-        public GameObject Player;
         public HealthBar HealthBar;
         public Inventory Inventory;
 
@@ -17,11 +15,10 @@ namespace HUD
         
         void Start()
         {
-            _playerController = Player.GetComponent<Player.Controller>();
-            UpdateHealthBar();
+            _playerController = GameObject.FindWithTag("Player").GetComponent<Player.Controller>();
             SetUpHealthBarObservers();
             
-            _playerInventoryManager = Player.GetComponent<InventoryManager>();
+            _playerInventoryManager = GameObject.FindWithTag("Player").GetComponent<InventoryManager>();
             UpdateFullInventory();
             SetUpInventoryObservers();
         }
@@ -48,15 +45,15 @@ namespace HUD
         }
         
         //Modify the HUD health bar using animation
-        private void UpdateHealthBar()
+        private void UpdateHealthBar(int hitPoints)
         {
-            HealthBar.UpdateHealthBar(_playerController.hitPoints);
+            HealthBar.UpdateHealthBar(hitPoints);
         }
         
         //Change the HUD health bar directly
-        private void ResetHealthBar()
+        private void ResetHealthBar(int hitPoints)
         {
-            HealthBar.ResetHealthBar(_playerController.hitPoints);
+            HealthBar.ResetHealthBar(hitPoints);
         }
     }
 }

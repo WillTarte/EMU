@@ -291,16 +291,18 @@ namespace Player
 
         #endregion
         
-        #region Public variables
+        #region Private variables
         
         [Range(0, 10)]
-        public int hitPoints = 10;
-        
+        private int hitPoints = 10;
+
         /// <summary>
-        /// Events listened by the HUD to update the HUD health bar.
+        /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
         /// </summary>
-        public event Action UpdateHealthBarHUD;
-        public event Action ResetHealthBarHUD;
+
+        public delegate void UpdateHUDHealthBarHandler(int hitPoints);
+        public event UpdateHUDHealthBarHandler UpdateHealthBarHUD;
+        public event UpdateHUDHealthBarHandler ResetHealthBarHUD;
         
         #endregion
         
@@ -311,7 +313,7 @@ namespace Player
             if (hitPoints - value < 0) hitPoints = 0;
             else hitPoints -= value;
             
-            UpdateHealthBarHUD();
+            UpdateHealthBarHUD?.Invoke(hitPoints);
         }
         
         public void RestoreHitPoints(int value)
@@ -319,13 +321,13 @@ namespace Player
             if (hitPoints + value > 10) hitPoints = 10;
             else hitPoints += value;
 
-            UpdateHealthBarHUD();
+            UpdateHealthBarHUD?.Invoke(hitPoints);
         }
 
         public void ResetHitPoints()
         {
             hitPoints = 10;
-            ResetHealthBarHUD();
+            ResetHealthBarHUD?.Invoke(hitPoints);
         }
         
         #endregion
