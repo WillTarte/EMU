@@ -10,17 +10,27 @@ namespace Player
         
         private BaseState _currentState;
         private InputHandler _inputHandler;
-        
+        private GameObject _nearestPickup;
+
         #endregion
 
         #region Interface Variables
         
+        public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
+        public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
-        
+        public InventoryManager InventoryManager { get; private set; }
+
+        public GameObject NearestPickup
+        {
+            get => _nearestPickup;
+            set => _nearestPickup = value;
+        }
+
         public bool IsGrounded { get; private set; }
         public bool CanClimb { get; private set; }
-        public bool IsFacingRight { get; private set; } // TODO: Should also flip weapons
+        public bool IsFacingRight { get; private set; }
 
         public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
@@ -44,20 +54,39 @@ namespace Player
         private void Start()
         {
             _inputHandler = new InputHandler();
-            
+
+            EdgeCollider = GetComponent<EdgeCollider2D>();
             Rigidbody = GetComponent<Rigidbody2D>();
+            SpriteRendererProp = GetComponent<SpriteRenderer>();
             Animator = GetComponent<Animator>();
+            InventoryManager = GetComponent<InventoryManager>();
 
             IsGrounded = false;
             IsFacingRight = true;
+
+            SetEdgeColliderPoints();
             
             ChangeState(new IdleState());
+        }
+
+        private void FixedUpdate()
+        {
+            SetEdgeColliderPoints();
         }
 
         // Update is called once per frame
         private void Update()
         {
             _currentState?.Update(_inputHandler.HandleInput());
+            if (IsFacingRight
+                ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
+                : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
+            {
+                if (InventoryManager.GetActiveWeapon() != null)
+                {
+                    InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+                }
+            }
         }
 
         private void FlipSprite()
@@ -70,6 +99,22 @@ namespace Player
             transform.localScale = scale;
         }
         
+        private void SetEdgeColliderPoints()
+        {
+            var sprite = SpriteRendererProp.sprite;
+            Vector2 spriteCenter = sprite.bounds.center;
+            Vector2 spriteExtents = sprite.bounds.extents;
+
+            Vector2[] edgeColliderPoints = {
+                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+            };
+            EdgeCollider.points = edgeColliderPoints;
+        }
+
         #endregion
         
         #region Public Methods
@@ -94,7 +139,7 @@ namespace Player
                 }
             }
         }
-        
+
         public void MoveX(float fixedSpeed)
         {
             float moveBy = fixedSpeed * speed;
@@ -178,7 +223,6 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                //Debug.Log("Ground hit");
                 IsGrounded = true;   
             }
 
@@ -195,7 +239,6 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                //Debug.Log("Ground left");
                 IsGrounded = false;   
             }
             
@@ -207,6 +250,24 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+
+            if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") && other.CompareTag("WeaponOnGroundTrigger"))
+            {
+                if (NearestPickup != null)
+                {
+                    if (Vector2.Distance(transform.position, NearestPickup.transform.position) >
+                        Vector2.Distance(transform.position, other.transform.parent.transform.position))
+                    {
+                        NearestPickup = other.transform.parent.gameObject;
+                    }
+                }
+                else
+                {
+                    NearestPickup = other.transform.parent.gameObject;
+                }
+            }
+            
+            
             if (other.gameObject.CompareTag("Ladders"))
             {
                 Debug.Log("Ladder hit");
@@ -220,6 +281,11 @@ namespace Player
             {
                 Debug.Log("Ladder left");
                 CanClimb = false;
+            }
+            else if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
+                     other.CompareTag("WeaponOnGroundTrigger"))
+            {
+                NearestPickup = null;
             }
         }
 
