@@ -1,90 +1,80 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
-public class HealthBar : MonoBehaviour
+
+namespace HUD
 {
-
-    public GameObject fill;
-    public int currentHealth = 10;
-    public Color red_color, white_color;
-
-    private bool performingAction = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public class HealthBar : MonoBehaviour
     {
-        if (currentHealth < 10)
+        //Fill contains the game objects that we use in health bar to display the hit points of the player.
+        public GameObject fill;
+        public int currentHitPoints = 10;
+
+        //These are used to maintain a smooth animation in the health bar in case of quick hit points modifications.
+        private int _newHitPoints = 10;
+        private bool _performingAnimation = false;
+        
+        //Making sure that health bar displays the right amount of hit points when initialized.
+        void Start()
         {
-            for (int hp = 9; hp >= currentHealth; --hp)
+            if (currentHitPoints < 10)
             {
-                fill.transform.GetChild(hp).GetComponent<Image>().enabled = false;
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        bool XDown = Input.GetKeyDown(KeyCode.X);
-        bool CDown = Input.GetKeyDown(KeyCode.C);
-        bool VDown = Input.GetKeyDown(KeyCode.V);
-
-        if (XDown && !performingAction) StartCoroutine(LoseHealthPoint());
-        if (CDown && !performingAction) StartCoroutine(RecoverAllHealthPoints());
-        if (VDown && !performingAction) AddHealthPoint();
-
-    }
-
-    IEnumerator LoseHealthPoint()
-    {
-        performingAction = true;
-        if (currentHealth > 0)
-        {
-            --currentHealth;
-            Image fill_image = fill.transform.GetChild(currentHealth).GetComponent<Image>();
-            for (int blinking = 6; blinking > 0; --blinking)
-            {
-                if (fill_image.enabled)
+                for (int healthBarIndex = 9; healthBarIndex >= currentHitPoints; --healthBarIndex)
                 {
-                    fill_image.enabled = false;
+                    fill.transform.GetChild(healthBarIndex).GetComponent<Image>().enabled = false;
                 }
-                else fill_image.enabled = true;
-
-                yield return new WaitForSeconds(0.25f);
-
             }
+        }
 
-            fill_image.enabled = false;
-        }
-        performingAction = false;
-    }
-    
-    void AddHealthPoint()
-    {
-        performingAction = true;
-        if (currentHealth < 10)
+        //Remove or add fill objects in the health bar according to the player's hit points using animation.
+        public void UpdateHealthBar(int newHitPoints)
         {
-            Image fill_image = fill.transform.GetChild(currentHealth).GetComponent<Image>();
-            fill_image.enabled = true;
-            ++currentHealth;
+            _newHitPoints = newHitPoints;
+            if(!_performingAnimation) StartCoroutine(AnimationUpdateHealthPoints());
         }
-        performingAction = false;
-    }
-    
-    IEnumerator RecoverAllHealthPoints()
-    {
-        performingAction = true;
-        if (currentHealth < 10)
+
+        private IEnumerator AnimationUpdateHealthPoints()
         {
-            while(currentHealth < 10)
+            _performingAnimation = true;
+                while (_newHitPoints != currentHitPoints)
+                {
+                    if (currentHitPoints > _newHitPoints)
+                    {
+                        fill.transform.GetChild(currentHitPoints - 1).GetComponent<Image>().enabled = false;
+                        --currentHitPoints;
+                        yield return new WaitForSeconds(0.15f);
+                    }
+                    else if (currentHitPoints < _newHitPoints)
+                    {
+                        fill.transform.GetChild(currentHitPoints).GetComponent<Image>().enabled = true;
+                        ++currentHitPoints;
+                        yield return new WaitForSeconds(0.15f);
+                    }
+                }
+            _performingAnimation = false;
+        }
+
+        //Remove or add fill objects in the health bar according to the player's hit points directly.
+        public void ResetHealthBar(int value)
+        {
+            int hitPointsDiff = value - currentHitPoints;
+
+            if (hitPointsDiff > 0)
             {
-                fill.transform.GetChild(currentHealth).GetComponent<Image>().enabled = true;
-                ++currentHealth;
-                yield return new WaitForSeconds(0.25f);
+                while (currentHitPoints < value)
+                {
+                    fill.transform.GetChild(currentHitPoints).GetComponent<Image>().enabled = true;
+                    ++currentHitPoints;
+                }
+            }
+            else if (hitPointsDiff < 0)
+            {
+                while (currentHitPoints > value)
+                {
+                    --currentHitPoints;
+                    fill.transform.GetChild(currentHitPoints).GetComponent<Image>().enabled = false;
+                }
             }
         }
-        performingAction = false;
     }
 }

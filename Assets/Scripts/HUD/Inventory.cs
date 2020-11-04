@@ -1,139 +1,54 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MonoBehaviours.WeaponsSystem;
+using Player;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+namespace HUD
 {
-    private GameObject[] inventoryContainer = new GameObject[3];
-
-    private int selectedIndex = 0;
-    private bool test = true;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Inventory : MonoBehaviour
     {
-        inventoryContainer[0] = transform.GetChild(0).gameObject;
-        inventoryContainer[1] =  transform.GetChild(1).gameObject;
-        inventoryContainer[2] =  transform.GetChild(2).gameObject;
-        transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.SetActive(true);
-    }
+        /// <summary>
+        /// Dictionary containing the inventory slots of the HUD inventory. Keys are slots, and values are the
+        /// game objects displaying the HUD.
+        /// </summary>
+        private Dictionary<InventoryIndex, GameObject> _inventoryContainer;
+        private InventoryIndex _selectedSlot;
 
-    // Update is called once per frame
-    void Update()
-    {
-        bool ADown = Input.GetKeyDown(KeyCode.A);
-        bool SDown = Input.GetKeyDown(KeyCode.S);
-        bool DDown = Input.GetKeyDown(KeyCode.D);
-        bool FDown = Input.GetKeyDown(KeyCode.F);
-        bool GDown = Input.GetKeyDown(KeyCode.G);
-        bool HDown = Input.GetKeyDown(KeyCode.H);
-        bool JDown = Input.GetKeyDown(KeyCode.J);
-        
-        if (ADown) changeSelected();
-        
-        if (DDown) addToInventory("weapon_ranged", Instantiate(Resources.Load<GameObject>("Temporary/Gun"), new Vector3(0.0f, 0.0f), Quaternion.identity) as GameObject);
-        if (SDown) addToInventory("throwable", Instantiate(Resources.Load<GameObject>("Temporary/Grenade"), new Vector3(0.0f, 0.0f), Quaternion.identity) as GameObject);
-        if (FDown) addToInventory("weapon_melee", Instantiate(Resources.Load<GameObject>("Temporary/Katana"), new Vector3(0.0f, 0.0f), Quaternion.identity) as GameObject);
-        
-        if (HDown) useSelected();
-        if (JDown) updateSelected();
-        
-        if (GDown) throwSelected();
-        
-        if (test)
+        void Start()
         {
-            addToInventory("weapon_ranged", Instantiate(Resources.Load<GameObject>("Temporary/Gun"), new Vector3(0.0f, 0.0f), Quaternion.identity) as GameObject);
-            test = false;
+            _inventoryContainer = new Dictionary<InventoryIndex, GameObject>
+            {
+                {InventoryIndex.First, transform.Find("Weapon1").gameObject},
+                {InventoryIndex.Second, transform.Find("Weapon2").gameObject},
+                {InventoryIndex.Throwable, transform.Find("Throwable").gameObject}
+            };
         }
-    }
 
-    public void changeSelected()
-    {
-        inventoryContainer[selectedIndex].transform.GetChild(1).gameObject.SetActive(false);
-        
-        do
+        //Outlines the weapon image in the HUD inventory that is currently used by the player.
+        public void ChangeSelected(InventoryIndex newSelectedSlot)
         {
-            ++selectedIndex;
-            if (selectedIndex > 2) selectedIndex = 0;
-        } while (!checkIfWeapon(selectedIndex));
-        
-        inventoryContainer[selectedIndex].transform.GetChild(1).gameObject.SetActive(true);
-        
-    }
-
-    public void throwSelected()
-    {
-        if (selectedIndex == 2)
-        {
-            inventoryContainer[selectedIndex].SendMessage("removeThrowable", SendMessageOptions.DontRequireReceiver);
-            changeSelected();
+            _inventoryContainer[_selectedSlot].transform.Find("Selected").gameObject.SetActive(false);
+            _selectedSlot = newSelectedSlot;
+            _inventoryContainer[_selectedSlot].transform.Find("Selected").gameObject.SetActive(true);
         }
-        else if (selectedIndex == 0 && checkIfWeapon(1))
-        {
-            GameObject temp = inventoryContainer[1].gameObject.GetComponent<InventoryWeapon>().weapon;
-            inventoryContainer[0].SendMessage("setWeapon", temp, SendMessageOptions.DontRequireReceiver); 
-            inventoryContainer[1].SendMessage("removeWeapon", SendMessageOptions.DontRequireReceiver);
-        }
-        else if (selectedIndex == 1)
-        {
-            inventoryContainer[selectedIndex].SendMessage("removeWeapon", SendMessageOptions.DontRequireReceiver);
-            changeSelected();
-        }
-    }
 
-    public void updateSelected()
-    {
-        inventoryContainer[selectedIndex].SendMessage("reload", SendMessageOptions.RequireReceiver);
-    }
-
-    public void useSelected()
-    {
-        inventoryContainer[selectedIndex].SendMessage("use", SendMessageOptions.RequireReceiver);
-    }
-
-    public void addToInventory(string type, GameObject item)
-    {
-        switch (type)
+        public void RemoveFromInventory(InventoryIndex weaponSlot)
         {
-            case "weapon_melee":
-                for (int index = 0; index < 2; ++index)
-                {
-                    if (!checkIfWeapon(index))
-                    {
-                        inventoryContainer[index].SendMessage("setWeapon", item, SendMessageOptions.DontRequireReceiver); 
-                        break;
-                    }
-                }
-                break;
-            case "weapon_ranged":
-                for (int index = 0; index < 2; ++index)
-                {
-                    if (!checkIfWeapon(index))
-                    {
-                        inventoryContainer[index].SendMessage("setWeapon", item, SendMessageOptions.DontRequireReceiver);
-                        break;
-                    }
-                }
-                break;
-            case "throwable":
-                if (!checkIfWeapon(2))
-                {
-                    inventoryContainer[2].SendMessage("setThrowable", item, SendMessageOptions.DontRequireReceiver);
-                }
-                break;
-            default:
-                print("Inventory: \"unrecognized item type\"");
-                break;
+            _inventoryContainer[weaponSlot].SendMessage("RemoveWeaponFromInventorySlot", SendMessageOptions.DontRequireReceiver);
         }
-    }
 
-    private bool checkIfWeapon(int index)
-    {
-        if (index == 2)
+        public void AddToInventory(InventoryIndex slot, WeaponBehaviourScript weaponScript)
         {
-            return inventoryContainer[2].GetComponent<InventoryThrowable>().throwable != null;
+            _inventoryContainer[slot].SendMessage("AddWeaponToInventorySlot", weaponScript, SendMessageOptions.DontRequireReceiver);
         }
-        else return inventoryContainer[index].GetComponent<InventoryWeapon>().weapon != null;
+
+        //Populate the HUD inventory with the inventory from InventoryManager
+        public void UpdateFullInventory(Dictionary<InventoryIndex, WeaponBehaviourScript> inventory)
+        {
+            foreach (var pair in inventory)
+            {
+                if (pair.Value != null)  _inventoryContainer[pair.Key].SendMessage("AddWeaponToInventorySlot", pair.Value, SendMessageOptions.DontRequireReceiver);
+            }
+        }
     }
 }

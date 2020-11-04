@@ -290,5 +290,44 @@ namespace Player
         }
 
         #endregion
+        
+        #region Public variables
+        
+        [Range(0, 10)]
+        public int hitPoints = 10;
+        
+        /// <summary>
+        /// Events listened by the HUD to update the HUD health bar.
+        /// </summary>
+        public event Action UpdateHealthBarHUD;
+        public event Action ResetHealthBarHUD;
+        
+        #endregion
+        
+        #region Public Methods
+
+        public void LoseHitPoints(int value)
+        {
+            if (hitPoints - value < 0) hitPoints = 0;
+            else hitPoints -= value;
+            
+            UpdateHealthBarHUD();
+        }
+        
+        public void RestoreHitPoints(int value)
+        {
+            if (hitPoints + value > 10) hitPoints = 10;
+            else hitPoints += value;
+
+            UpdateHealthBarHUD();
+        }
+
+        public void ResetHitPoints()
+        {
+            hitPoints = 10;
+            ResetHealthBarHUD();
+        }
+        
+        #endregion
     }
 }
