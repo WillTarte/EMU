@@ -14,7 +14,7 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.Space)) return _jumpCmd;
             else if (Input.GetKeyDown(KeyCode.R)) return _reloadCmd;
-            else if (Input.GetMouseButton(0)) return _shootCmd;
+            else if (Input.GetKey(KeyCode.K)) return _shootCmd;
             else if (Input.GetKeyDown(KeyCode.E)) return _pickupCommand;
             else if (Input.GetKeyDown(KeyCode.Alpha1)) return new SwitchWeaponCommand(KeyCode.Alpha1);
             else if (Input.GetKeyDown(KeyCode.Alpha2)) return new SwitchWeaponCommand(KeyCode.Alpha2);

@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canReload: 1
   canShoot: 1
-  pressed: 0
