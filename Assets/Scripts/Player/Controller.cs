@@ -7,7 +7,9 @@ namespace Player
     public class Controller : MonoBehaviour
     {
         #region Private Variables
-        
+
+        [Range(0, 10)] 
+        private int hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
         private GameObject _nearestPickup;
@@ -45,6 +47,13 @@ namespace Player
         public float speed = 5.0F;
         [Range(100, 1000)]
         public float jumpForce = 400.0F;
+
+        /// <summary>
+        /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
+        /// </summary>
+        public delegate void UpdateHUDHealthBarHandler(int hitPoints);
+        public event UpdateHUDHealthBarHandler UpdateHealthBarHUD;
+        public event UpdateHUDHealthBarHandler ResetHealthBarHUD;
 
         #endregion
         
@@ -185,12 +194,34 @@ namespace Player
             _currentState?.Destroy();
 
             _currentState = newState;
-            
+
             if (_currentState != null)
             {
                 _currentState.Controller = this;
                 _currentState.Start();
             }
+        }
+
+        public void LoseHitPoints(int value)
+        {
+            if (hitPoints - value < 0) hitPoints = 0;
+            else hitPoints -= value;
+            
+            UpdateHealthBarHUD?.Invoke(hitPoints);
+        }
+        
+        public void RestoreHitPoints(int value)
+        {
+            if (hitPoints + value > 10) hitPoints = 10;
+            else hitPoints += value;
+
+            UpdateHealthBarHUD?.Invoke(hitPoints);
+        }
+
+        public void ResetHitPoints()
+        {
+            hitPoints = 10;
+            ResetHealthBarHUD?.Invoke(hitPoints);
         }
 
         #endregion
