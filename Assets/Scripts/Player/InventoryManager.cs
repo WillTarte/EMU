@@ -7,24 +7,33 @@ namespace Player
 {
     public class InventoryManager : MonoBehaviour
     {
-        private Dictionary<InventorySlot, WeaponBehaviourScript> _weaponSlots;
-        private InventorySlot _currentActiveWeaponSlot;
+        private Dictionary<InventoryIndex, WeaponBehaviourScript> _weaponSlots;
+        private InventoryIndex _currentActiveWeaponSlot;
+        
+        /// <summary>
+        /// Events listened by the HUD to update the HUD inventory. Delegates allows to pass variable using events.
+        /// </summary>
+        public delegate void AddWeaponToHUDHandler(InventoryIndex slot, WeaponBehaviourScript weaponScript);
+        public delegate void UpdateHUDInventoryHandler(InventoryIndex slot);
+        public event AddWeaponToHUDHandler AddWeaponHUD;
+        public event UpdateHUDInventoryHandler RemoveWeaponHUD;
+        public event UpdateHUDInventoryHandler ChangeSelectedWeaponHUD;
 
         /// <summary>
         /// Public property to access the weapons currently in the inventory. Keys are slots, and values are the
         /// WeaponBehaviourScripts attached to the weapon gameobjects. Values can be null.
         /// </summary>
-        public Dictionary<InventorySlot, WeaponBehaviourScript> WeaponSlots => _weaponSlots;
-        public InventorySlot CurrentActiveWeaponSlot => _currentActiveWeaponSlot;
+        public Dictionary<InventoryIndex, WeaponBehaviourScript> WeaponSlots => _weaponSlots;
+        public InventoryIndex CurrentActiveWeaponSlot => _currentActiveWeaponSlot;
 
         private void Awake()
         {
-            _weaponSlots = new Dictionary<InventorySlot, WeaponBehaviourScript>
+            _weaponSlots = new Dictionary<InventoryIndex, WeaponBehaviourScript>
             {
-                {InventorySlot.First, null}, {InventorySlot.Second, null}, {InventorySlot.Throwable, null}
+                {InventoryIndex.First, null}, {InventoryIndex.Second, null}, {InventoryIndex.Throwable, null}
             };
 
-            _currentActiveWeaponSlot = InventorySlot.First;
+            _currentActiveWeaponSlot = InventoryIndex.First;
         }
 
         private void Update()
@@ -52,16 +61,18 @@ namespace Player
             {
                 case KeyCode.Alpha1:
                 {
-                    _currentActiveWeaponSlot = InventorySlot.First;
-                    if (_weaponSlots[InventorySlot.Second] != null)
-                        _weaponSlots[InventorySlot.Second].WeaponStateProp = WeaponState.InInventory;
+                    _currentActiveWeaponSlot = InventoryIndex.First;
+                    ChangeSelectedWeaponHUD?.Invoke(InventoryIndex.First);
+                    if (_weaponSlots[InventoryIndex.Second] != null)
+                        _weaponSlots[InventoryIndex.Second].WeaponStateProp = WeaponState.InInventory;
                     break;
                 }
                 case KeyCode.Alpha2:
                 {
-                    _currentActiveWeaponSlot = InventorySlot.Second;
-                    if (_weaponSlots[InventorySlot.First] != null)
-                        _weaponSlots[InventorySlot.First].WeaponStateProp = WeaponState.InInventory;
+                    _currentActiveWeaponSlot = InventoryIndex.Second;
+                    ChangeSelectedWeaponHUD?.Invoke(InventoryIndex.Second);
+                    if (_weaponSlots[InventoryIndex.First] != null)
+                        _weaponSlots[InventoryIndex.First].WeaponStateProp = WeaponState.InInventory;
                     break;
                 }
             }
@@ -76,6 +87,12 @@ namespace Player
         {
             var weaponScript = weapon.GetComponent<WeaponBehaviourScript>();
             if (weaponScript == null) return false;
+
+            InventoryIndex? maybeIndex = GetInventoryIndexByWeapon(weaponScript);
+            if (maybeIndex.HasValue)
+            {
+                return AddWeapon(maybeIndex.Value, weaponScript);
+            }
             
             if (weapon.CompareTag("Weapon"))
             {
@@ -91,7 +108,7 @@ namespace Player
             } 
             else if (weapon.CompareTag("Throwable"))
             {
-                return AddWeapon(InventorySlot.Throwable, weaponScript);
+                return AddWeapon(InventoryIndex.Throwable, weaponScript);
             }
             else
             {
@@ -106,7 +123,7 @@ namespace Player
         /// <param name="slot">The inventory slot to add the weapon to</param>
         /// <param name="weaponScript">The WeaponBehaviourScript attached to the weapon gameobject</param>
         /// <returns>A boolean indicating if the addition was successful</returns>
-        private bool AddWeapon(InventorySlot slot, WeaponBehaviourScript weaponScript)
+        private bool AddWeapon(InventoryIndex slot, WeaponBehaviourScript weaponScript)
         {
             if (_weaponSlots[slot] != null)
             {
@@ -114,7 +131,7 @@ namespace Player
                 {
                     _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
                     Destroy(weaponScript.gameObject);
-                    Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                    Debug.Log("Added ammo from" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true;
                 }
                 else
@@ -122,6 +139,7 @@ namespace Player
                     _weaponSlots[slot].WeaponStateProp = WeaponState.OnGround;
                     weaponScript.WeaponStateProp = WeaponState.InInventory;
                     _weaponSlots[slot] = weaponScript;
+                    AddWeaponHUD?.Invoke(slot, weaponScript);
                     Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true; 
                 }
@@ -130,27 +148,46 @@ namespace Player
             {
                 weaponScript.WeaponStateProp = WeaponState.InInventory;
                 _weaponSlots[slot] = weaponScript;
+                AddWeaponHUD?.Invoke(slot, weaponScript);
                 Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                 return true;
             }
         }
         
-        private InventorySlot? GetFirstOpenSlot()
+        private InventoryIndex? GetFirstOpenSlot()
         {
-            if (_weaponSlots[InventorySlot.First] == null)
+            if (_weaponSlots[InventoryIndex.First] == null)
             {
-                return InventorySlot.First;
+                return InventoryIndex.First;
             }
-            else if (_weaponSlots[InventorySlot.Second] == null)
+            else if (_weaponSlots[InventoryIndex.Second] == null)
             {
-                return InventorySlot.Second;
+                return InventoryIndex.Second;
+            }
+
+            return null;
+        }
+
+        private InventoryIndex? GetInventoryIndexByWeapon(WeaponBehaviourScript weaponScript)
+        {
+            if (_weaponSlots[InventoryIndex.First] != null && _weaponSlots[InventoryIndex.First].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.First;
+            } 
+            else if (_weaponSlots[InventoryIndex.Second] != null && _weaponSlots[InventoryIndex.Second].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.Second;
+            } 
+            else if (_weaponSlots[InventoryIndex.Throwable] != null && _weaponSlots[InventoryIndex.Throwable].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.Throwable;
             }
 
             return null;
         }
     }
 
-    public enum InventorySlot
+    public enum InventoryIndex
     {
         First,
         Second,
