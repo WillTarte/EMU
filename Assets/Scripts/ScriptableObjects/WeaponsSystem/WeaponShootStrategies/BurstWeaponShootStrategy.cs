@@ -33,7 +33,7 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             canReload = false;
             SpawnProjectile(weapon);
             weapon.CurrentMagazineAmmunition -= numProjectiles;
-            yield return new WaitForSeconds(1.0f / weapon.WeaponData.FireRate);
+            yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate);
             canReload = true;
             canShoot = true; 
         }
@@ -68,18 +68,6 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             for (int i = 0; i < numProjectiles; i++)
             {
                 float angle = -(spread / 2) + i * (spread / (numProjectiles - 1));
-                //todo
-                /*if (weapon.FacingDirection == Vector2.left)
-            {
-                if (angle >= 0.0f)
-                {
-                    angle = 180.0f - angle;
-                }
-                else
-                {
-                    angle = 180.0f + angle;
-                }
-            }*/
                 GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
                 Vector2 projDir =
                     Vector2.ClampMagnitude(new Vector2(weapon.Direction.x, (float) Math.Tan(angle) * weapon.Direction.x),1.0f);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
 
@@ -12,26 +13,16 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
     {
         private const bool DefaultCanShootValue = true;
         private const bool DefaultCanReloadValue = true;
-        private const bool DefaultPressedValue = false;
-    
+
         [SerializeField] private bool canReload = true;
         [SerializeField] private bool canShoot = true;
-        [SerializeField] private bool pressed = false;
-    
+
         public override void Shoot(WeaponBehaviourScript weapon)
         {
-            if (canShoot && !pressed && weapon.CurrentMagazineAmmunition >= 1)
+            if (canShoot && weapon.CurrentMagazineAmmunition >= 1)
             {
-                pressed = true;
                 weapon.StartCoroutine(WaitForShot(weapon));
-                weapon.StartCoroutine(WaitForRelease());
             }
-        }
-
-        private IEnumerator WaitForRelease()
-        {
-            yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
-            pressed = false;
         }
 
         private IEnumerator WaitForShot(WeaponBehaviourScript weapon)
@@ -39,13 +30,12 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             canShoot = false;
             SpawnProjectile(weapon);
             weapon.CurrentMagazineAmmunition -= 1;
-            yield return new WaitForSeconds(1.0f / weapon.WeaponData.FireRate);
+            yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate);
             canShoot = true;
         }
 
         public override void Reload(WeaponBehaviourScript weapon)
         {
-
             if (canReload)
             {
                 weapon.StartCoroutine(WaitForReload(weapon));
@@ -78,14 +68,12 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         {
             canShoot = DefaultCanShootValue;
             canReload = DefaultCanReloadValue;
-            pressed = DefaultPressedValue;
         }
 
         private void OnDestroy()
         {
             canShoot = DefaultCanShootValue;
             canReload = DefaultCanReloadValue;
-            pressed = DefaultPressedValue;
         }
     }
 }
