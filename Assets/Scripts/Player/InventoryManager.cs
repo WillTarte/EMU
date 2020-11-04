@@ -87,6 +87,12 @@ namespace Player
         {
             var weaponScript = weapon.GetComponent<WeaponBehaviourScript>();
             if (weaponScript == null) return false;
+
+            InventoryIndex? maybeIndex = GetInventoryIndexByWeapon(weaponScript);
+            if (maybeIndex.HasValue)
+            {
+                return AddWeapon(maybeIndex.Value, weaponScript);
+            }
             
             if (weapon.CompareTag("Weapon"))
             {
@@ -125,7 +131,7 @@ namespace Player
                 {
                     _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
                     Destroy(weaponScript.gameObject);
-                    Debug.Log("Added ammo frome" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                    Debug.Log("Added ammo from" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true;
                 }
                 else
@@ -157,6 +163,24 @@ namespace Player
             else if (_weaponSlots[InventoryIndex.Second] == null)
             {
                 return InventoryIndex.Second;
+            }
+
+            return null;
+        }
+
+        private InventoryIndex? GetInventoryIndexByWeapon(WeaponBehaviourScript weaponScript)
+        {
+            if (_weaponSlots[InventoryIndex.First] != null && _weaponSlots[InventoryIndex.First].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.First;
+            } 
+            else if (_weaponSlots[InventoryIndex.Second] != null && _weaponSlots[InventoryIndex.Second].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.Second;
+            } 
+            else if (_weaponSlots[InventoryIndex.Throwable] != null && _weaponSlots[InventoryIndex.Throwable].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.Throwable;
             }
 
             return null;
