@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8423057064303207579}
   - component: {fileID: 8423057064303207577}
   - component: {fileID: 8423057064303207578}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EmuSoldier
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e25ba7af6ff20499a1c7afdae40c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTarget: {fileID: 29354406410690254, guid: 836efce1b76ca2c5685af8c74976a1bb, type: 3}
   mFollowSpeed: 4
   mFollowRange: 10
   mJumpForce: 300
@@ -134,8 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8748371daf6f402a8b4afcbe52e9c99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPlayer: {fileID: 29354406410690242, guid: 836efce1b76ca2c5685af8c74976a1bb, type: 3}
-  mSpriteRenderer: {fileID: 8423057064303207582}
 --- !u!61 &8423057064303207578
 BoxCollider2D:
   m_ObjectHideFlags: 0

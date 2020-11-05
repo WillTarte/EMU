@@ -5,12 +5,6 @@ namespace Enemy
 {
     public class Emu : MonoBehaviour
     {
-        #region Interface Variables
-
-        [SerializeField] public SpriteRenderer mSpriteRenderer;
-
-        #endregion
-        
         #region private Variables
 
         private GameObject _player;
@@ -32,7 +26,7 @@ namespace Enemy
             var emuPosition = gameObject.transform.position;
             var playerPosition = _player.transform.position;
 
-            mSpriteRenderer.flipX = (emuPosition.x - playerPosition.x < 0);
+            _player.GetComponent<SpriteRenderer>().flipX = (emuPosition.x - playerPosition.x < 0);
         }
 
         private void OnTriggerEnter2D(Collider2D col)

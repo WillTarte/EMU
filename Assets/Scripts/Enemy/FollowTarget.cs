@@ -7,9 +7,9 @@ namespace Enemy
     {
         #region Interface Variables
 
-        [SerializeField] public float mFollowSpeed;
-        [SerializeField] public float mFollowRange;
-        [SerializeField] public float mJumpForce;
+        [SerializeField] private float mFollowSpeed;
+        [SerializeField] private float mFollowRange;
+        [SerializeField] private float mJumpForce;
 
         #endregion
         
