@@ -1,5 +1,6 @@
 ﻿using System;
 using Player.States;
+using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -13,6 +14,8 @@ namespace Player
         private BaseState _currentState;
         private InputHandler _inputHandler;
         private GameObject _nearestPickup;
+        private bool _isHurt;
+        private float _timer = 2;
 
         #endregion
 
@@ -23,6 +26,7 @@ namespace Player
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
+        public TextMeshProUGUI WarningText;
 
         public GameObject NearestPickup
         {
@@ -69,6 +73,8 @@ namespace Player
             SpriteRendererProp = GetComponent<SpriteRenderer>();
             Animator = GetComponent<Animator>();
             InventoryManager = GetComponent<InventoryManager>();
+            
+            WarningText.enabled = false;
 
             IsGrounded = false;
             IsFacingRight = true;
@@ -86,6 +92,7 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
+            IsHurt();
             _currentState?.Update(_inputHandler.HandleInput());
             if (IsFacingRight
                 ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
@@ -124,6 +131,17 @@ namespace Player
             EdgeCollider.points = edgeColliderPoints;
         }
 
+        private void IsHurt()
+        {
+            _timer -= Time.deltaTime;
+            if (_timer < 0 && _isHurt)
+            {
+                _timer = 2;
+                _isHurt = false;
+                WarningText.enabled = false;
+            }
+        }
+        
         #endregion
         
         #region Public Methods
@@ -204,10 +222,16 @@ namespace Player
 
         public void LoseHitPoints(int value)
         {
-            if (hitPoints - value < 0) hitPoints = 0;
-            else hitPoints -= value;
-            
-            UpdateHealthBarHUD?.Invoke(hitPoints);
+            if (!_isHurt)
+            {
+                _isHurt = true;
+                WarningText.enabled = true;
+                _timer = 2;
+                if (hitPoints - value < 0) hitPoints = 0;
+                else hitPoints -= value;
+
+                UpdateHealthBarHUD?.Invoke(hitPoints);
+            }
         }
         
         public void RestoreHitPoints(int value)
@@ -223,7 +247,7 @@ namespace Player
             hitPoints = 10;
             ResetHealthBarHUD?.Invoke(hitPoints);
         }
-
+        
         #endregion
         
         #region Event Methods
@@ -252,6 +276,12 @@ namespace Player
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                LoseHitPoints(1);
+            }
+            
             if (other.gameObject.CompareTag("Ground"))
             {
                 IsGrounded = true;   

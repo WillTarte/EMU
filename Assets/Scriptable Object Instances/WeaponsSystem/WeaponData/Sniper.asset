@@ -15,7 +15,7 @@ MonoBehaviour:
   magazineCapacity: 20
   maxAmmunitionCount: 50
   fireRate: 0.5
-  reloadTime: 4
+  reloadTime: 2
   projectileData: {fileID: 11400000, guid: 1170e62700ef5bb478973b72c7154636, type: 2}
   fireMode: 1
   shootStrategy: {fileID: 11400000, guid: 94cdf14ec036d2c4f8cf3bff8b83b50e, type: 2}

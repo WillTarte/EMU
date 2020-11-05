@@ -8,7 +8,9 @@ TagManager:
   - Ground
   - Ladders
   - WeaponOnGroundTrigger
+  - Enemy
   - Platform
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -22,10 +24,7 @@ TagManager:
   - Player
   - Trigger
   - Passthrough
-  - 
-  - 
-  - 
-  - 
+  - Enemy
   - 
   - 
   - 

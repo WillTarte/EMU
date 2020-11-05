@@ -53,11 +53,6 @@ namespace MonoBehaviours.WeaponsSystem
                 transform.Translate(_projectileData.ProjectileSpeed * Time.deltaTime * _direction);
             }
         }
-    
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            Debug.Log("Projectile " + _projectileData.name + " Collided with " + other.name);
-        }
 
         private void OnDestroy()
         {

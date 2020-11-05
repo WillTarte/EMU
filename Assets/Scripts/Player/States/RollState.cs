@@ -14,7 +14,7 @@ namespace Player.States
         {
             base.Start();
             
-            Debug.Log("Roll State");
+            //Debug.Log("Roll State");
             
             Controller.Animator.SetTrigger("Roll");
         }
