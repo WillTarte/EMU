@@ -162,6 +162,24 @@ namespace Player
 
             return null;
         }
+
+        private InventoryIndex? GetInventoryIndexByWeapon(WeaponBehaviourScript weaponScript)
+        {
+            if (_weaponSlots[InventoryIndex.First] != null && _weaponSlots[InventoryIndex.First].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.First;
+            } 
+            else if (_weaponSlots[InventoryIndex.Second] != null && _weaponSlots[InventoryIndex.Second].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.Second;
+            } 
+            else if (_weaponSlots[InventoryIndex.Throwable] != null && _weaponSlots[InventoryIndex.Throwable].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            {
+                return InventoryIndex.Throwable;
+            }
+
+            return null;
+        }
     }
 
     public enum InventoryIndex
