@@ -87,6 +87,12 @@ namespace Player
         {
             var weaponScript = weapon.GetComponent<WeaponBehaviourScript>();
             if (weaponScript == null) return false;
+
+            InventoryIndex? maybeIndex = GetInventoryIndexByWeapon(weaponScript);
+            if (maybeIndex.HasValue)
+            {
+                return AddWeapon(maybeIndex.Value, weaponScript);
+            }
             
             if (weapon.CompareTag("Weapon"))
             {
@@ -125,7 +131,7 @@ namespace Player
                 {
                     _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
                     Destroy(weaponScript.gameObject);
-                    Debug.Log("Added ammo frome" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                    Debug.Log("Added ammo from" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
                     return true;
                 }
                 else
