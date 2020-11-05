@@ -226,6 +226,7 @@ namespace Player
             {
                 _isHurt = true;
                 WarningText.enabled = true;
+                _timer = 2;
                 if (hitPoints - value < 0) hitPoints = 0;
                 else hitPoints -= value;
 

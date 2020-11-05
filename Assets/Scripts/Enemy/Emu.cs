@@ -26,7 +26,7 @@ namespace Enemy
             var emuPosition = gameObject.transform.position;
             var playerPosition = _player.transform.position;
 
-            _player.GetComponent<SpriteRenderer>().flipX = (emuPosition.x - playerPosition.x < 0);
+            gameObject.GetComponent<SpriteRenderer>().flipX = (emuPosition.x - playerPosition.x < 0);
         }
 
         private void OnTriggerEnter2D(Collider2D col)
