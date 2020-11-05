@@ -7,11 +7,21 @@ namespace Enemy
     {
         #region Interface Variables
 
-        [SerializeField] public GameObject mPlayer;
         [SerializeField] public SpriteRenderer mSpriteRenderer;
 
         #endregion
+        
+        #region private Variables
 
+        private GameObject _player;
+        
+        #endregion
+
+        void Start()
+        {
+            _player = GameObject.FindWithTag("Player");
+        }
+        
         void Update()
         {
             IsFacingPlayer();
@@ -20,7 +30,7 @@ namespace Enemy
         private void IsFacingPlayer()
         {
             var emuPosition = gameObject.transform.position;
-            var playerPosition = mPlayer.transform.position;
+            var playerPosition = _player.transform.position;
 
             mSpriteRenderer.flipX = (emuPosition.x - playerPosition.x < 0);
         }

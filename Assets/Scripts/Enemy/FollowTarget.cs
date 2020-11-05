@@ -7,7 +7,6 @@ namespace Enemy
     {
         #region Interface Variables
 
-        [SerializeField] public Transform mTarget;
         [SerializeField] public float mFollowSpeed;
         [SerializeField] public float mFollowRange;
         [SerializeField] public float mJumpForce;
@@ -18,11 +17,13 @@ namespace Enemy
         
         private Vector3 _lastPosition;
         private float _timer = 2;
+        private Transform _playerTransform;
         
         #endregion
 
         void Start()
         {
+            _playerTransform = GameObject.FindWithTag("Player").transform;
             _lastPosition = gameObject.transform.position;
         }
         
@@ -36,10 +37,10 @@ namespace Enemy
 
         private void FollowPlayer()
         {
-            if (mTarget != null && Vector2.Distance(transform.position, mTarget.position) < mFollowRange)
+            if (_playerTransform != null && Vector2.Distance(transform.position, _playerTransform.position) < mFollowRange)
             {
                 transform.position =
-                    Vector2.MoveTowards(transform.position, mTarget.position, mFollowSpeed * Time.deltaTime);
+                    Vector2.MoveTowards(transform.position, _playerTransform.position, mFollowSpeed * Time.deltaTime);
             }
         }
 
