@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
 
@@ -44,10 +45,8 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         {
             canReload = false;
             canShoot = false;
-            int reloadAmount =
-                weapon.CurrentTotalAmmunition < weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition
-                    ? weapon.CurrentTotalAmmunition
-                    : weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            int reloadAmount = weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            reloadAmount = Math.Min(reloadAmount, weapon.CurrentTotalAmmunition);
             yield return new WaitForSeconds(weapon.WeaponData.ReloadTime);
             weapon.CurrentTotalAmmunition -= reloadAmount;
             weapon.CurrentMagazineAmmunition += reloadAmount;
@@ -63,6 +62,18 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         }
 
         private void Awake()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnEnable()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnDisable()
         {
             canShoot = DefaultCanShootValue;
             canReload = DefaultCanReloadValue;

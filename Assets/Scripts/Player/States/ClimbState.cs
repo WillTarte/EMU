@@ -8,9 +8,7 @@ namespace Player.States
         public override void Start()
         {
             base.Start();
-            
-            Debug.Log("Climb State");
-            
+
             Controller.Animator.SetInteger("AnimState", 0);
             
             Controller.Rigidbody.gravityScale = 0.0F;

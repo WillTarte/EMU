@@ -13,9 +13,7 @@ namespace Player.States
         public override void Start()
         {
             base.Start();
-            
-            //Debug.Log("Roll State");
-            
+
             Controller.Animator.SetTrigger("Roll");
         }
 

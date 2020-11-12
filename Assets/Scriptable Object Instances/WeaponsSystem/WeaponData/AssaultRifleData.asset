@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
+  m_Name: AssaultRifleData
+  m_EditorClassIdentifier: 
+  magazineCapacity: 30
+  maxAmmunitionCount: 150
+  fireRate: 5
+  reloadTime: 1.25
+  projectileData: {fileID: 11400000, guid: 7d6dd0663f7033d42b82d85a828005b4, type: 2}
+  shootStrategy: {fileID: 11400000, guid: 4ca44fd5d94a0ca48b957711bdfbee06, type: 2}
+  onGroundSprite: {fileID: -971063008101321254, guid: 6de0f8b654f3ef742b88e028d4f68618,
+    type: 3}
+  inInventorySprite: {fileID: -971063008101321254, guid: 6de0f8b654f3ef742b88e028d4f68618,
+    type: 3}

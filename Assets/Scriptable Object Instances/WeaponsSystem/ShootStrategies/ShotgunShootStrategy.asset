@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c455a07aa848dcbda3d18a3c3493e8, type: 3}
   m_Name: ShotgunShootStrategy
   m_EditorClassIdentifier: 
-  spread: 30
+  spread: 15
   numProjectiles: 3
   canReload: 1
   canShoot: 1

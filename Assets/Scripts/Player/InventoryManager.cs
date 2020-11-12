@@ -131,7 +131,7 @@ namespace Player
                 {
                     _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
                     Destroy(weaponScript.gameObject);
-                    Debug.Log("Added ammo from" + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                    weaponScript.gameObject.transform.parent = gameObject.transform;
                     return true;
                 }
                 else
@@ -140,7 +140,7 @@ namespace Player
                     weaponScript.WeaponStateProp = WeaponState.InInventory;
                     _weaponSlots[slot] = weaponScript;
                     AddWeaponHUD?.Invoke(slot, weaponScript);
-                    Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                    weaponScript.gameObject.transform.parent = gameObject.transform;
                     return true; 
                 }
             }
@@ -149,7 +149,7 @@ namespace Player
                 weaponScript.WeaponStateProp = WeaponState.InInventory;
                 _weaponSlots[slot] = weaponScript;
                 AddWeaponHUD?.Invoke(slot, weaponScript);
-                Debug.Log("Added " + weaponScript.WeaponData.name + " to Inventory slot " + slot);
+                weaponScript.gameObject.transform.parent = gameObject.transform;
                 return true;
             }
         }

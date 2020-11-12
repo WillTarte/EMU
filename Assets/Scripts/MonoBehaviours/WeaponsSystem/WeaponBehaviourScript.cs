@@ -21,11 +21,25 @@ namespace MonoBehaviours.WeaponsSystem
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody;
         private Vector2 _direction;
-    
+
         /// <summary>
         /// Returns the world space position of where the weapon's muzzle is
         /// </summary>
-        public Vector2 WeaponSpriteEndPosition => (Vector2) transform.position + (_direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
+        public Vector2 WeaponSpriteEndPosition
+        {
+            get
+            {
+                if (gameObject.transform.parent != null)
+                {
+                    var parent = gameObject.transform.parent.gameObject;
+                    var parentSpriteRender = parent.GetComponent<SpriteRenderer>();
+                    var sprite = parentSpriteRender.sprite;
+                    return (Vector2) parent.transform.position + new Vector2(sprite.bounds.extents.x, sprite.bounds.extents.y);
+                }
+                return (Vector2) transform.position + (_direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
+            }
+        }
+
         public WeaponData WeaponData => weaponData;
 
         /// <summary>
@@ -56,13 +70,13 @@ namespace MonoBehaviours.WeaponsSystem
         public int CurrentMagazineAmmunition
         {
             get => currentMagazineAmmunition;
-            set => currentMagazineAmmunition = value;
+            set => currentMagazineAmmunition = value > weaponData.MagazineCapacity ? weaponData.MagazineCapacity : value;
         }
 
         public int CurrentTotalAmmunition
         {
             get => currentTotalAmmunition;
-            set => currentTotalAmmunition = value;
+            set => currentTotalAmmunition = value > weaponData.MaxAmmunitionCount ? weaponData.MaxAmmunitionCount : value;
         }
 
         private void Awake()
@@ -72,6 +86,18 @@ namespace MonoBehaviours.WeaponsSystem
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _weaponOnGroundBehaviour = GetComponent<WeaponOnGroundBehaviour>();
             _weaponOnGroundBehaviour.Init(weaponData);
+
+            weaponData = Instantiate(weaponData);
+
+            if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)
+            {
+                currentTotalAmmunition = weaponData.MaxAmmunitionCount;
+            }
+
+            if (currentMagazineAmmunition > weaponData.MagazineCapacity)
+            {
+                currentMagazineAmmunition = weaponData.MagazineCapacity;
+            }
         }
 
         private void Update()
@@ -84,16 +110,16 @@ namespace MonoBehaviours.WeaponsSystem
                     break;
                 case WeaponState.InInventory:
                     _weaponOnGroundBehaviour.enabled = false;
-                    _spriteRenderer.sprite = weaponData.InInventorySprite;
+                    _spriteRenderer.sprite = null;
                     _rigidbody.Sleep();
                     break;
                 case WeaponState.Inactive:
                     _weaponOnGroundBehaviour.enabled = false;
-                    _spriteRenderer.sprite = weaponData.InactiveSprite;
+                    _spriteRenderer.sprite = null;
                     break;
                 case WeaponState.Active:
                     _weaponOnGroundBehaviour.enabled = false;
-                    _spriteRenderer.sprite = weaponData.ActiveSprite;
+                    _spriteRenderer.sprite = null;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

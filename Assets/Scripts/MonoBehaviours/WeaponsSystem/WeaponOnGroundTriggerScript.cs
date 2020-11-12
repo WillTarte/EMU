@@ -9,19 +9,26 @@ namespace MonoBehaviours.WeaponsSystem
         private GameObject _promptInstance = null;
         private BoxCollider2D _boxCollider;
         private Rigidbody2D _rigidbody;
-        private bool _playerInside = false;
+        private Vector2 _promptHitboxSize;
+        private int _promptTextSize;
 
-        public void Init(GameObject promptPrefab)
+        public void Init(GameObject promptPrefab, Vector2 promptHitboxSize, int promptTextSize)
         {
             _promptPrefab = promptPrefab;
+            _promptHitboxSize = promptHitboxSize;
+            _promptTextSize = promptTextSize;
         }
 
         private void Awake()
         {
             _boxCollider = GetComponent<BoxCollider2D>();
-            _boxCollider.isTrigger = true;
-            _boxCollider.size = new Vector2(5, 5);
             _rigidbody = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+            _boxCollider.isTrigger = true;
+            _boxCollider.size = _promptHitboxSize;
             _rigidbody.isKinematic = true;
         }
 
@@ -35,7 +42,7 @@ namespace MonoBehaviours.WeaponsSystem
             if (other.CompareTag("Player"))
             {
                 _promptInstance = Instantiate(_promptPrefab, transform.parent.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
-                _playerInside = true;
+                _promptInstance.GetComponent<TextMesh>().fontSize = _promptTextSize;
             }
         }
 
@@ -44,7 +51,6 @@ namespace MonoBehaviours.WeaponsSystem
             if (other.CompareTag("Player"))
             {
                 Destroy(_promptInstance);
-                _playerInside = false;
             }
         }
     }

@@ -66,6 +66,18 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             canReload = DefaultCanReloadValue;
         }
 
+        private void OnEnable()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnDisable()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
         private void OnDestroy()
         {
             canShoot = DefaultCanShootValue;

@@ -11,8 +11,6 @@ namespace Player.States
         public override void Start()
         {
             base.Start();
-
-            Debug.Log("Fall State");
         }
 
         public override void Update(Command cmd)

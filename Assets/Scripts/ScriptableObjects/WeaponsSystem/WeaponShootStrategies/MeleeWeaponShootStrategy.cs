@@ -35,19 +35,20 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             switch (meleeShapeType)
             {
                 case MeleeShapeType.BoxCast:
-                    ProcessRayCastHits(Physics2D.BoxCastAll(weapon.transform.position, size, angle, direction.Equals(Vector2.zero) ? weapon.Direction : direction, distance == 0.0f ? Mathf.Infinity : distance));
+                    ProcessRayCastHits(Physics2D.BoxCastAll((Vector2) weapon.transform.position + weapon.WeaponSpriteEndPosition, size, angle, direction.Equals(Vector2.zero) ? weapon.Direction : new Vector2(direction.x * weapon.Direction.x, direction.y), distance == 0.0f ? Mathf.Infinity : distance));
                     break;
                 case MeleeShapeType.CircleCast:
-                    ProcessRayCastHits(Physics2D.CircleCastAll(weapon.transform.position, radius, direction.Equals(Vector2.zero) ? weapon.Direction : direction, distance == 0.0f ? Mathf.Infinity : distance));
+                    ProcessRayCastHits(Physics2D.CircleCastAll((Vector2) weapon.transform.position + weapon.WeaponSpriteEndPosition, radius, direction.Equals(Vector2.zero) ? weapon.Direction : direction, distance == 0.0f ? Mathf.Infinity : distance));
                     break;
                 case MeleeShapeType.RayCast:
-                    ProcessRayCastHits(Physics2D.RaycastAll(weapon.transform.position, direction.Equals(Vector2.zero) ? weapon.Direction : direction, distance == 0.0f ? Mathf.Infinity : distance));
+                    ProcessRayCastHits(Physics2D.RaycastAll((Vector2) weapon.transform.position + weapon.WeaponSpriteEndPosition, direction.Equals(Vector2.zero) ? weapon.Direction : direction, distance == 0.0f ? Mathf.Infinity : distance));
+                    Debug.DrawRay((Vector2) weapon.transform.position + weapon.WeaponSpriteEndPosition, weapon.Direction, Color.cyan, 5.0f);
                     break;
                 case MeleeShapeType.OverlapCircle:
-                    ProcessColliderHits(Physics2D.OverlapCircleAll(weapon.transform.position, radius));
+                    ProcessColliderHits(Physics2D.OverlapCircleAll((Vector2) weapon.transform.position + weapon.WeaponSpriteEndPosition, radius));
                     break;
                 case MeleeShapeType.OverlapBox:
-                    ProcessColliderHits(Physics2D.OverlapBoxAll(weapon.transform.position, size, angle));
+                    ProcessColliderHits(Physics2D.OverlapBoxAll((Vector2) weapon.transform.position + weapon.WeaponSpriteEndPosition, size, angle));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -95,6 +96,16 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         }
     
         private void Awake()
+        {
+            canAttack = DefaultCanAttackValue;
+        }
+
+        private void OnEnable()
+        {
+            canAttack = DefaultCanAttackValue;
+        }
+
+        private void OnDisable()
         {
             canAttack = DefaultCanAttackValue;
         }
