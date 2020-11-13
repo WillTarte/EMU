@@ -22,6 +22,8 @@ namespace HUD
                 {InventoryIndex.Second, transform.Find("Weapon2").gameObject},
                 {InventoryIndex.Throwable, transform.Find("Throwable").gameObject}
             };
+            
+            _inventoryContainer[_selectedSlot].transform.Find("Selected").gameObject.SetActive(true);
         }
 
         //Outlines the weapon image in the HUD inventory that is currently used by the player.

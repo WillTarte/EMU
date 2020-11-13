@@ -62,7 +62,6 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
 
         protected override void SpawnProjectile(WeaponBehaviourScript weapon)
         {
-            //todo if spread is 0 (straight line) then bullets should have delay between each other
             for (int i = 0; i < numProjectiles; i++)
             {
                 var angle = -(spread / 2) + i * (spread / (numProjectiles - 1));
