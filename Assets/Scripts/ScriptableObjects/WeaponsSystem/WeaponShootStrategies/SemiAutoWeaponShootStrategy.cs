@@ -30,7 +30,7 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             canShoot = false;
             SpawnProjectile(weapon);
             weapon.CurrentMagazineAmmunition -= 1;
-            yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate);
+            yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate); // todo what if we change the keybinding?
             canShoot = true;
         }
 

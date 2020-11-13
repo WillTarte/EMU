@@ -10,9 +10,6 @@ namespace MonoBehaviours.WeaponsSystem
     /// </summary>
     public class WeaponBehaviourScript : MonoBehaviour
     {
-        // TODO: 
-        // 1. Make sure the weapon gameobject does not have more ammo than allowed by the WeaponData instance
-
         [SerializeField] private WeaponData weaponData;
         [SerializeField] private WeaponState weaponState;
         [SerializeField] private int currentMagazineAmmunition;
@@ -87,6 +84,7 @@ namespace MonoBehaviours.WeaponsSystem
             _weaponOnGroundBehaviour = GetComponent<WeaponOnGroundBehaviour>();
             _weaponOnGroundBehaviour.Init(weaponData);
 
+            // todo: Didn't find much info, but hopefully this does a deep copy of everything
             weaponData = Instantiate(weaponData);
 
             if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)

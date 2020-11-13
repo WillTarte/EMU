@@ -10,7 +10,7 @@ namespace Player
         #region Private Variables
 
         [Range(0, 10)] 
-        private int hitPoints = 10;
+        private int _hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
         private GameObject _nearestPickup;
@@ -101,6 +101,11 @@ namespace Player
                 if (InventoryManager.GetActiveWeapon() != null)
                 {
                     InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+                }
+
+                if (InventoryManager.GetThrowableWeapon() != null)
+                {
+                    InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
                 }
             }
         }
@@ -227,25 +232,25 @@ namespace Player
                 _isHurt = true;
                 WarningText.enabled = true;
                 _timer = 2;
-                if (hitPoints - value < 0) hitPoints = 0;
-                else hitPoints -= value;
+                if (_hitPoints - value < 0) _hitPoints = 0;
+                else _hitPoints -= value;
 
-                UpdateHealthBarHUD?.Invoke(hitPoints);
+                UpdateHealthBarHUD?.Invoke(_hitPoints);
             }
         }
         
         public void RestoreHitPoints(int value)
         {
-            if (hitPoints + value > 10) hitPoints = 10;
-            else hitPoints += value;
+            if (_hitPoints + value > 10) _hitPoints = 10;
+            else _hitPoints += value;
 
-            UpdateHealthBarHUD?.Invoke(hitPoints);
+            UpdateHealthBarHUD?.Invoke(_hitPoints);
         }
 
         public void ResetHitPoints()
         {
-            hitPoints = 10;
-            ResetHealthBarHUD?.Invoke(hitPoints);
+            _hitPoints = 10;
+            ResetHealthBarHUD?.Invoke(_hitPoints);
         }
         
         #endregion

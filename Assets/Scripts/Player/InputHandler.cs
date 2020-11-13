@@ -9,6 +9,7 @@ namespace Player
         private readonly Command _shootCmd = new ShootCommand();
         private readonly Command _reloadCmd = new ReloadCommand();
         private readonly Command _pickupCommand = new PickupCommand();
+        private readonly Command _throwCommand = new ThrowCommand();
 
         public Command HandleInput()
         {
@@ -18,6 +19,7 @@ namespace Player
             else if (Input.GetKeyDown(KeyCode.E)) return _pickupCommand;
             else if (Input.GetKeyDown(KeyCode.Alpha1)) return new SwitchWeaponCommand(KeyCode.Alpha1);
             else if (Input.GetKeyDown(KeyCode.Alpha2)) return new SwitchWeaponCommand(KeyCode.Alpha2);
+            else if (Input.GetKeyDown(KeyCode.G)) return _throwCommand;
             else return null;
         }
     }

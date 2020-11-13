@@ -11,14 +11,12 @@ namespace ScriptableObjects.WeaponsSystem
         //todo particle effect when colliding
         [SerializeField] private Sprite projectileSprite;
         [SerializeField] private float projectileSpeed;
-        [SerializeField] private float projectileBaseDamage;
-        [SerializeField] private bool isKinematic;
+        [SerializeField] private int projectileBaseDamage;
         [SerializeField] private GameObject projectilePrefab;
 
         public Sprite ProjectileSprite => projectileSprite;
         public float ProjectileSpeed => projectileSpeed;
-        public float ProjectileBaseDamage => projectileBaseDamage;
-        public bool IsKinematic => isKinematic;
+        public int ProjectileBaseDamage => projectileBaseDamage;
         public GameObject ProjectilePrefab => projectilePrefab;
     }
 }

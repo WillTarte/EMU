@@ -21,7 +21,7 @@ namespace Player.States
         {
             base.Update(cmd);
 
-            if (cmd is JumpCommand || cmd is PickupCommand || cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand)
+            if (cmd is JumpCommand || cmd is PickupCommand || cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand)
             {
                 cmd.Execute(Controller);
             }

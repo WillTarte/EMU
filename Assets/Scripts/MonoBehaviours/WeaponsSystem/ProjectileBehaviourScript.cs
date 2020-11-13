@@ -7,6 +7,7 @@ namespace MonoBehaviours.WeaponsSystem
     /// <summary>
     /// Controls the behavior of a projectile
     /// </summary>
+    // todo: Environment needs to be on different layers, and projectiles only interact with some of the environment layers
     public class ProjectileBehaviourScript : MonoBehaviour
     {
         [SerializeField] private int aliveTime;
@@ -17,7 +18,7 @@ namespace MonoBehaviours.WeaponsSystem
         private SpriteRenderer _spriteRenderer;
 
         /// <summary>
-        ///  Initializes parameters of the script. MAKE SURE THE ProjectileData instance IS KINEMATIC
+        ///  Initializes parameters of the script.
         /// </summary>
         /// <param name="projectileData"></param> The projectile's data (Scriptable object instance)
         /// <param name="spawnDirection"></param> The direction of the projectile (right or left)
@@ -25,8 +26,8 @@ namespace MonoBehaviours.WeaponsSystem
         {
             _projectileData = projectileData;
             _direction = spawnDirection;
-        
-            _rigidbody.isKinematic = _projectileData.IsKinematic;
+
+            _rigidbody.isKinematic = true;
             _spriteRenderer.sprite = _projectileData.ProjectileSprite;
         }
     
@@ -38,20 +39,12 @@ namespace MonoBehaviours.WeaponsSystem
 
         private void Start()
         {
-            if (!_projectileData.IsKinematic)
-            {
-                _rigidbody.AddForce(_projectileData.ProjectileSpeed * _direction, ForceMode2D.Impulse);
-            }
-
             StartCoroutine(WaitForDestroy());
         }
 
         private void Update()
         {
-            if (_projectileData.IsKinematic)
-            {
-                transform.Translate(_projectileData.ProjectileSpeed * Time.deltaTime * _direction);
-            }
+            transform.Translate(_projectileData.ProjectileSpeed * Time.deltaTime * _direction);
         }
 
         private void OnDestroy()

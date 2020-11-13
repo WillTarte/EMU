@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using MonoBehaviours.WeaponsSystem;
+using ScriptableObjects.WeaponsSystem;
+using ScriptableObjects.WeaponsSystem.WeaponShootStrategies;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,8 +45,11 @@ namespace Player
             if (_weaponSlots[_currentActiveWeaponSlot] != null)
             {
                 _weaponSlots[_currentActiveWeaponSlot].WeaponStateProp = WeaponState.Active;
-                var weaponPos = gameObject.transform.position + GetComponent<SpriteRenderer>().sprite.bounds.center;
-                _weaponSlots[_currentActiveWeaponSlot].transform.position = weaponPos;
+            }
+
+            if (_weaponSlots[InventoryIndex.Throwable] != null)
+            {
+                _weaponSlots[InventoryIndex.Throwable].WeaponStateProp = WeaponState.Active;
             }
         }
 
@@ -53,6 +60,12 @@ namespace Player
         public WeaponBehaviourScript GetActiveWeapon()
         {
             return _weaponSlots[_currentActiveWeaponSlot];
+        }
+
+        [CanBeNull]
+        public WeaponBehaviourScript GetThrowableWeapon()
+        {
+            return _weaponSlots[InventoryIndex.Throwable];
         }
         
         public void SwitchActiveWeapon(KeyCode keyPressed)
@@ -88,32 +101,39 @@ namespace Player
             var weaponScript = weapon.GetComponent<WeaponBehaviourScript>();
             if (weaponScript == null) return false;
 
-            InventoryIndex? maybeIndex = GetInventoryIndexByWeapon(weaponScript);
-            if (maybeIndex.HasValue)
-            {
-                return AddWeapon(maybeIndex.Value, weaponScript);
-            }
-            
-            if (weapon.CompareTag("Weapon"))
-            {
-                var openSlot = GetFirstOpenSlot();
-                if (openSlot.HasValue)
-                {
-                    return AddWeapon(openSlot.Value, weaponScript);
-                }
-                else
-                {
-                    return AddWeapon(_currentActiveWeaponSlot, weaponScript);
-                }
-            } 
-            else if (weapon.CompareTag("Throwable"))
+            if (weaponScript.WeaponData.ShootStrategy is ThrowableShootStrategy)
             {
                 return AddWeapon(InventoryIndex.Throwable, weaponScript);
             }
             else
             {
-                Debug.Log("Tried to add weapon that didn't have a valid tag.");
-                return false; 
+                InventoryIndex? maybeIndex = GetInventoryIndexByWeapon(weaponScript);
+                if (maybeIndex.HasValue)
+                {
+                    return AddWeapon(maybeIndex.Value, weaponScript);
+                }
+            
+                if (weapon.CompareTag("Weapon"))
+                {
+                    var openSlot = GetFirstOpenSlot();
+                    if (openSlot.HasValue)
+                    {
+                        return AddWeapon(openSlot.Value, weaponScript);
+                    }
+                    else
+                    {
+                        return AddWeapon(_currentActiveWeaponSlot, weaponScript);
+                    }
+                } 
+                else if (weapon.CompareTag("Throwable"))
+                {
+                    return AddWeapon(InventoryIndex.Throwable, weaponScript);
+                }
+                else
+                {
+                    Debug.Log("Tried to add weapon that didn't have a valid tag.");
+                    return false; 
+                }
             }
         }
         
@@ -127,9 +147,16 @@ namespace Player
         {
             if (_weaponSlots[slot] != null)
             {
-                if (_weaponSlots[slot].WeaponData.name.Equals(weaponScript.WeaponData.name))
+                if (_weaponSlots[slot].WeaponData.WeaponName.Equals(weaponScript.WeaponData.WeaponName))
                 {
-                    _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
+                    if (_weaponSlots[slot].WeaponData.WeaponName is WeaponName.Grenade)
+                    {
+                        _weaponSlots[slot].CurrentMagazineAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
+                    }
+                    else
+                    {
+                        _weaponSlots[slot].CurrentTotalAmmunition += weaponScript.CurrentMagazineAmmunition + weaponScript.CurrentTotalAmmunition;
+                    }
                     Destroy(weaponScript.gameObject);
                     weaponScript.gameObject.transform.parent = gameObject.transform;
                     return true;
@@ -170,15 +197,15 @@ namespace Player
 
         private InventoryIndex? GetInventoryIndexByWeapon(WeaponBehaviourScript weaponScript)
         {
-            if (_weaponSlots[InventoryIndex.First] != null && _weaponSlots[InventoryIndex.First].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            if (_weaponSlots[InventoryIndex.First] != null && _weaponSlots[InventoryIndex.First].WeaponData.WeaponName.Equals(weaponScript.WeaponData.WeaponName))
             {
                 return InventoryIndex.First;
             } 
-            else if (_weaponSlots[InventoryIndex.Second] != null && _weaponSlots[InventoryIndex.Second].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            else if (_weaponSlots[InventoryIndex.Second] != null && _weaponSlots[InventoryIndex.Second].WeaponData.WeaponName.Equals(weaponScript.WeaponData.WeaponName))
             {
                 return InventoryIndex.Second;
             } 
-            else if (_weaponSlots[InventoryIndex.Throwable] != null && _weaponSlots[InventoryIndex.Throwable].WeaponData.name.Equals(weaponScript.WeaponData.name))
+            else if (_weaponSlots[InventoryIndex.Throwable] != null && _weaponSlots[InventoryIndex.Throwable].WeaponData.WeaponName.Equals(weaponScript.WeaponData.WeaponName))
             {
                 return InventoryIndex.Throwable;
             }

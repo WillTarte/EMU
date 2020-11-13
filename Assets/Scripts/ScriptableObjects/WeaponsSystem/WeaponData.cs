@@ -11,6 +11,7 @@ namespace ScriptableObjects.WeaponsSystem
     [CreateAssetMenu(fileName = "NewWeaponData", menuName = "ScriptableObjects/WeaponData", order = 1)]
     public class WeaponData : ScriptableObject
     {
+        [SerializeField] private WeaponName weaponName;
         [SerializeField] private int magazineCapacity;
         [SerializeField] private int maxAmmunitionCount;
         /// <summary>
@@ -23,6 +24,7 @@ namespace ScriptableObjects.WeaponsSystem
         [SerializeField] private Sprite onGroundSprite;
         [SerializeField] private Sprite inInventorySprite;
 
+        public WeaponName WeaponName => weaponName;
         public int MagazineCapacity => magazineCapacity;
         public int MaxAmmunitionCount => maxAmmunitionCount;
         public float FireRate => fireRate;
@@ -31,6 +33,15 @@ namespace ScriptableObjects.WeaponsSystem
         public WeaponShootStrategy ShootStrategy => shootStrategy;
         public Sprite OnGroundSprite => onGroundSprite;
         public Sprite InInventorySprite => inInventorySprite;
+    }
+
+    public enum WeaponName
+    {
+        Shotgun,
+        AssaultRifle,
+        Sniper,
+        Knife,
+        Grenade
     }
 }
 
