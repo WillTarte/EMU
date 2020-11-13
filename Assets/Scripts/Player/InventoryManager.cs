@@ -164,6 +164,7 @@ namespace Player
                 else
                 {
                     _weaponSlots[slot].WeaponStateProp = WeaponState.OnGround;
+                    _weaponSlots[slot].transform.parent = null;
                     weaponScript.WeaponStateProp = WeaponState.InInventory;
                     _weaponSlots[slot] = weaponScript;
                     AddWeaponHUD?.Invoke(slot, weaponScript);

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
   m_Name: AssaultRifleData
   m_EditorClassIdentifier: 
+  weaponName: 1
   magazineCapacity: 30
   maxAmmunitionCount: 150
   fireRate: 5

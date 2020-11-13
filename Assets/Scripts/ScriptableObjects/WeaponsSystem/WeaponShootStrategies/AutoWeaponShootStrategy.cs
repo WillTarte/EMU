@@ -56,8 +56,11 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
     
         protected override void SpawnProjectile(WeaponBehaviourScript weapon)
         {
-            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
-            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction);
+            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
+            
+            // Make sure the weapon has a parent gameobject of this line is gonna cause a Nullptrexception
+            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction,!weapon.transform.parent.CompareTag("Player"));
+            
             projectile.SetActive(true);
         }
 

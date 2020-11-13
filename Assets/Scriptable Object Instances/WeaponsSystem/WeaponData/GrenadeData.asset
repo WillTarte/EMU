@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
   m_Name: GrenadeData
   m_EditorClassIdentifier: 
-  weaponName: 0
+  weaponName: 4
   magazineCapacity: 8
   maxAmmunitionCount: 0
   fireRate: 1

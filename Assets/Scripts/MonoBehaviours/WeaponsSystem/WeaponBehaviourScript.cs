@@ -22,7 +22,7 @@ namespace MonoBehaviours.WeaponsSystem
         /// <summary>
         /// Returns the world space position of where the weapon's muzzle is
         /// </summary>
-        public Vector2 WeaponSpriteEndPosition
+        public Vector2 WeaponShootLocation
         {
             get
             {

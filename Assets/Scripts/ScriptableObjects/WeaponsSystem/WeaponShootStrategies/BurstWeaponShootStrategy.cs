@@ -67,10 +67,10 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             {
                 var angle = -(spread / 2) + i * (spread / (numProjectiles - 1));
                 angle = (float) (Math.PI / 180) * angle;
-                var projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
+                var projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
                 var projDir =
                     Vector2.ClampMagnitude(new Vector2(weapon.Direction.x, (float) Math.Tan(angle) * weapon.Direction.x),1.0f);
-                projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, projDir);
+                projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, projDir, !weapon.transform.parent.CompareTag("Player"));
                 projectile.SetActive(true);
             }
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
   m_Name: KnifeData
   m_EditorClassIdentifier: 
-  weaponName: 0
+  weaponName: 3
   magazineCapacity: 1
   maxAmmunitionCount: 1
   fireRate: 0

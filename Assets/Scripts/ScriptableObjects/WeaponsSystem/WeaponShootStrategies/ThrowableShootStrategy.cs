@@ -31,7 +31,7 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
 
         protected override void SpawnProjectile(WeaponBehaviourScript weapon)
         {
-            var throwable = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
+            var throwable = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
             var throwableScript = throwable.GetComponent<ThrowableBehaviourScript>();
             if (throwableScript == null)
             {

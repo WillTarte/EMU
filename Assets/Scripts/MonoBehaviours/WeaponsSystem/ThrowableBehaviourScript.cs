@@ -51,6 +51,20 @@ namespace MonoBehaviours.WeaponsSystem
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                DoExplosion();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
+
         private IEnumerator WaitForExplosion()
         {
             yield return new WaitForSeconds(aliveTime);

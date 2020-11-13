@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveTime: 3.5
-  explosionRadius: 3
+  explosionRadius: 4
   force: {x: 9, y: 7}
