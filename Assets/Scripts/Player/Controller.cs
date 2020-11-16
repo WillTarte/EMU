@@ -10,7 +10,7 @@ namespace Player
     {
         #region Private Variables
 
-        [Range(0, 10)] private int hitPoints = 10;
+        [Range(0, 10)] private int _hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
         private GameObject _nearestPickup;
