@@ -2,6 +2,7 @@
 using Player.States;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -9,8 +10,7 @@ namespace Player
     {
         #region Private Variables
 
-        [Range(0, 10)] 
-        private int hitPoints = 10;
+        [Range(0, 10)] private int hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
         private GameObject _nearestPickup;
@@ -20,7 +20,7 @@ namespace Player
         #endregion
 
         #region Interface Variables
-        
+
         public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
         public SpriteRenderer SpriteRendererProp { get; private set; }
@@ -46,23 +46,24 @@ namespace Player
         #endregion
 
         #region Public variables
-        
-        [Range(1, 10)]
-        public float speed = 5.0F;
-        [Range(100, 1000)]
-        public float jumpForce = 400.0F;
+
+        [Range(1, 10)] public float speed = 7.0f;
+        [Range(100, 1000)] public float jumpForce = 500.0f;
+        [Range(0, 500)] public int fallMultiplier = 10;
+
 
         /// <summary>
         /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
         /// </summary>
         public delegate void UpdateHUDHealthBarHandler(int hitPoints);
+
         public event UpdateHUDHealthBarHandler UpdateHealthBarHUD;
         public event UpdateHUDHealthBarHandler ResetHealthBarHUD;
 
         #endregion
-        
+
         #region Private Methods
-        
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -73,14 +74,14 @@ namespace Player
             SpriteRendererProp = GetComponent<SpriteRenderer>();
             Animator = GetComponent<Animator>();
             InventoryManager = GetComponent<InventoryManager>();
-            
+
             WarningText.enabled = false;
 
             IsGrounded = false;
             IsFacingRight = true;
 
             SetEdgeColliderPoints();
-            
+
             ChangeState(new IdleState());
         }
 
@@ -114,14 +115,15 @@ namespace Player
 
             transform.localScale = scale;
         }
-        
+
         private void SetEdgeColliderPoints()
         {
             var sprite = SpriteRendererProp.sprite;
             Vector2 spriteCenter = sprite.bounds.center;
             Vector2 spriteExtents = sprite.bounds.extents;
 
-            Vector2[] edgeColliderPoints = {
+            Vector2[] edgeColliderPoints =
+            {
                 new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
                 new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
                 new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
@@ -141,11 +143,11 @@ namespace Player
                 WarningText.enabled = false;
             }
         }
-        
+
         #endregion
-        
+
         #region Public Methods
-        
+
         /// <summary>
         /// Set the direction of the texture based on keyboard input
         /// </summary>
@@ -233,7 +235,7 @@ namespace Player
                 UpdateHealthBarHUD?.Invoke(hitPoints);
             }
         }
-        
+
         public void RestoreHitPoints(int value)
         {
             if (hitPoints + value > 10) hitPoints = 10;
@@ -247,11 +249,11 @@ namespace Player
             hitPoints = 10;
             ResetHealthBarHUD?.Invoke(hitPoints);
         }
-        
+
         #endregion
-        
+
         #region Event Methods
-        
+
         /// <summary>
         /// Event function called at the end of the Roll animation
         /// </summary>
@@ -269,22 +271,21 @@ namespace Player
                 ChangeState(new RunState());
             }
             else
-            { 
+            {
                 ChangeState(new IdleState());
             }
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            
             if (other.gameObject.CompareTag("Enemy"))
             {
                 LoseHitPoints(1);
             }
-            
+
             if (other.gameObject.CompareTag("Ground"))
             {
-                IsGrounded = true;   
+                IsGrounded = true;
             }
 
             if (other.gameObject.CompareTag("Platform"))
@@ -300,9 +301,9 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                IsGrounded = false;   
+                IsGrounded = false;
             }
-            
+
             if (other.gameObject.CompareTag("Platform"))
             {
                 IsGrounded = false;
@@ -311,8 +312,8 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-
-            if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") && other.CompareTag("WeaponOnGroundTrigger"))
+            if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
+                other.CompareTag("WeaponOnGroundTrigger"))
             {
                 if (NearestPickup != null)
                 {
@@ -327,8 +328,8 @@ namespace Player
                     NearestPickup = other.transform.parent.gameObject;
                 }
             }
-            
-            
+
+
             if (other.gameObject.CompareTag("Ladders"))
             {
                 Debug.Log("Ladder hit");
