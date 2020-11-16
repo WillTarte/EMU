@@ -38,6 +38,9 @@ namespace Player.States
             }
             
             Controller.MoveX(Input.GetAxisRaw("Horizontal"));
+
+            var fallMultiplier = 1.0f + (Controller.fallMultiplier / 100.0f);
+            Controller.Rigidbody.velocity += Vector2.up * (Physics2D.gravity.y * fallMultiplier * Time.deltaTime);
         }
 
         public override void Destroy()
