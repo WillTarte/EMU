@@ -9,8 +9,7 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
     /// </summary>
     public interface IWeaponShootStrategy
     {
-        //todo?
-        void Shoot(/*Player player,*/ WeaponBehaviourScript weapon);
+        void Shoot(WeaponBehaviourScript weapon);
         void Reload(WeaponBehaviourScript weapon);
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using MonoBehaviours.WeaponsSystem;
+using ScriptableObjects.WeaponsSystem;
 
 namespace HUD
 {
@@ -36,7 +37,14 @@ namespace HUD
             // 2. Modify the text according to the type of the weapon.
             if (_weaponScript != null)
             {
-                _text.text = _weaponScript.CurrentMagazineAmmunition + "/" + _weaponScript.CurrentTotalAmmunition;
+                if (_weaponScript.WeaponData.WeaponName is WeaponName.Grenade)
+                {
+                    _text.text = _weaponScript.CurrentMagazineAmmunition.ToString();
+                }
+                else
+                {
+                    _text.text = _weaponScript.CurrentMagazineAmmunition + "/" + _weaponScript.CurrentTotalAmmunition;
+                }
             }
         }
 
@@ -44,7 +52,14 @@ namespace HUD
         {
             _weaponScript = weaponScript;
             _image.sprite = _weaponScript.gameObject.GetComponent<SpriteRenderer>().sprite;
-            _text.text = _weaponScript.CurrentMagazineAmmunition + "/" + _weaponScript.CurrentTotalAmmunition;
+            if (_weaponScript.WeaponData.WeaponName is WeaponName.Grenade)
+            {
+                _text.text = _weaponScript.CurrentMagazineAmmunition.ToString();
+            }
+            else
+            {
+                _text.text = _weaponScript.CurrentMagazineAmmunition + "/" + _weaponScript.CurrentTotalAmmunition;
+            }
         }
 
         public void RemoveWeaponFromInventorySlot()

@@ -1,6 +1,4 @@
-﻿
-using System;
-using ScriptableObjects.WeaponsSystem;
+﻿using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
 
 namespace MonoBehaviours.WeaponsSystem
@@ -13,13 +11,14 @@ namespace MonoBehaviours.WeaponsSystem
         private const string GameobjectName = "WeaponOnGroundTriggerHitbox";
         
         [SerializeField] private GameObject promptPrefab;
+        [SerializeField] private Vector2 promptHitboxSize;
+        [SerializeField] private int promptTextSize;
         private GameObject _triggerCollider;
         private WeaponData _weaponData;
         private BoxCollider2D _weaponCollider;
         private Rigidbody2D _weaponRigidBody;
         private SpriteRenderer _weaponSpriteRenderer;
-        private bool _playerInside;
-        
+
         /// <summary>
         /// Initializes some of this behaviour's params 
         /// </summary>
@@ -35,13 +34,12 @@ namespace MonoBehaviours.WeaponsSystem
             _weaponCollider = GetComponent<BoxCollider2D>();
             _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
 
-            _triggerCollider = new GameObject {layer = 10};
-            _triggerCollider.name = GameobjectName;
+            _triggerCollider = new GameObject {layer = 10, name = GameobjectName};
             _triggerCollider.transform.parent = transform;
             _triggerCollider.tag = "WeaponOnGroundTrigger";
             _triggerCollider.AddComponent<BoxCollider2D>();
             _triggerCollider.AddComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
-            _triggerCollider.AddComponent<WeaponOnGroundTriggerScript>().Init(promptPrefab);
+            _triggerCollider.AddComponent<WeaponOnGroundTriggerScript>().Init(promptPrefab, promptHitboxSize, promptTextSize);
         
             _triggerCollider.SetActive(false);
         }

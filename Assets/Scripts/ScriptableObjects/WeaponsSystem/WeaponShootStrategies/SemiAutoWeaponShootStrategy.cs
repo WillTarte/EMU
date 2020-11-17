@@ -30,7 +30,7 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             canShoot = false;
             SpawnProjectile(weapon);
             weapon.CurrentMagazineAmmunition -= 1;
-            yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate);
+            yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate); // todo what if we change the keybinding?
             canShoot = true;
         }
 
@@ -46,10 +46,8 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         {
             canReload = false;
             canShoot = false;
-            int reloadAmount =
-                weapon.CurrentTotalAmmunition < weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition
-                    ? weapon.CurrentTotalAmmunition
-                    : weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            int reloadAmount = weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            reloadAmount = Math.Min(reloadAmount, weapon.CurrentTotalAmmunition);
             yield return new WaitForSeconds(weapon.WeaponData.ReloadTime);
             weapon.CurrentTotalAmmunition -= reloadAmount;
             weapon.CurrentMagazineAmmunition += reloadAmount;
@@ -59,12 +57,25 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
     
         protected override void SpawnProjectile(WeaponBehaviourScript weapon)
         {
-            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
-            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction);
+            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
+            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction, !weapon.transform.parent.CompareTag("Player"));
+            projectile.GetComponent<ProjectileBehaviourScript>().enabled = true;
             projectile.SetActive(true);
         }
     
         private void Awake()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnEnable()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnDisable()
         {
             canShoot = DefaultCanShootValue;
             canReload = DefaultCanReloadValue;

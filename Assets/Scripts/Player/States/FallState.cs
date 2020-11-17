@@ -11,15 +11,13 @@ namespace Player.States
         public override void Start()
         {
             base.Start();
-
-            Debug.Log("Fall State");
         }
 
         public override void Update(Command cmd)
         {
             base.Update(cmd);
 
-            if (cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand)
+            if (cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand)
             {
                 cmd.Execute(Controller);
             }

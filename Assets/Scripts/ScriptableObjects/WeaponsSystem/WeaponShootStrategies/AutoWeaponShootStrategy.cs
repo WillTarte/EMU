@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
 
@@ -44,10 +45,8 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         {
             canReload = false;
             canShoot = false;
-            int reloadAmount =
-                weapon.CurrentTotalAmmunition < weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition
-                    ? weapon.CurrentTotalAmmunition
-                    : weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            int reloadAmount = weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            reloadAmount = Math.Min(reloadAmount, weapon.CurrentTotalAmmunition);
             yield return new WaitForSeconds(weapon.WeaponData.ReloadTime);
             weapon.CurrentTotalAmmunition -= reloadAmount;
             weapon.CurrentMagazineAmmunition += reloadAmount;
@@ -57,12 +56,27 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
     
         protected override void SpawnProjectile(WeaponBehaviourScript weapon)
         {
-            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
-            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction);
+            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
+            
+            // Make sure the weapon has a parent gameobject of this line is gonna cause a Nullptrexception
+            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction,!weapon.transform.parent.CompareTag("Player"));
+            
             projectile.SetActive(true);
         }
 
         private void Awake()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnEnable()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnDisable()
         {
             canShoot = DefaultCanShootValue;
             canReload = DefaultCanReloadValue;

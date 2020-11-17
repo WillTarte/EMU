@@ -32,7 +32,7 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             canShoot = false;
             canReload = false;
             SpawnProjectile(weapon);
-            weapon.CurrentMagazineAmmunition -= numProjectiles;
+            weapon.CurrentMagazineAmmunition -= 1;
             yield return new WaitForAndWhile(() => Input.GetKeyUp(KeyCode.K), 1.0f / weapon.WeaponData.FireRate);
             canReload = true;
             canShoot = true; 
@@ -51,10 +51,8 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
         {
             canReload = false;
             canShoot = false;
-            int reloadAmount =
-                weapon.CurrentTotalAmmunition < weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition
-                    ? weapon.CurrentTotalAmmunition
-                    : weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            int reloadAmount = weapon.WeaponData.MagazineCapacity - weapon.CurrentMagazineAmmunition;
+            reloadAmount = Math.Min(reloadAmount, weapon.CurrentTotalAmmunition);
             yield return new WaitForSeconds(weapon.WeaponData.ReloadTime);
             weapon.CurrentTotalAmmunition -= reloadAmount;
             weapon.CurrentMagazineAmmunition += reloadAmount;
@@ -64,19 +62,31 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
 
         protected override void SpawnProjectile(WeaponBehaviourScript weapon)
         {
-            //todo if spread is 0 (straight line) then bullets should have delay between each other
             for (int i = 0; i < numProjectiles; i++)
             {
-                float angle = -(spread / 2) + i * (spread / (numProjectiles - 1));
-                GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponSpriteEndPosition, Quaternion.identity);
-                Vector2 projDir =
+                var angle = -(spread / 2) + i * (spread / (numProjectiles - 1));
+                angle = (float) (Math.PI / 180) * angle;
+                var projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
+                var projDir =
                     Vector2.ClampMagnitude(new Vector2(weapon.Direction.x, (float) Math.Tan(angle) * weapon.Direction.x),1.0f);
-                projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, projDir);
+                projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, projDir, !weapon.transform.parent.CompareTag("Player"));
                 projectile.SetActive(true);
             }
         }
     
         private void Awake()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnEnable()
+        {
+            canShoot = DefaultCanShootValue;
+            canReload = DefaultCanReloadValue;
+        }
+
+        private void OnDisable()
         {
             canShoot = DefaultCanShootValue;
             canReload = DefaultCanReloadValue;

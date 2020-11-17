@@ -8,18 +8,15 @@ namespace ScriptableObjects.WeaponsSystem
     [CreateAssetMenu(fileName = "NewProjectileData", menuName = "ScriptableObjects/ProjectileData", order = 2)]
     public class ProjectileData : ScriptableObject
     {
+        //todo particle effect when colliding
         [SerializeField] private Sprite projectileSprite;
-        [SerializeField] private Sprite destroyedSprite; //todo particle effect
         [SerializeField] private float projectileSpeed;
-        [SerializeField] private float projectileBaseDamage;
-        [SerializeField] private bool isKinematic;
+        [SerializeField] private int projectileBaseDamage;
         [SerializeField] private GameObject projectilePrefab;
 
         public Sprite ProjectileSprite => projectileSprite;
-        public Sprite DestroyedSprite => destroyedSprite;
         public float ProjectileSpeed => projectileSpeed;
-        public float ProjectileBaseDamage => projectileBaseDamage;
-        public bool IsKinematic => isKinematic;
+        public int ProjectileBaseDamage => projectileBaseDamage;
         public GameObject ProjectilePrefab => projectilePrefab;
     }
 }

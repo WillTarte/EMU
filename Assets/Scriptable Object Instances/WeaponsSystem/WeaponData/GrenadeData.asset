@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
+  m_Name: GrenadeData
+  m_EditorClassIdentifier: 
+  weaponName: 4
+  magazineCapacity: 8
+  maxAmmunitionCount: 0
+  fireRate: 1
+  reloadTime: 0
+  projectileData: {fileID: 11400000, guid: 838dae8f442929544920d349e3721263, type: 2}
+  shootStrategy: {fileID: 11400000, guid: 7426f97a7eb42584085fc91655007fb1, type: 2}
+  onGroundSprite: {fileID: 21300000, guid: be7b30935b6fbde488e75ac8f1238f1d, type: 3}
+  inInventorySprite: {fileID: 21300000, guid: be7b30935b6fbde488e75ac8f1238f1d, type: 3}
