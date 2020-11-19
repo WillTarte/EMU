@@ -508,3 +508,7 @@ InitTestScene*.unity
 
 .DS_Store
 
+# LFS Stuff
+
+Assets/Fonts/*.meta
+Assets/Fonts.meta
