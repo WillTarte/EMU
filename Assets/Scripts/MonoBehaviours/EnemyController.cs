@@ -1,4 +1,5 @@
-﻿using ScriptableObjects.EnemiesSystem;
+﻿using MonoBehaviours.WeaponsSystem;
+using ScriptableObjects.EnemiesSystem;
 using ScriptableObjects.EnemiesSystem.EnemyAttackStrategies;
 using ScriptableObjects.EnemiesSystem.EnemyMovementStrategies;
 using UnityEngine;
@@ -35,10 +36,10 @@ namespace MonoBehaviours
         void Update()
         {
             _movementStrategy.Move(gameObject.transform, _player.transform);
-            _hasCollided = _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven, _hasCollided);
             _timer -= Time.deltaTime;
             CheckIfStuck();
             IsFacingPlayer();
+            _hasCollided = _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven, _hasCollided);
             _lastPosition = gameObject.transform.position;
         }
 
@@ -48,6 +49,11 @@ namespace MonoBehaviours
             var playerPosition = _player.transform.position;
 
             gameObject.GetComponent<SpriteRenderer>().flipX = (emuPosition.x - playerPosition.x < 0);
+            if (gameObject.GetComponentInChildren<WeaponBehaviourScript>() != null)
+            {
+                gameObject.GetComponentInChildren<WeaponBehaviourScript>().Direction =
+                    gameObject.GetComponent<SpriteRenderer>().flipX ? Vector2.right : Vector2.left;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D col)

@@ -2,7 +2,6 @@
 using MonoBehaviours.WeaponsSystem;
 using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ScriptableObjects.EnemiesSystem.EnemyAttackStrategies
 {
@@ -12,7 +11,7 @@ namespace ScriptableObjects.EnemiesSystem.EnemyAttackStrategies
     {
         #region Interface Variables
 
-        [SerializeField] private float shootDistanceRangeMax = 50;
+        [SerializeField] private float shootDistanceRangeMax = 25;
         [SerializeField] private float shootHeightRangeMax = 0.1f;
 
         #endregion
@@ -23,11 +22,11 @@ namespace ScriptableObjects.EnemiesSystem.EnemyAttackStrategies
          */
         public override bool Attack(GameObject player, GameObject emu, int damageGiven, bool hasCollided)
         {
-            if (Math.Abs(emu.transform.position.x - player.transform.position.x) < shootDistanceRangeMax
-                && Math.Abs(emu.transform.position.y - player.transform.position.y) < shootHeightRangeMax)
+            if ((Math.Abs(emu.transform.position.x) - Math.Abs(player.transform.position.x) < shootDistanceRangeMax)
+                && (Math.Abs(emu.transform.position.y) - Math.Abs(player.transform.position.y) < shootHeightRangeMax))
             {
-                var weapon = emu.GetComponent<WeaponBehaviourScript>();
-                emu.GetComponent<WeaponData>().ShootStrategy.Shoot(weapon);
+                var weapon = emu.GetComponentInChildren<WeaponBehaviourScript>();
+                weapon.WeaponData.ShootStrategy.Shoot(weapon);
             }
 
             return false;
