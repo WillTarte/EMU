@@ -1,4 +1,5 @@
-﻿using ScriptableObjects.WeaponsSystem;
+﻿using Interactables;
+using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
 
 namespace MonoBehaviours.WeaponsSystem
@@ -13,7 +14,7 @@ namespace MonoBehaviours.WeaponsSystem
         [SerializeField] private GameObject promptPrefab;
         [SerializeField] private Vector2 promptHitboxSize;
         [SerializeField] private int promptTextSize;
-        private GameObject _triggerCollider;
+        private GameObject _trigger;
         private WeaponData _weaponData;
         private BoxCollider2D _weaponCollider;
         private Rigidbody2D _weaponRigidBody;
@@ -34,14 +35,14 @@ namespace MonoBehaviours.WeaponsSystem
             _weaponCollider = GetComponent<BoxCollider2D>();
             _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
 
-            _triggerCollider = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName};
-            _triggerCollider.transform.parent = transform;
-            _triggerCollider.tag = "InteractTrigger";
-            _triggerCollider.AddComponent<BoxCollider2D>();
-            _triggerCollider.AddComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
-            _triggerCollider.AddComponent<InteractOnGroundTriggerScript>().Init(promptPrefab, promptHitboxSize, promptTextSize);
+            _trigger = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName};
+            _trigger.transform.parent = transform;
+            _trigger.tag = "InteractTrigger";
+            _trigger.AddComponent<BoxCollider2D>();
+            _trigger.AddComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
+            _trigger.AddComponent<InteractOnGroundTriggerScript>().Init(promptPrefab, promptHitboxSize, promptTextSize);
         
-            _triggerCollider.SetActive(false);
+            _trigger.SetActive(false);
         }
 
         private void OnEnable()
@@ -54,7 +55,7 @@ namespace MonoBehaviours.WeaponsSystem
             _weaponCollider.enabled = true;
             _weaponCollider.size = _weaponSpriteRenderer.sprite.bounds.size;
         
-            _triggerCollider.SetActive(true);
+            _trigger.SetActive(true);
         }
 
         private void OnDisable()
@@ -64,7 +65,7 @@ namespace MonoBehaviours.WeaponsSystem
 
             _weaponCollider.enabled = false;
         
-            _triggerCollider.SetActive(false);
+            _trigger.SetActive(false);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MonoBehaviours;
+﻿using Interactables;
+using MonoBehaviours;
 using UnityEngine;
 
 namespace Player.Commands

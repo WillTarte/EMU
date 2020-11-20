@@ -20,11 +20,14 @@ namespace Player
 
         #region Interface Variables
 
+        public bool IsFullHp => _hitPoints == 10;
+        
         public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
+        
         public TextMeshProUGUI WarningText;
 
         public GameObject NearestInteractable { get; set; }

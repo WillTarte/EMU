@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using MonoBehaviours;
 using MonoBehaviours.WeaponsSystem;
 using ScriptableObjects.WeaponsSystem;
 using UnityEditor;
 using UnityEngine;
 
-namespace MonoBehaviours
+namespace Interactables
 {
     public class ChestBehaviourScript : MonoBehaviour
     {
@@ -16,6 +17,8 @@ namespace MonoBehaviours
         [SerializeField] private List<WeaponPickupParams> weaponPickupList;
 
         [SerializeField] private GameObject weaponPrefab;
+        [SerializeField] private GameObject ammoPickupPrefab;
+        [SerializeField] private GameObject healthPickupPrefab;
         [SerializeField] private Sprite openSprite;
         [SerializeField] private Sprite closedSprite;
         [SerializeField] private GameObject promptPrefab;
@@ -25,12 +28,12 @@ namespace MonoBehaviours
         private GameObject _triggerCollider;
         private SpriteRenderer _spriteRenderer;
         
-        private bool isOpen = false;
+        private bool _isOpen;
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.sprite = isOpen ? openSprite : closedSprite;
+            _spriteRenderer.sprite = _isOpen ? openSprite : closedSprite;
             
             _triggerCollider = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName};
             _triggerCollider.transform.parent = transform;
@@ -44,9 +47,8 @@ namespace MonoBehaviours
 
         public void Interact()
         {
-            // drop loot
-            // disable this
-            if (isOpen)
+
+            if (_isOpen)
             {
                 Debug.Log("Tried Interacting with an already open chest");
                 _spriteRenderer.sprite = openSprite;
@@ -55,14 +57,18 @@ namespace MonoBehaviours
             }
             else
             {
-                for (int i = 0; i < healthPickupParams.numberOfPickups; i++)
+                for (var i = 0; i < healthPickupParams.numberOfPickups; i++)
                 {
-                    //spawn new health pickup
+                    var pickup = Instantiate(healthPickupPrefab, (Vector2) transform.position + new Vector2(0f, 0.5f),
+                        Quaternion.identity);
+                    pickup.GetComponent<HealthPickupBehaviour>().Init(healthPickupParams.healthAmount);
                 }
 
-                for (int i = 0; i < ammoPickupParams.numberOfPickups; i++)
+                for (var i = 0; i < ammoPickupParams.numberOfPickups; i++)
                 {
-                    //spawn new ammo pickup
+                    var pickup = Instantiate(ammoPickupPrefab, (Vector2) transform.position + new Vector2(0f, 0.5f),
+                        Quaternion.identity);
+                    pickup.GetComponent<AmmoPickupBehaviour>().Init(ammoPickupParams.ammoAmount);
                 }
 
                 foreach (var weaponParam in weaponPickupList)
@@ -77,7 +83,7 @@ namespace MonoBehaviours
                     droppedWeaponBehaviour.WeaponStateProp = WeaponState.OnGround;
                 }
                 
-                isOpen = true;
+                _isOpen = true;
                 _spriteRenderer.sprite = openSprite;
                 _triggerCollider.SetActive(false);
                 enabled = false;

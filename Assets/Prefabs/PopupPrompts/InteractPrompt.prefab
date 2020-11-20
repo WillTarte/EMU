@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5945005522457501967}
   - component: {fileID: 6190071148074659732}
   m_Layer: 0
-  m_Name: Pickupprompt
+  m_Name: InteractPrompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709781030951268166}
-  m_Text: Press E to pickup
+  m_Text: Press E to interact
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1

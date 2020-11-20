@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5508119621658172470}
   - component: {fileID: 8559511042453291940}
   - component: {fileID: 49826601344462349}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 350150017
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16444bee23594ec59eb69ca701c49013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptPrefab: {fileID: 709781030951268166, guid: b5b7f623102b80d45816bfb9a6898c86,
+  promptPrefab: {fileID: 709781030951268166, guid: bffe2c73d3d0b514696e9778c58e76ac,
     type: 3}
   promptHitboxSize: {x: 3, y: 3}
   promptTextSize: 30

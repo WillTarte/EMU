@@ -50,3 +50,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: First
+    uniqueID: 829774851
+    locked: 0
+  - name: Second
+    uniqueID: 4219016239
+    locked: 0
+  - name: Third
+    uniqueID: 350150017
+    locked: 0

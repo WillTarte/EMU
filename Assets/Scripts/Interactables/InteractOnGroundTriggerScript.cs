@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MonoBehaviours
+namespace Interactables
 {
     public class InteractOnGroundTriggerScript : MonoBehaviour
     {
