@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyBehaviourName: 0
   enemyAttackStrategy: {fileID: 11400000, guid: e948fb448d71c4c4fb44865598b1245e,
     type: 2}
-  enemyMovementStrategy: {fileID: 0}
+  enemyMovementStrategy: {fileID: 11400000, guid: de7fdbbd723eb2247a02e32b48037fc3,
+    type: 2}
   damageGiven: 1
   healthPoints: 10
