@@ -37,7 +37,25 @@ namespace MonoBehaviours.WeaponsSystem
             }
         }
 
-        public WeaponData WeaponData => weaponData;
+        public WeaponData WeaponData
+        {
+            get => weaponData;
+            set
+            {
+                weaponData = Instantiate(value);
+
+                _weaponOnGroundBehaviour.Init(weaponData);
+                if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)
+                {
+                    currentTotalAmmunition = weaponData.MaxAmmunitionCount;
+                }
+
+                if (currentMagazineAmmunition > weaponData.MagazineCapacity)
+                {
+                    currentMagazineAmmunition = weaponData.MagazineCapacity;
+                }
+            }
+        }
 
         /// <summary>
         /// Property for the weapon's direction
@@ -82,19 +100,22 @@ namespace MonoBehaviours.WeaponsSystem
             _rigidbody.sleepMode = RigidbodySleepMode2D.StartAsleep;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _weaponOnGroundBehaviour = GetComponent<WeaponOnGroundBehaviour>();
-            _weaponOnGroundBehaviour.Init(weaponData);
 
-            // todo: Didn't find much info, but hopefully this does a deep copy of everything
-            weaponData = Instantiate(weaponData);
-
-            if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)
+            if (weaponData != null)
             {
-                currentTotalAmmunition = weaponData.MaxAmmunitionCount;
-            }
+                // todo: Didn't find much info, but hopefully this does a deep copy of everything
+                weaponData = Instantiate(weaponData);
+                
+                _weaponOnGroundBehaviour.Init(weaponData);
+                if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)
+                {
+                    currentTotalAmmunition = weaponData.MaxAmmunitionCount;
+                }
 
-            if (currentMagazineAmmunition > weaponData.MagazineCapacity)
-            {
-                currentMagazineAmmunition = weaponData.MagazineCapacity;
+                if (currentMagazineAmmunition > weaponData.MagazineCapacity)
+                {
+                    currentMagazineAmmunition = weaponData.MagazineCapacity;
+                }
             }
         }
 

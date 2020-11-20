@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MonoBehaviours.WeaponsSystem
+namespace MonoBehaviours
 {
-    public class WeaponOnGroundTriggerScript : MonoBehaviour
+    public class InteractOnGroundTriggerScript : MonoBehaviour
     {
         private GameObject _promptPrefab = null;
         private GameObject _promptInstance = null;

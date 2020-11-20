@@ -13,7 +13,6 @@ namespace Player
         [Range(0, 10)] private int _hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
-        private GameObject _nearestPickup;
         private bool _isHurt;
         private float _timer = 2;
 
@@ -28,11 +27,7 @@ namespace Player
         public InventoryManager InventoryManager { get; private set; }
         public TextMeshProUGUI WarningText;
 
-        public GameObject NearestPickup
-        {
-            get => _nearestPickup;
-            set => _nearestPickup = value;
-        }
+        public GameObject NearestInteractable { get; set; }
 
         public bool IsGrounded { get; private set; }
         public bool CanClimb { get; private set; }
@@ -316,27 +311,23 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
-                other.CompareTag("WeaponOnGroundTrigger"))
+            if (other.CompareTag("InteractTrigger"))
             {
-                if (NearestPickup != null)
+                if (NearestInteractable != null)
                 {
-                    if (Vector2.Distance(transform.position, NearestPickup.transform.position) >
-                        Vector2.Distance(transform.position, other.transform.parent.transform.position))
+                    if (Vector2.Distance(transform.position, NearestInteractable.transform.position) >
+                        Vector2.Distance(transform.position, other.transform.parent.position))
                     {
-                        NearestPickup = other.transform.parent.gameObject;
+                        NearestInteractable = other.transform.parent.gameObject;
                     }
                 }
                 else
                 {
-                    NearestPickup = other.transform.parent.gameObject;
+                    NearestInteractable = other.transform.parent.gameObject;
                 }
             }
-
-
-            if (other.gameObject.CompareTag("Ladders"))
+            else if (other.gameObject.CompareTag("Ladders"))
             {
-                Debug.Log("Ladder hit");
                 CanClimb = true;
             }
         }
@@ -345,16 +336,14 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ladders"))
             {
-                Debug.Log("Ladder left");
                 CanClimb = false;
             }
-            else if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
-                     other.CompareTag("WeaponOnGroundTrigger"))
+            else if (NearestInteractable != null && other.name.Equals(NearestInteractable.name))
             {
-                NearestPickup = null;
+                
+                NearestInteractable = null;
             }
         }
-
         #endregion
     }
 }

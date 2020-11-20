@@ -8,7 +8,7 @@ namespace Player
         private readonly Command _jumpCmd = new JumpCommand();
         private readonly Command _shootCmd = new ShootCommand();
         private readonly Command _reloadCmd = new ReloadCommand();
-        private readonly Command _pickupCommand = new PickupCommand();
+        private readonly Command _pickupCommand = new InteractCommand();
         private readonly Command _throwCommand = new ThrowCommand();
 
         public Command HandleInput()

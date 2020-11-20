@@ -7,11 +7,12 @@ TagManager:
   - Weapon
   - Ground
   - Ladders
-  - WeaponOnGroundTrigger
   - Enemy
   - Platform
   - Projectile
   - Breakable
+  - Chest
+  - InteractTrigger
   layers:
   - Default
   - TransparentFX

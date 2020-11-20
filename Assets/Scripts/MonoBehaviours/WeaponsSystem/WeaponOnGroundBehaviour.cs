@@ -34,12 +34,12 @@ namespace MonoBehaviours.WeaponsSystem
             _weaponCollider = GetComponent<BoxCollider2D>();
             _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
 
-            _triggerCollider = new GameObject {layer = 10, name = GameobjectName};
+            _triggerCollider = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName};
             _triggerCollider.transform.parent = transform;
-            _triggerCollider.tag = "WeaponOnGroundTrigger";
+            _triggerCollider.tag = "InteractTrigger";
             _triggerCollider.AddComponent<BoxCollider2D>();
             _triggerCollider.AddComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
-            _triggerCollider.AddComponent<WeaponOnGroundTriggerScript>().Init(promptPrefab, promptHitboxSize, promptTextSize);
+            _triggerCollider.AddComponent<InteractOnGroundTriggerScript>().Init(promptPrefab, promptHitboxSize, promptTextSize);
         
             _triggerCollider.SetActive(false);
         }
