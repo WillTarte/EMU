@@ -17,9 +17,9 @@ namespace ScriptableObjects.EnemiesSystem.EnemyMovementStrategies
         {
             if (Vector2.Distance(emuTransform.position, playerTransform.position) < minDistanceBuffer)
             {
-                emuTransform.position =
-                    Vector2.MoveTowards(emuTransform.position, new Vector2(-playerTransform.position.x, 0),
-                        speed * Time.deltaTime);
+                Vector3 movementDirection = new Vector3(emuTransform.position.x, 0, 0) -
+                                            new Vector3(playerTransform.position.x, 0, 0);
+                emuTransform.Translate(movementDirection.normalized * speed * Time.deltaTime);
             }
         }
     }
