@@ -13,7 +13,6 @@ namespace ScriptableObjects.EnemiesSystem.EnemyAttackStrategies
             {
                 var playerController = player.GetComponent<Controller>();
                 playerController.LoseHitPoints(damageGiven);
-                //Debug.Log("Dealt damage");
                 return false;
             }
 

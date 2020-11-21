@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04aef09d12885f46b07c84c5c2d2017, type: 3}
   m_Name: GunnerBehaviourData
   m_EditorClassIdentifier: 
-  enemyBehaviourName: 0
+  enemyBehaviourName: 1
   enemyAttackStrategy: {fileID: 11400000, guid: 6db3eb86f933f094b89a4d38c5702a71,
     type: 2}
   enemyMovementStrategy: {fileID: 11400000, guid: f989e3d912b82384aa21fb164f645837,
