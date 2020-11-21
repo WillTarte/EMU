@@ -26,15 +26,34 @@ namespace MonoBehaviours.WeaponsSystem
         /// <param name="weaponData"></param> The weapon's data
         public void Init(WeaponData weaponData)
         {
+            if (_weaponRigidBody == null)
+            {
+                _weaponRigidBody = GetComponent<Rigidbody2D>();
+            }
+            if (_weaponCollider == null)
+            {
+                _weaponCollider = GetComponent<BoxCollider2D>();
+            }
+            if (_weaponSpriteRenderer == null)
+            {
+                _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
+            }
+            CreateTrigger();
+            
             _weaponData = weaponData;
+            _weaponSpriteRenderer.sprite = _weaponData.OnGroundSprite;
+            _weaponRigidBody.isKinematic = false;
+            _weaponRigidBody.WakeUp();
+
+            _weaponCollider.enabled = true;
+            _weaponCollider.size = _weaponSpriteRenderer.sprite.bounds.size;
+        
+            _trigger.SetActive(true);
         }
 
-        private void Awake()
+        private void CreateTrigger()
         {
-            _weaponRigidBody = GetComponent<Rigidbody2D>();
-            _weaponCollider = GetComponent<BoxCollider2D>();
-            _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
-
+            if (_trigger != null) return;
             _trigger = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName};
             _trigger.transform.parent = transform;
             _trigger.tag = "InteractTrigger";
@@ -45,10 +64,18 @@ namespace MonoBehaviours.WeaponsSystem
             _trigger.SetActive(false);
         }
 
+        private void Awake()
+        {
+            _weaponRigidBody = GetComponent<Rigidbody2D>();
+            _weaponCollider = GetComponent<BoxCollider2D>();
+            _weaponSpriteRenderer = GetComponent<SpriteRenderer>();
+            CreateTrigger();
+        }
+
         private void OnEnable()
         {
+            if (_weaponData == null) return;
             _weaponSpriteRenderer.sprite = _weaponData.OnGroundSprite;
-
             _weaponRigidBody.isKinematic = false;
             _weaponRigidBody.WakeUp();
 

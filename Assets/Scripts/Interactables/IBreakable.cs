@@ -1,4 +1,7 @@
-﻿$HEADER$namespace $NAMESPACE$
+﻿namespace Interactables
 {
-  public interface $INTERFACE$ {$END$}
+    public interface IBreakable
+    {
+        void Break();
+    }
 }

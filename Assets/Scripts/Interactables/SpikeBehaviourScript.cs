@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Player;
 using UnityEngine;
 
-public class SpikeBehaviourScript : MonoBehaviour
+namespace Interactables
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SpikeBehaviourScript : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<Controller>().LoseHitPoints(1);
+                other.rigidbody.AddForce(Vector2.up * 2.0f, ForceMode2D.Impulse);
+            }
+        }
     }
 }

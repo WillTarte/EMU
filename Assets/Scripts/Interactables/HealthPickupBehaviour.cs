@@ -44,7 +44,7 @@ namespace Interactables
 
         public void Pickup(Controller playerController)
         {
-            if (playerController.IsFullHp)
+            if (playerController.IsFullHp || _rigidbody.velocity.y != 0)
             {
                 return;
             }

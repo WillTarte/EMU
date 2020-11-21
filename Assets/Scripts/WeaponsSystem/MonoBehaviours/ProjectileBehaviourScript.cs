@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Interactables;
 using Player;
 using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
@@ -54,6 +55,8 @@ namespace MonoBehaviours.WeaponsSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log(other.name);
+            
             if (other.CompareTag("Enemy"))
             {
                 //todo: Deal damage to enemy
@@ -62,7 +65,11 @@ namespace MonoBehaviours.WeaponsSystem
             {
                 var player = other.GetComponent<Controller>();
                 player.LoseHitPoints(_projectileData.ProjectileBaseDamage);
-            } 
+            }
+            /*else if (other.CompareTag("ExplosiveBarrel"))
+            {
+                other.GetComponent<IBreakable>().Break();
+            }*/
             else if (other.CompareTag("Ground") || other.CompareTag("Platform"))
             {
                 Destroy(gameObject);    

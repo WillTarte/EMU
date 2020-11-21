@@ -54,6 +54,8 @@ namespace Interactables
 
         public void Pickup(Controller playerController)
         {
+            if (_rigidbody.velocity.y != 0) return;
+            
             if (playerController.InventoryManager.WeaponSlots[InventoryIndex.First] == null &&
                 playerController.InventoryManager.WeaponSlots[InventoryIndex.Second] == null)
             {

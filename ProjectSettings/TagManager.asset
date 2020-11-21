@@ -13,6 +13,8 @@ TagManager:
   - Breakable
   - Chest
   - InteractTrigger
+  - ExplosiveBarrel
+  - Spike
   layers:
   - Default
   - TransparentFX
@@ -27,8 +29,8 @@ TagManager:
   - Trigger
   - Passthrough
   - Enemy
-  - 
-  - 
+  - Interactable
+  - IgnoreEntities
   - 
   - 
   - 

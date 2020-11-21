@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3644127789605955543}
   - component: {fileID: 8718285359633719469}
   - component: {fileID: 4969793716929815200}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: AmmoPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupTriggerSize: {x: 2, y: 2}
+  amount: 0

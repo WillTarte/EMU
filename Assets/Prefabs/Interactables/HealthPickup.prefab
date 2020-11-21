@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4967495363536665363}
   - component: {fileID: 9198760139262327219}
   - component: {fileID: 6546576331463182900}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: HealthPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupTriggerSize: {x: 2, y: 2}
+  amount: 0

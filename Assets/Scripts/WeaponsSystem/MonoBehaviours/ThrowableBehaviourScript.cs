@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Interactables;
 using Player;
 using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
@@ -85,6 +86,10 @@ namespace MonoBehaviours.WeaponsSystem
                 {
                     var playerController = hit.GetComponent<Controller>();
                     playerController.LoseHitPoints(_projectileData.ProjectileBaseDamage);
+                }
+                else if (hit.CompareTag("ExplosiveBarrel"))
+                {
+                    GetComponent<IBreakable>().Break();
                 }
                 // todo: interacts with breakable things
             }
