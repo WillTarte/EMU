@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0138d7ccbd96a654fbcd3b0c0fee97dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 2
   enemyBehaviourData: {fileID: 11400000, guid: c786f4fa01416474a80ca77b45a07a3e, type: 2}
   jumpForce: 300
 --- !u!95 &7783861631885898908

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MonoBehaviours;
+using UnityEngine;
 
 namespace ScriptableObjects.EnemiesSystem.EnemyMovementStrategies
 {
@@ -18,8 +19,13 @@ namespace ScriptableObjects.EnemiesSystem.EnemyMovementStrategies
             if (playerTransform != null &&
                 Vector2.Distance(emuTransform.position, playerTransform.position) < followRange)
             {
+                emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
                 emuTransform.position =
                     Vector2.MoveTowards(emuTransform.position, playerTransform.position, followSpeed * Time.deltaTime);
+            }
+            else
+            {
+                emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
             }
         }
     }

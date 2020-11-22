@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f06c1c46c3fb4b449862c559702cb2a, type: 3}
   m_Name: GunnerAttackStrategy
   m_EditorClassIdentifier: 
-  shootRangeMax: 30
-  heightRangeMax: 2
+  shootDistanceRangeMax: 20
+  shootHeightRangeMax: 0.1

@@ -9,7 +9,8 @@ namespace MonoBehaviours
     public class EnemyController : MonoBehaviour
     {
         #region Interface Variables
-
+        
+        [SerializeField] public int healthPoints;
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
         [SerializeField] private float jumpForce = 300;
 
@@ -43,6 +44,15 @@ namespace MonoBehaviours
             _lastPosition = gameObject.transform.position;
         }
 
+        public void getDamage()
+        {
+            healthPoints -= 1;
+            if (healthPoints <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
         private void IsFacingPlayer()
         {
             var emuPosition = gameObject.transform.position;
@@ -58,12 +68,7 @@ namespace MonoBehaviours
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.CompareTag("Projectile"))
-            {
-                Destroy(col.gameObject);
-                Destroy(gameObject);
-            }
-            else if (col.gameObject.CompareTag("Player"))
+            if (col.gameObject.CompareTag("Player"))
             {
                 _hasCollided = true;
             }

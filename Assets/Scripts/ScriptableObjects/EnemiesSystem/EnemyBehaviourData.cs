@@ -13,8 +13,7 @@ namespace ScriptableObjects.EnemiesSystem
         public EnemyAttackStrategy enemyAttackStrategy;
         public EnemyMovementStrategy enemyMovementStrategy;
         public int damageGiven;
-        public int healthPoints;
-        
+
         #endregion
 
     }

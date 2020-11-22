@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Player;
+using ScriptableObjects.EnemiesSystem;
 using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
 
@@ -56,7 +57,8 @@ namespace MonoBehaviours.WeaponsSystem
         {
             if (other.CompareTag("Enemy"))
             {
-                //todo: Deal damage to enemy
+                other.gameObject.GetComponent<EnemyController>().getDamage();
+                Destroy(gameObject);
             }
             else if (_shouldDamagePlayer && other.CompareTag("Player"))
             {
