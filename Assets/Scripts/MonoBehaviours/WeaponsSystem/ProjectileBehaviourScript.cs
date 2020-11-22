@@ -55,7 +55,7 @@ namespace MonoBehaviours.WeaponsSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy"))
+            if (!_shouldDamagePlayer && other.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponent<EnemyController>().getDamage();
                 Destroy(gameObject);

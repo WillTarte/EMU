@@ -17,7 +17,8 @@ namespace ScriptableObjects.EnemiesSystem.EnemyMovementStrategies
         public override void Move(Transform emuTransform, Transform playerTransform)
         {
             if (playerTransform != null &&
-                Vector2.Distance(emuTransform.position, playerTransform.position) < followRange)
+                (Vector2.Distance(emuTransform.position, playerTransform.position) < followRange  ||
+                 emuTransform.gameObject.GetComponent<EnemyController>().gotHit()))
             {
                 emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
                 emuTransform.position =

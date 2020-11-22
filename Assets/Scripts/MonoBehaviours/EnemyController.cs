@@ -22,6 +22,7 @@ namespace MonoBehaviours
         private Vector3 _lastPosition;
         private float _timer = 2;
         private bool _hasCollided;
+        private bool _gotHit = false;
         private EnemyAttackStrategy _attackStrategy;
         private EnemyMovementStrategy _movementStrategy;
 
@@ -47,10 +48,16 @@ namespace MonoBehaviours
         public void getDamage()
         {
             healthPoints -= 1;
+            _gotHit = true;
             if (healthPoints <= 0)
             {
                 Destroy(this.gameObject);
             }
+        }
+
+        public bool gotHit()
+        {
+            return _gotHit;
         }
 
         private void IsFacingPlayer()
