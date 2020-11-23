@@ -7,9 +7,13 @@ namespace ScriptableObjects.EnemiesSystem.EnemyAttackStrategies
         menuName = "ScriptableObjects/EnemyAttack/Melee", order = 3)]
     public class MeleeStrategy : EnemyAttackStrategy
     {
+        private float rangeOfMeleeAttack = 1;
+        private float waitTime = 2;
+        
         public override bool Attack(GameObject player, GameObject emu, int damageGiven, bool hasCollided)
         {
-            if (player.CompareTag("Player") && hasCollided)
+            if (player.transform != null &&
+                Vector2.Distance(emu.transform.position, player.transform.position) < rangeOfMeleeAttack)
             {
                 var playerController = player.GetComponent<Controller>();
                 playerController.LoseHitPoints(damageGiven);
@@ -20,3 +24,19 @@ namespace ScriptableObjects.EnemiesSystem.EnemyAttackStrategies
         }
     }
 }
+
+// public override void Move(Transform emuTransform, Transform playerTransform)
+// {
+// if (playerTransform != null &&
+// (Vector2.Distance(emuTransform.position, playerTransform.position) < followRange  ||
+// emuTransform.gameObject.GetComponent<EnemyController>().gotHit()))
+// {
+//     emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
+//     emuTransform.position =
+//         Vector2.MoveTowards(emuTransform.position, playerTransform.position, followSpeed * Time.deltaTime);
+// }
+// else
+// {
+//     emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
+// }
+// }
