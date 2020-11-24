@@ -1,6 +1,6 @@
-﻿using MonoBehaviours.WeaponsSystem;
+﻿using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     /// <summary>
     /// Interface for weapon shooting strategies. The implementors are in charge of handling shooting.<br/>

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using EnemySystem.Monobehaviours;
 using Interactables;
 using Player;
-using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using WeaponsSystem.ScriptableObjects;
 
-namespace MonoBehaviours.WeaponsSystem
+namespace WeaponsSystem.MonoBehaviours
 {
     /// <summary>
     /// This Monobehaviour models the behaviour of a projectile that is thrown (i.e. physics)
     /// </summary>
-    // todo: Environment needs to be on different layers, and projectiles only interact with some of the environment layers
     public class ThrowableBehaviourScript : MonoBehaviour
     {
         [SerializeField] private float aliveTime;
@@ -80,7 +78,7 @@ namespace MonoBehaviours.WeaponsSystem
             {
                 if (hit.CompareTag("Enemy"))
                 {
-                    // todo: do damage to enemy
+                    hit.gameObject.GetComponent<EnemyController>()?.ReceiveDamage(_projectileData.ProjectileBaseDamage);
                 }
                 else if (hit.CompareTag("Player"))
                 {

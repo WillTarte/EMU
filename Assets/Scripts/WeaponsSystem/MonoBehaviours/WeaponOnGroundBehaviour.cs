@@ -1,8 +1,8 @@
 ﻿using Interactables;
-using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.ScriptableObjects;
 
-namespace MonoBehaviours.WeaponsSystem
+namespace WeaponsSystem.MonoBehaviours
 {
     /// <summary>
     /// Controls the behavior of a weapon when it is on the ground

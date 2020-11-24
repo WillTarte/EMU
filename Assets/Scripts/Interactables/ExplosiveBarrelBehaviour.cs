@@ -1,4 +1,5 @@
 ﻿using System;
+using EnemySystem.Monobehaviours;
 using Player;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ namespace Interactables
             {
                 if (hit.CompareTag("Enemy"))
                 {
-                    // todo: do damage to enemy
+                    hit.GetComponent<EnemyController>()?.ReceiveDamage(damageAmount);
                 }
                 else if (hit.CompareTag("Player"))
                 {

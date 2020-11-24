@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using MonoBehaviours.WeaponsSystem;
+using EnemySystem.Monobehaviours;
+using Interactables;
 using Player;
 using UnityEngine;
-using Color = UnityEngine.Color;
+using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     // TODO: when we have animations, tweak the values of every instance
     // TODO: when we have more layers/tags to check, some refactor needed
@@ -69,15 +69,15 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
             {
                 Debug.Log("Hit " + hit.transform.gameObject.name);
                 
-                if (hit.transform.gameObject.CompareTag("Enemy"))
+                if (hit.transform.CompareTag("Enemy"))
                 {
-                    // todo Make the enemy take damage
+                    hit.transform.GetComponent<EnemyController>()?.ReceiveDamage(baseAttackDamage);
                 }
-                else if (hit.transform.gameObject.CompareTag("Breakable"))
+                else if (hit.transform.CompareTag("Breakable"))
                 {
-                    // todo make the other break/take damage
+                    hit.transform.GetComponent<IBreakable>()?.Break();
                 }
-                else if (hit.transform.gameObject.CompareTag("Player"))
+                else if (hit.transform.CompareTag("Player"))
                 {
                     var playerController = hit.transform.gameObject.GetComponent<Controller>();
                     playerController.LoseHitPoints(baseAttackDamage);
@@ -93,11 +93,11 @@ namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
                 
                 if (hit.gameObject.CompareTag("Enemy"))
                 {
-                    //todo Make the enemy take damage
+                    hit.gameObject.GetComponent<EnemyController>()?.ReceiveDamage(baseAttackDamage);
                 }
                 else if (hit.gameObject.CompareTag("Breakable"))
                 {
-                    // todo make the other break/take damage
+                    hit.gameObject.GetComponent<IBreakable>()?.Break();
                 }
                 else if (hit.transform.gameObject.CompareTag("Player"))
                 {

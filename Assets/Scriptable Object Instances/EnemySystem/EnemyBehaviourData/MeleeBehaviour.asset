@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04aef09d12885f46b07c84c5c2d2017, type: 3}
+  m_Name: MeleeBehaviour
+  m_EditorClassIdentifier: 
+  enemyBehaviourName: 0
+  enemyAttackStrategy: {fileID: 11400000, guid: e948fb448d71c4c4fb44865598b1245e,
+    type: 2}
+  enemyMovementStrategy: {fileID: 11400000, guid: de7fdbbd723eb2247a02e32b48037fc3,
+    type: 2}
+  damageGiven: 1

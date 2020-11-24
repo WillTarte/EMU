@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     /// <summary>
     /// Meant for weapons that can only shoot 1 bullet per click. (E.g. sniper)

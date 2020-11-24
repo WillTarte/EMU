@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ScriptableObjects.WeaponsSystem
+namespace WeaponsSystem.ScriptableObjects
 {
     /// <summary>
     /// Represents a projectile's data. Every ProjectileData asset is a unique projectile type's data.

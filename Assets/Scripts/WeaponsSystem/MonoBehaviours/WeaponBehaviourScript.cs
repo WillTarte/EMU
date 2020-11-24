@@ -1,8 +1,8 @@
 ﻿using System;
-using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.ScriptableObjects;
 
-namespace MonoBehaviours.WeaponsSystem
+namespace WeaponsSystem.MonoBehaviours
 {
     /// <summary>
     /// Controls the behavior of a weapon.  
@@ -31,7 +31,12 @@ namespace MonoBehaviours.WeaponsSystem
                     var parent = gameObject.transform.parent.gameObject;
                     var parentSpriteRender = parent.GetComponent<SpriteRenderer>();
                     var sprite = parentSpriteRender.sprite;
-                    return (Vector2) parent.transform.position + new Vector2(sprite.bounds.extents.x, sprite.bounds.extents.y);
+                    if (gameObject.transform.parent.CompareTag("Player"))
+                    {
+                        return (Vector2) parent.transform.position +
+                               new Vector2(sprite.bounds.extents.x, sprite.bounds.extents.y);
+                    }
+                    return parent.transform.position;
                 }
                 return (Vector2) transform.position + (_direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
             }
@@ -103,7 +108,7 @@ namespace MonoBehaviours.WeaponsSystem
 
             if (weaponData != null)
             {
-                // todo: Didn't find much info, but hopefully this does a deep copy of everything
+                // Didn't find much info, but hopefully this does a deep copy of everything
                 weaponData = Instantiate(weaponData);
                 
                 _weaponOnGroundBehaviour.Init(weaponData);

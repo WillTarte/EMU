@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     [CreateAssetMenu(fileName = "NewThrowableShootStrategy", menuName = "ScriptableObjects/WeaponShootStrategy/Throwable", order = 6)]
     public class ThrowableShootStrategy : WeaponShootStrategy

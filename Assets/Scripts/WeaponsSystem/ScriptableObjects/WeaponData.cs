@@ -1,9 +1,9 @@
 ﻿#pragma warning disable 0649
 
-using ScriptableObjects.WeaponsSystem.WeaponShootStrategies;
 using UnityEngine;
+using WeaponsSystem.ScriptableObjects.WeaponShootStrategies;
 
-namespace ScriptableObjects.WeaponsSystem
+namespace WeaponsSystem.ScriptableObjects
 {
     /// <summary>
     /// A weapon's data. Every WeaponData asset is a unique weapon's data.

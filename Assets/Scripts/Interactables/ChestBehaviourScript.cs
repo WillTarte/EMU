@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using MonoBehaviours.WeaponsSystem;
-using ScriptableObjects.WeaponsSystem;
 using UnityEditor;
 using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
+using WeaponsSystem.ScriptableObjects;
 
 namespace Interactables
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     /// <summary>
     /// Meant for weapons that you can keep shooting as long as you have ammo. (Ex. ak47)

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using EnemySystem.Monobehaviours;
 using Interactables;
 using Player;
-using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.ScriptableObjects;
 
-namespace MonoBehaviours.WeaponsSystem
+namespace WeaponsSystem.MonoBehaviours
 {
     /// <summary>
     /// Controls the behavior of a projectile
     /// </summary>
-    // todo: Environment needs to be on different layers, and projectiles only interact with some of the environment layers
     public class ProjectileBehaviourScript : MonoBehaviour
     {
         [SerializeField] private int aliveTime;
@@ -55,9 +54,10 @@ namespace MonoBehaviours.WeaponsSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy"))
+            if (!_shouldDamagePlayer && other.CompareTag("Enemy"))
             {
-                //todo: Deal damage to enemy
+                other.gameObject.GetComponent<EnemyController>()?.ReceiveDamage(_projectileData.ProjectileBaseDamage);
+                Destroy(gameObject);
             }
             else if (_shouldDamagePlayer && other.CompareTag("Player"))
             {

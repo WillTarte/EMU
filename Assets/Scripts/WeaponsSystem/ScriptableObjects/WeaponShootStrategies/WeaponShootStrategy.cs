@@ -1,7 +1,7 @@
-﻿using MonoBehaviours.WeaponsSystem;
-using UnityEngine;
+﻿using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     public abstract class WeaponShootStrategy : ScriptableObject, IWeaponShootStrategy
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using MonoBehaviours.WeaponsSystem;
 using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
 
-namespace ScriptableObjects.WeaponsSystem.WeaponShootStrategies
+namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 {
     /// <summary>
     /// Meant for weapons that shoot bursts of bullets at one time. (shot at once, or in a row) (E.g shotgun / other) 

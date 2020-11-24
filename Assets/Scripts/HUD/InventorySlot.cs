@@ -1,8 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using MonoBehaviours.WeaponsSystem;
-using ScriptableObjects.WeaponsSystem;
+using WeaponsSystem.MonoBehaviours;
+using WeaponsSystem.ScriptableObjects;
 
 namespace HUD
 {
