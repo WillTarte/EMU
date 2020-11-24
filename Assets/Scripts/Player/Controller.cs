@@ -8,14 +8,16 @@ namespace Player
 {
     public class Controller : MonoBehaviour
     {
+        private readonly float _maxFallthroughTime = 0.5f;
+
         #region Private Variables
 
         [Range(0, 10)] private int _hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
-        private GameObject _nearestPickup;
         private bool _isHurt;
         private float _timer = 2;
+        private float _fallthroughTimer = 0.0f;
 
         #endregion
 
@@ -28,15 +30,14 @@ namespace Player
         public InventoryManager InventoryManager { get; private set; }
         public TextMeshProUGUI WarningText;
 
-        public GameObject NearestPickup
-        {
-            get => _nearestPickup;
-            set => _nearestPickup = value;
-        }
+        public GameObject NearestPickup { get; set; }
 
         public bool IsGrounded { get; private set; }
+        public bool IsOnPlatform { get; private set; }
         public bool CanClimb { get; private set; }
         public bool IsFacingRight { get; private set; }
+
+        public bool CanFallthrough { get; set; }
 
         public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
@@ -78,6 +79,7 @@ namespace Player
             WarningText.enabled = false;
 
             IsGrounded = false;
+            IsOnPlatform = false;
             IsFacingRight = true;
 
             SetEdgeColliderPoints();
@@ -108,6 +110,18 @@ namespace Player
                 {
                     InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
                 }
+            }
+
+            if (CanFallthrough)
+            {
+                _fallthroughTimer += Time.deltaTime;
+            }
+
+            if (_fallthroughTimer >= _maxFallthroughTime)
+            {
+                _fallthroughTimer = 0.0f;
+
+                CanFallthrough = false;
             }
         }
 
@@ -289,14 +303,19 @@ namespace Player
 
             if (other.gameObject.CompareTag("Ground"))
             {
+                Debug.Log("On Ground | Bridge");
+
                 IsGrounded = true;
             }
 
             if (other.gameObject.CompareTag("Platform"))
             {
+                Debug.Log("On Platform");
+
                 if (Rigidbody.velocity.y >= 0.0F)
                 {
                     IsGrounded = true;
+                    IsOnPlatform = true;
                 }
             }
         }
@@ -311,6 +330,7 @@ namespace Player
             if (other.gameObject.CompareTag("Platform"))
             {
                 IsGrounded = false;
+                IsOnPlatform = false;
             }
         }
 
