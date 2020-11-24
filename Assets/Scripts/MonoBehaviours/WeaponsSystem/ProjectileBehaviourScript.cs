@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Player;
+using ScriptableObjects.EnemiesSystem;
 using ScriptableObjects.WeaponsSystem;
 using UnityEngine;
 
@@ -54,9 +55,10 @@ namespace MonoBehaviours.WeaponsSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy"))
+            if (!_shouldDamagePlayer && other.CompareTag("Enemy"))
             {
-                //todo: Deal damage to enemy
+                other.gameObject.GetComponent<EnemyController>().getDamage();
+                Destroy(gameObject);
             }
             else if (_shouldDamagePlayer && other.CompareTag("Player"))
             {
