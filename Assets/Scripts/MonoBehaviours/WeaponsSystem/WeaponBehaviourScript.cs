@@ -31,7 +31,12 @@ namespace MonoBehaviours.WeaponsSystem
                     var parent = gameObject.transform.parent.gameObject;
                     var parentSpriteRender = parent.GetComponent<SpriteRenderer>();
                     var sprite = parentSpriteRender.sprite;
-                    return (Vector2) parent.transform.position + new Vector2(sprite.bounds.extents.x, sprite.bounds.extents.y);
+                    if (gameObject.transform.parent.CompareTag("Player"))
+                    {
+                        return (Vector2) parent.transform.position +
+                               new Vector2(sprite.bounds.extents.x, sprite.bounds.extents.y);
+                    }
+                    return parent.transform.position;
                 }
                 return (Vector2) transform.position + (_direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
             }

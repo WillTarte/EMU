@@ -12,6 +12,7 @@ TagManager:
   - Platform
   - Projectile
   - Breakable
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Trigger
   - Passthrough
   - Enemy
-  - 
+  - EnemyTrigger
   - 
   - 
   - 
