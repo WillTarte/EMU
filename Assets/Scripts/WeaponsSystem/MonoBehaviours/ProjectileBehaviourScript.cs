@@ -55,8 +55,6 @@ namespace MonoBehaviours.WeaponsSystem
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log(other.name);
-            
             if (other.CompareTag("Enemy"))
             {
                 //todo: Deal damage to enemy
@@ -66,13 +64,13 @@ namespace MonoBehaviours.WeaponsSystem
                 var player = other.GetComponent<Controller>();
                 player.LoseHitPoints(_projectileData.ProjectileBaseDamage);
             }
-            /*else if (other.CompareTag("ExplosiveBarrel"))
-            {
-                other.GetComponent<IBreakable>().Break();
-            }*/
             else if (other.CompareTag("Ground") || other.CompareTag("Platform"))
             {
                 Destroy(gameObject);    
+            }
+            else
+            {
+                other.GetComponent<IBreakable>()?.Break();
             }
         }
 

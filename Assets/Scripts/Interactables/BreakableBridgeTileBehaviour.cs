@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,10 +17,15 @@ namespace Interactables
 
         public void Break()
         {
+            StartCoroutine(DestroyOnNextFrame());
+        }
+
+        private IEnumerator DestroyOnNextFrame()
+        {
             var tilePos = new Vector3Int((int) Math.Floor(transform.position.x),
                 (int) Math.Floor(transform.position.y), 0);
-
-            // Believe it or not, this destroys this tile, yet no documentation mentions this ¯\_(ツ)_/¯
+            yield return new WaitForEndOfFrame();
+            // Believe it or not, this destroys this tile (gameobject), yet no documentation mentions this ¯\_(ツ)_/¯
             _tilemap.SetTile(tilePos,null);
         }
     }

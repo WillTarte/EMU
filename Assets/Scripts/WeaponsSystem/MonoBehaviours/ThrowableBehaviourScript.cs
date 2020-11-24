@@ -87,11 +87,10 @@ namespace MonoBehaviours.WeaponsSystem
                     var playerController = hit.GetComponent<Controller>();
                     playerController.LoseHitPoints(_projectileData.ProjectileBaseDamage);
                 }
-                else if (hit.GetComponent<IBreakable>() != null)
+                else
                 {
-                    hit.GetComponent<IBreakable>().Break();
+                    hit.GetComponent<IBreakable>()?.Break();
                 }
-                // todo: interacts with breakable things
             }
             Destroy(gameObject);
         }

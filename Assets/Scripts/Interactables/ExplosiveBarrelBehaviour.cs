@@ -6,8 +6,6 @@ namespace Interactables
 {
     public class ExplosiveBarrelBehaviour : MonoBehaviour, IBreakable
     {
-        private const string TriggerName = "ExplosiveBarrelTrigger";
-        
         [SerializeField] private int explosionRadius;
         [SerializeField] private int damageAmount;
 
@@ -45,7 +43,13 @@ namespace Interactables
                     var playerController = hit.GetComponent<Controller>();
                     playerController.LoseHitPoints(damageAmount);
                 }
-                // todo: interacts with breakable things
+                else
+                {
+                    if (!hit.gameObject.Equals(gameObject))
+                    {
+                        hit.GetComponent<IBreakable>()?.Break();
+                    }
+                }
             }
             Destroy(gameObject);
         }
