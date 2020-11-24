@@ -149,6 +149,8 @@ MonoBehaviour:
   healthPoints: 3
   enemyBehaviourData: {fileID: 11400000, guid: 166a9ed4386852d46b90561f762010b7, type: 2}
   jumpForce: 300
+  bloodEffect: {fileID: 475600541225742035, guid: cb3213415a62c3c4d8246a4d6500e6d1,
+    type: 3}
 --- !u!95 &5386256132087364664
 Animator:
   serializedVersion: 3

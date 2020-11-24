@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfa6e24526d8ab4c99acd1b739053ad, type: 3}
   m_Name: KamikazeAttackStrategy
   m_EditorClassIdentifier: 
-  bloodEffect: {fileID: 475600541225742035, guid: cb3213415a62c3c4d8246a4d6500e6d1,
+  bloodEffect: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
     type: 3}

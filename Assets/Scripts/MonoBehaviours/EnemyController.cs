@@ -13,6 +13,7 @@ namespace MonoBehaviours
         [SerializeField] public int healthPoints;
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
         [SerializeField] private float jumpForce = 300;
+        [SerializeField] private GameObject bloodEffect;
 
         #endregion
 
@@ -51,6 +52,7 @@ namespace MonoBehaviours
             _gotHit = true;
             if (healthPoints <= 0)
             {
+                Instantiate(bloodEffect, transform.position, transform.rotation);
                 Destroy(this.gameObject);
             }
         }
