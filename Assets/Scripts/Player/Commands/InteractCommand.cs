@@ -1,6 +1,4 @@
 ﻿using Interactables;
-using MonoBehaviours;
-using UnityEngine;
 
 namespace Player.Commands
 {
@@ -14,15 +12,12 @@ namespace Player.Commands
             if (controller.NearestInteractable.CompareTag("Chest"))
             {
                 controller.NearestInteractable.GetComponent<ChestBehaviourScript>().Interact();
-                controller.NearestInteractable = null;
+                controller.RemoveInteractable(controller.NearestInteractable);
             }
             else if (controller.NearestInteractable.CompareTag("Weapon"))
             {
-
-                if (controller.InventoryManager.AddWeapon(controller.NearestInteractable))
-                {
-                    controller.NearestInteractable = null;
-                }
+                controller.InventoryManager.AddWeapon(controller.NearestInteractable);
+                controller.RemoveInteractable(controller.NearestInteractable);
             }
         }
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4969793716929815200}
   m_Layer: 13
   m_Name: AmmoPickup
-  m_TagString: Untagged
+  m_TagString: AmmoPickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,4 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupTriggerSize: {x: 2, y: 2}
-  amount: 0
+  percentageToReplenish: 0

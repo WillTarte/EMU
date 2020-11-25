@@ -7,7 +7,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
         menuName = "ScriptableObjects/EnemyAttack/Melee", order = 3)]
     public class MeleeStrategy : EnemyAttackStrategy
     {
-        private float rangeOfMeleeAttack = 1;
+        private float rangeOfMeleeAttack = 1.5f;
         private float waitTime = 2;
         
         public override bool Attack(GameObject player, GameObject emu, int damageGiven, bool hasCollided)

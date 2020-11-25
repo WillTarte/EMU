@@ -11,11 +11,13 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         [SerializeField] private float followSpeed = 4;
         [SerializeField] private float followRange = 10;
+        [SerializeField] private float threshold = 1.25f;
 
         #endregion
 
         public override void Move(Transform emuTransform, Transform playerTransform)
         {
+            if (Vector2.Distance(emuTransform.position, playerTransform.position) < threshold) return;
             if (playerTransform != null &&
                 (Vector2.Distance(emuTransform.position, playerTransform.position) < followRange  ||
                  emuTransform.gameObject.GetComponent<EnemyController>().gotHit()))

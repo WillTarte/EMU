@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using Player.States;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -15,6 +17,7 @@ namespace Player
         private InputHandler _inputHandler;
         private bool _isHurt;
         private float _timer = 2;
+        private List<GameObject> _nearestInteractables = new List<GameObject>(1);
 
         #endregion
 
@@ -30,7 +33,8 @@ namespace Player
         
         public TextMeshProUGUI WarningText;
 
-        public GameObject NearestInteractable { get; set; }
+        [CanBeNull] public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
+        public void RemoveInteractable(GameObject interactable) => _nearestInteractables.Remove(interactable);
 
         public bool IsGrounded { get; private set; }
         public bool CanClimb { get; private set; }
@@ -107,6 +111,15 @@ namespace Player
                     InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
                 }
             }
+            
+            _nearestInteractables.Sort(delegate(GameObject o, GameObject o1)
+            {
+                var distanceToPlayer0 = Vector2.Distance(transform.position, o.transform.position);
+                var distanceToPlayer1 = Vector2.Distance(transform.position, o1.transform.position);
+                if (Math.Abs(distanceToPlayer0 - distanceToPlayer1) < 0.1) return 0;
+                if (distanceToPlayer0 < distanceToPlayer1) return -1;
+                return 1;
+            });
         }
 
         private void FlipSprite()
@@ -309,18 +322,9 @@ namespace Player
         {
             if (other.CompareTag("InteractTrigger"))
             {
-                if (NearestInteractable != null)
-                {
-                    if (Vector2.Distance(transform.position, NearestInteractable.transform.position) >
-                        Vector2.Distance(transform.position, other.transform.parent.position))
-                    {
-                        NearestInteractable = other.transform.parent.gameObject;
-                    }
-                }
-                else
-                {
-                    NearestInteractable = other.transform.parent.gameObject;
-                }
+                if (other.transform.parent.CompareTag("AmmoPickup") ||
+                    other.transform.parent.CompareTag("HealthPickup")) return;
+                _nearestInteractables.Add(other.transform.parent.gameObject);
             }
             else if (other.gameObject.CompareTag("Ladders"))
             {
@@ -334,10 +338,9 @@ namespace Player
             {
                 CanClimb = false;
             }
-            else if (NearestInteractable != null && other.name.Equals(NearestInteractable.name))
+            else if (other.CompareTag("InteractTrigger"))
             {
-                
-                NearestInteractable = null;
+                _nearestInteractables.Remove(other.transform.parent.gameObject);
             }
         }
         #endregion

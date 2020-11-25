@@ -16,6 +16,8 @@ TagManager:
   - ExplosiveBarrel
   - Spike
   - EnemyProjectile
+  - HealthPickup
+  - AmmoPickup
   layers:
   - Default
   - TransparentFX

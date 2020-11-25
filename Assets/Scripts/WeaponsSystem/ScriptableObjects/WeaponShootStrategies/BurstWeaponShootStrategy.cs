@@ -21,7 +21,7 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
 
         public override void Shoot(WeaponBehaviourScript weapon)
         {
-            if (canShoot && weapon.CurrentMagazineAmmunition >= numProjectiles)
+            if (canShoot && weapon.CurrentMagazineAmmunition >= 1)
             {
                 weapon.StartCoroutine(WaitForShot(weapon));
             }

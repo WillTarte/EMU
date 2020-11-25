@@ -67,7 +67,7 @@ namespace Interactables
                 {
                     var pickup = Instantiate(ammoPickupPrefab, (Vector2) transform.position + new Vector2(0f, 0.5f),
                         Quaternion.identity);
-                    pickup.GetComponent<AmmoPickupBehaviour>().Init(ammoPickupParams.ammoAmount);
+                    pickup.GetComponent<AmmoPickupBehaviour>().Init(ammoPickupParams.percentage);
                 }
 
                 foreach (var weaponParam in weaponPickupList)
@@ -119,7 +119,7 @@ namespace Interactables
     internal struct AmmoPickupParams
     {
         public int numberOfPickups;
-        public int ammoAmount;
+        public int percentage;
     }
 
     [Serializable]
