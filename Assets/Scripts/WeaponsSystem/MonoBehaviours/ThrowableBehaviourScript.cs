@@ -15,6 +15,7 @@ namespace WeaponsSystem.MonoBehaviours
         [SerializeField] private float aliveTime;
         [SerializeField] private int explosionRadius;
         [SerializeField] private Vector2 force;
+        [SerializeField] private GameObject explosionVFXPrefab;
 
         private Vector2 _direction;
         private ProjectileData _projectileData;
@@ -90,6 +91,8 @@ namespace WeaponsSystem.MonoBehaviours
                     hit.GetComponent<IBreakable>()?.Break();
                 }
             }
+
+            Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

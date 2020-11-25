@@ -9,6 +9,7 @@ namespace Interactables
     {
         [SerializeField] private int explosionRadius;
         [SerializeField] private int damageAmount;
+        [SerializeField] private GameObject explosionVFXPrefab;
 
         private GameObject _trigger;
         
@@ -52,6 +53,8 @@ namespace Interactables
                     }
                 }
             }
+
+            Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 

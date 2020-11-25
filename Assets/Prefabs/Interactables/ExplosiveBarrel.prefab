@@ -145,3 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 3
   damageAmount: 3
+  explosionVFXPrefab: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
+    type: 3}

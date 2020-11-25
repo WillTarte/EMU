@@ -13,7 +13,7 @@ namespace WeaponsSystem.MonoBehaviours
     public class ProjectileBehaviourScript : MonoBehaviour
     {
         [SerializeField] private int aliveTime;
-    
+
         private ProjectileData _projectileData;
         private Vector2 _direction;
         private Rigidbody2D _rigidbody;

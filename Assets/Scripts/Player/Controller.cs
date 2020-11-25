@@ -278,7 +278,7 @@ namespace Player
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionStay2D(Collision2D other)
         {
 
             if (other.gameObject.CompareTag("Ground"))
@@ -288,10 +288,7 @@ namespace Player
 
             if (other.gameObject.CompareTag("Platform"))
             {
-                if (Rigidbody.velocity.y >= 0.0F)
-                {
-                    IsGrounded = true;
-                }
+                IsGrounded = true;
             }
         }
 
