@@ -137,16 +137,30 @@ namespace Player
             var sprite = SpriteRendererProp.sprite;
             Vector2 spriteCenter = sprite.bounds.center;
             Vector2 spriteExtents = sprite.bounds.extents;
-
-            Vector2[] edgeColliderPoints =
+            
+            if (spriteExtents.x > 0.25f) {
+                Vector2[] edgeColliderPoints =
+                    {
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y - spriteExtents.y),
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y + spriteExtents.y),
+                        new Vector2(spriteCenter.x + 0.25f, spriteCenter.y + spriteExtents.y),
+                        new Vector2(spriteCenter.x + 0.25f, spriteCenter.y - spriteExtents.y),
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y - spriteExtents.y),
+                    };
+                EdgeCollider.points = edgeColliderPoints;
+            }
+            else
             {
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
-                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
-                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
-            };
-            EdgeCollider.points = edgeColliderPoints;
+                Vector2[] edgeColliderPoints = 
+                {
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                    new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                    new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                };
+                EdgeCollider.points = edgeColliderPoints;
+            }
         }
 
         private void IsHurt()
