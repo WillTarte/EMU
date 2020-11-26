@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodEffect: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
     type: 3}
+  explosionRadius: 3

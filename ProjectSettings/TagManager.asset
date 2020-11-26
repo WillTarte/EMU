@@ -7,12 +7,17 @@ TagManager:
   - Weapon
   - Ground
   - Ladders
-  - WeaponOnGroundTrigger
   - Enemy
   - Platform
   - Projectile
   - Breakable
+  - Chest
+  - InteractTrigger
+  - ExplosiveBarrel
+  - Spike
   - EnemyProjectile
+  - HealthPickup
+  - AmmoPickup
   layers:
   - Default
   - TransparentFX
@@ -27,10 +32,10 @@ TagManager:
   - Trigger
   - Passthrough
   - Enemy
+  - Interactable
+  - IgnoreEntities
   - EnemyTrigger
-  - 
-  - 
-  - 
+  - ThrownGrenade
   - 
   - 
   - 
@@ -49,4 +54,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: First
+    uniqueID: 829774851
+    locked: 0
+  - name: Second
+    uniqueID: 4219016239
+    locked: 0
+  - name: Third
+    uniqueID: 350150017
     locked: 0
