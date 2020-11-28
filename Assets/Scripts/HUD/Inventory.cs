@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MonoBehaviours.WeaponsSystem;
 using Player;
 using UnityEngine;
+using WeaponsSystem.MonoBehaviours;
 
 namespace HUD
 {

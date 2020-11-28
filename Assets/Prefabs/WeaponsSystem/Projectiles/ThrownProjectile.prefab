@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7648541924597092838}
   - component: {fileID: -6073236835041680630}
   - component: {fileID: 2618708266174827020}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: ThrownProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -136,3 +136,5 @@ MonoBehaviour:
   aliveTime: 3.5
   explosionRadius: 4
   force: {x: 9, y: 7}
+  explosionVFXPrefab: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
+    type: 3}

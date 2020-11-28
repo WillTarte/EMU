@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using Player.States;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -18,19 +20,24 @@ namespace Player
         private bool _isHurt;
         private float _timer = 2;
         private float _fallthroughTimer = 0.0f;
+        private List<GameObject> _nearestInteractables = new List<GameObject>(1);
 
         #endregion
 
         #region Interface Variables
 
+        public bool IsFullHp => _hitPoints == 10;
+        
         public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
+        
         public TextMeshProUGUI WarningText;
-
-        public GameObject NearestPickup { get; set; }
+        
+        [CanBeNull] public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
+        public void RemoveInteractable(GameObject interactable) => _nearestInteractables.Remove(interactable);
 
         public bool IsGrounded { get; private set; }
         public bool IsOnPlatform { get; private set; }
@@ -123,6 +130,15 @@ namespace Player
 
                 CanFallthrough = false;
             }
+
+            _nearestInteractables.Sort(delegate(GameObject o, GameObject o1)
+            {
+                var distanceToPlayer0 = Vector2.Distance(transform.position, o.transform.position);
+                var distanceToPlayer1 = Vector2.Distance(transform.position, o1.transform.position);
+                if (Math.Abs(distanceToPlayer0 - distanceToPlayer1) < 0.1) return 0;
+                if (distanceToPlayer0 < distanceToPlayer1) return -1;
+                return 1;
+            });
         }
 
         private void FlipSprite()
@@ -140,16 +156,30 @@ namespace Player
             var sprite = SpriteRendererProp.sprite;
             Vector2 spriteCenter = sprite.bounds.center;
             Vector2 spriteExtents = sprite.bounds.extents;
-
-            Vector2[] edgeColliderPoints =
+            
+            if (spriteExtents.x > 0.25f) {
+                Vector2[] edgeColliderPoints =
+                    {
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y - spriteExtents.y),
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y + spriteExtents.y),
+                        new Vector2(spriteCenter.x + 0.25f, spriteCenter.y + spriteExtents.y),
+                        new Vector2(spriteCenter.x + 0.25f, spriteCenter.y - spriteExtents.y),
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y - spriteExtents.y),
+                    };
+                EdgeCollider.points = edgeColliderPoints;
+            }
+            else
             {
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
-                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
-                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
-            };
-            EdgeCollider.points = edgeColliderPoints;
+                Vector2[] edgeColliderPoints = 
+                {
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                    new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                    new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                };
+                EdgeCollider.points = edgeColliderPoints;
+            }
         }
 
         private void IsHurt()
@@ -294,7 +324,7 @@ namespace Player
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionStay2D(Collision2D other)
         {
 
             if (other.gameObject.CompareTag("Ground"))
@@ -306,8 +336,6 @@ namespace Player
 
             if (other.gameObject.CompareTag("Platform"))
             {
-                Debug.Log("On Platform");
-
                 if (Rigidbody.velocity.y >= 0.0F)
                 {
                     IsGrounded = true;
@@ -332,27 +360,14 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
-                other.CompareTag("WeaponOnGroundTrigger"))
+            if (other.CompareTag("InteractTrigger"))
             {
-                if (NearestPickup != null)
-                {
-                    if (Vector2.Distance(transform.position, NearestPickup.transform.position) >
-                        Vector2.Distance(transform.position, other.transform.parent.transform.position))
-                    {
-                        NearestPickup = other.transform.parent.gameObject;
-                    }
-                }
-                else
-                {
-                    NearestPickup = other.transform.parent.gameObject;
-                }
+                if (other.transform.parent.CompareTag("AmmoPickup") ||
+                    other.transform.parent.CompareTag("HealthPickup")) return;
+                _nearestInteractables.Add(other.transform.parent.gameObject);
             }
-
-
-            if (other.gameObject.CompareTag("Ladders"))
+            else if (other.gameObject.CompareTag("Ladders"))
             {
-                Debug.Log("Ladder hit");
                 CanClimb = true;
             }
         }
@@ -361,16 +376,13 @@ namespace Player
         {
             if (other.gameObject.CompareTag("Ladders"))
             {
-                Debug.Log("Ladder left");
                 CanClimb = false;
             }
-            else if (other.transform.parent != null && other.transform.parent.CompareTag("Weapon") &&
-                     other.CompareTag("WeaponOnGroundTrigger"))
+            else if (other.CompareTag("InteractTrigger"))
             {
-                NearestPickup = null;
+                _nearestInteractables.Remove(other.transform.parent.gameObject);
             }
         }
-
         #endregion
     }
 }

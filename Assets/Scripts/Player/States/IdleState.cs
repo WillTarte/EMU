@@ -20,9 +20,8 @@ namespace Player.States
         public override void Update(Command cmd)
         {
             base.Update(cmd);
-
-            if (cmd is JumpCommand || cmd is PickupCommand || cmd is ShootCommand || cmd is ReloadCommand ||
-                cmd is SwitchWeaponCommand || cmd is ThrowCommand)
+            
+            if (cmd is JumpCommand || cmd is InteractCommand || cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand)
             {
                 cmd.Execute(Controller);
             }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using MonoBehaviours.WeaponsSystem;
-using ScriptableObjects.WeaponsSystem;
-using ScriptableObjects.WeaponsSystem.WeaponShootStrategies;
 using UnityEngine;
-using UnityEngine.UI;
+using WeaponsSystem.MonoBehaviours;
+using WeaponsSystem.ScriptableObjects;
+using WeaponsSystem.ScriptableObjects.WeaponShootStrategies;
 
 namespace Player
 {
