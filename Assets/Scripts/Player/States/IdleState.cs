@@ -13,15 +13,16 @@ namespace Player.States
             base.Start();
 
             Controller.Rigidbody.velocity = new Vector2(0.0F, Controller.Rigidbody.velocity.y);
-            
+
             Controller.Animator.SetInteger("AnimState", 0);
         }
 
         public override void Update(Command cmd)
         {
             base.Update(cmd);
-            
-            if (cmd is JumpCommand || cmd is InteractCommand || cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand)
+
+            if (cmd is JumpCommand || cmd is InteractCommand || cmd is ShootCommand || cmd is ReloadCommand ||
+                cmd is SwitchWeaponCommand || cmd is ThrowCommand || cmd is LeaveGameCommand)
             {
                 cmd.Execute(Controller);
             }
@@ -49,5 +50,5 @@ namespace Player.States
         {
             base.Destroy();
         }
-    }   
+    }
 }

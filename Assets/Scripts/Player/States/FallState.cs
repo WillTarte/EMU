@@ -17,18 +17,19 @@ namespace Player.States
         {
             base.Update(cmd);
 
-            if (cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand)
+            if (cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand
+                || cmd is LeaveGameCommand)
             {
                 cmd.Execute(Controller);
             }
 
             Controller.UpdateTextureDirection();
-            
+
             if (Controller.IsGrounded)
             {
                 Controller.ChangeState(new IdleState());
             }
-            
+
             if (Controller.IsPressingUp || Controller.IsPressingDown)
             {
                 if (Controller.CanClimb)
@@ -36,7 +37,7 @@ namespace Player.States
                     Controller.ChangeState(new ClimbState());
                 }
             }
-            
+
             Controller.MoveX(Input.GetAxisRaw("Horizontal"));
 
             var fallMultiplier = 1.0f + (Controller.fallMultiplier / 100.0f);
