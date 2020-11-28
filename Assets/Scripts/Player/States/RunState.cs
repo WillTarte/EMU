@@ -41,10 +41,8 @@ namespace Player.States
                 }
             }
 
-            if (!Controller.IsGrounded)
-            {
-                Controller.ChangeState(new FallState());
-            }
+            base.CheckAndHandleFallthrough();
+            base.CheckAndHandleFall();
 
             Controller.CheckForRoll();
         }
