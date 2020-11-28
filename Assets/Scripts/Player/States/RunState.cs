@@ -19,7 +19,8 @@ namespace Player.States
         {
             base.Update(cmd);
 
-            if (cmd is JumpCommand || cmd is InteractCommand || cmd is ShootCommand || cmd is ReloadCommand || cmd is SwitchWeaponCommand || cmd is ThrowCommand)
+            if (cmd is JumpCommand || cmd is InteractCommand || cmd is ShootCommand || cmd is ReloadCommand ||
+                cmd is SwitchWeaponCommand || cmd is ThrowCommand || cmd is LeaveGameCommand)
             {
                 cmd.Execute(Controller);
             }

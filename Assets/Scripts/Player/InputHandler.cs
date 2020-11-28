@@ -10,6 +10,7 @@ namespace Player
         private readonly Command _reloadCmd = new ReloadCommand();
         private readonly Command _pickupCommand = new InteractCommand();
         private readonly Command _throwCommand = new ThrowCommand();
+        private readonly Command _leaveGame = new LeaveGameCommand();
 
         public Command HandleInput()
         {
@@ -20,6 +21,7 @@ namespace Player
             else if (Input.GetKeyDown(KeyCode.Alpha1)) return new SwitchWeaponCommand(KeyCode.Alpha1);
             else if (Input.GetKeyDown(KeyCode.Alpha2)) return new SwitchWeaponCommand(KeyCode.Alpha2);
             else if (Input.GetKeyDown(KeyCode.G)) return _throwCommand;
+            else if (Input.GetKeyDown(KeyCode.Escape)) return _leaveGame; 
             else return null;
         }
     }

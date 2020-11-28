@@ -329,7 +329,7 @@ namespace Player
 
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("On Ground | Bridge");
+                //Debug.Log("On Ground | Bridge");
 
                 IsGrounded = true;
             }
