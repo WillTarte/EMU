@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
   m_Name: ShotgunData
   m_EditorClassIdentifier: 
+  weaponName: 0
   magazineCapacity: 10
   maxAmmunitionCount: 20
   fireRate: 1
@@ -22,3 +23,5 @@ MonoBehaviour:
     type: 3}
   inInventorySprite: {fileID: 6879118450950661895, guid: a2ac6c54625afa64c937dcdf03ed9c53,
     type: 3}
+  shootAudioClip: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
+  reloadAudioClip: {fileID: 8300000, guid: a400a751bbd582c4fa1146bedadcfba0, type: 3}

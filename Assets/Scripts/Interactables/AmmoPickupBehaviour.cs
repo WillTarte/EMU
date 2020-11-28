@@ -11,6 +11,7 @@ namespace Interactables
 
         [SerializeField] private Vector2 pickupTriggerSize;
         [SerializeField] private int percentageToReplenish;
+        [SerializeField] private AudioClip pickupSoundClip;
 
         private Rigidbody2D _rigidbody;
         private GameObject _trigger;
@@ -82,6 +83,7 @@ namespace Interactables
 
                 if (pickedUp)
                 {
+                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position);
                     Destroy(gameObject);
                 }
             }
