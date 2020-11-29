@@ -83,7 +83,7 @@ namespace Interactables
 
                 if (pickedUp)
                 {
-                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position);
+                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
                     Destroy(gameObject);
                 }
             }

@@ -1,19 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MonoBehaviours
+public class MainMenu : MonoBehaviour
 {
-    public class MainMenu : MonoBehaviour
+    private void Awake()
     {
-        public void PlayGame()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
+        PlayerPrefs.SetInt("volume", 7);
+    }
 
-        public void QuitGame()
-        {
-            Debug.Log("Game has been quit");
-            Application.Quit();
-        }
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Game has been quit");
+        Application.Quit();
     }
 }

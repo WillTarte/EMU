@@ -19,6 +19,11 @@ namespace Player.States
             base.Update(cmd);
 
             Controller.UpdateTextureDirection();
+
+            if (cmd is SwitchWeaponCommand)
+            {
+                cmd.Execute(Controller);
+            }
             
             if (!Controller.CanClimb)
             {

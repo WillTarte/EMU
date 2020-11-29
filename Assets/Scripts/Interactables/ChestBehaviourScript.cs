@@ -57,7 +57,7 @@ namespace Interactables
             }
             else
             {
-                GetComponent<AudioSource>()?.PlayOneShot(openSoundClip);
+                GetComponent<AudioSource>()?.PlayOneShot(openSoundClip, PlayerPrefs.GetInt("volume") / 10.0f);
                 
                 for (var i = 0; i < healthPickupParams.numberOfPickups; i++)
                 {

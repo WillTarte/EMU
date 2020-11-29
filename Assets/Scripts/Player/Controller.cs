@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Player.Commands;
 using Player.States;
 using TMPro;
 using UnityEngine;
@@ -30,7 +31,8 @@ namespace Player
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
-        
+        public BaseState CurrentState => _currentState;
+
         public TextMeshProUGUI WarningText;
 
         [CanBeNull] public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
@@ -53,6 +55,11 @@ namespace Player
         [Range(100, 1000)] public float jumpForce = 500.0f;
         [Range(0, 500)] public int fallMultiplier = 10;
 
+        public delegate void OnStateChange(BaseState newState);
+        public event OnStateChange OnStateChanged;
+
+        public delegate void OnCommandInput(Command command);
+        public event OnCommandInput OnCommandInputted;
 
         /// <summary>
         /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
@@ -96,7 +103,12 @@ namespace Player
         private void Update()
         {
             IsHurt();
-            _currentState?.Update(_inputHandler.HandleInput());
+            var input = _inputHandler.HandleInput();
+            if (input != null)
+            {
+                OnCommandInputted?.Invoke(input);
+            }
+            _currentState?.Update(input);
             if (IsFacingRight
                 ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
                 : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
@@ -249,6 +261,7 @@ namespace Player
             {
                 _currentState.Controller = this;
                 _currentState.Start();
+                OnStateChanged?.Invoke(newState);
             }
         }
 

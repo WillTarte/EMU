@@ -158,7 +158,7 @@ MonoBehaviour:
     type: 3}
   healthPickupPrefab: {fileID: 1410339511450321719, guid: 9999069b3ed84e249a6787708b2717b3,
     type: 3}
-  openSoundClip: {fileID: 8300000, guid: 53a242c19923890448a84478008cde79, type: 3}
+  openSoundClip: {fileID: 8300000, guid: 399e11258a7d0324ca6cbd88c0aae521, type: 3}
   openSprite: {fileID: -5627866836883545433, guid: c9be5fdc974cdb945931130c28cabeea,
     type: 3}
   closedSprite: {fileID: 9116851946686450653, guid: c9be5fdc974cdb945931130c28cabeea,
