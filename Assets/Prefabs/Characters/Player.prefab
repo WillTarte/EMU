@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bfa4e12e5f706a184e28bd613531eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodEffect: {fileID: 475600541225742035, guid: cb3213415a62c3c4d8246a4d6500e6d1,
+    type: 3}
   WarningText: {fileID: 0}
   speed: 5
   jumpForce: 350.72

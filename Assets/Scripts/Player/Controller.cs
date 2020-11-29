@@ -1,10 +1,12 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Player.States;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -26,6 +28,7 @@ namespace Player
 
         #region Interface Variables
 
+        public GameObject bloodEffect;
         public bool IsFullHp => _hitPoints == 10;
         
         public EdgeCollider2D EdgeCollider { get; private set; }
@@ -281,6 +284,11 @@ namespace Player
                 if (_hitPoints - value < 0) _hitPoints = 0;
                 else _hitPoints -= value;
 
+                if (_hitPoints <= 0)
+                {
+                    StartCoroutine(GameOver());
+                }
+
                 UpdateHealthBarHUD?.Invoke(_hitPoints);
             }
         }
@@ -297,6 +305,14 @@ namespace Player
         {
             _hitPoints = 10;
             ResetHealthBarHUD?.Invoke(_hitPoints);
+        }
+
+        private IEnumerator GameOver()
+        {
+            var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+            Destroy(blood);
+            SceneManager.LoadScene(3);
         }
 
         #endregion

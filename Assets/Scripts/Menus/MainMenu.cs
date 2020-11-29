@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MonoBehaviours
+namespace Menus
 {
     public class MainMenu : MonoBehaviour
     {
         public void PlayGame()
         {
+            Indestructibles.LastLevel = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
