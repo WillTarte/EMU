@@ -17,6 +17,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         public override void Move(Transform emuTransform, Transform playerTransform)
         {
+            //This prevents the emu to be on top of the player
             if (Vector2.Distance(emuTransform.position, playerTransform.position) < threshold) return;
             if (playerTransform != null &&
                 (Vector2.Distance(emuTransform.position, playerTransform.position) < followRange  ||

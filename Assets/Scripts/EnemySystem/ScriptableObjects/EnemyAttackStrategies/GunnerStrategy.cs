@@ -19,7 +19,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
          * Shoot the target if they are a certain distance away
          * In this case, we don't need the hasCollided bool, so we will return false
          */
-        public override bool Attack(GameObject player, GameObject emu, int damageGiven, bool hasCollided)
+        public override void Attack(GameObject player, GameObject emu, int damageGiven)
         {
             if ((Math.Abs(emu.transform.position.x) - Math.Abs(player.transform.position.x) < shootDistanceRangeMax)
                 && (Math.Abs(emu.transform.position.y) - Math.Abs(player.transform.position.y) < shootHeightRangeMax))
@@ -27,8 +27,6 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
                 var weapon = emu.GetComponentInChildren<WeaponBehaviourScript>();
                 weapon.WeaponData.ShootStrategy.Shoot(weapon);
             }
-
-            return false;
         }
     }
 }
