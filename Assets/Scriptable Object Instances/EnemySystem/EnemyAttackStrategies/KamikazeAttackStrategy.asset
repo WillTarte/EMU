@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfa6e24526d8ab4c99acd1b739053ad, type: 3}
   m_Name: KamikazeAttackStrategy
   m_EditorClassIdentifier: 
-  bloodEffect: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
+  explosionEffect: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
     type: 3}
   explosionRadius: 3
