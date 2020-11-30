@@ -47,7 +47,8 @@ namespace WeaponsSystem.MonoBehaviours
             get => weaponData;
             set
             {
-                weaponData = Instantiate(value);
+
+                weaponData = value.Copy();
 
                 _weaponOnGroundBehaviour.Init(weaponData);
                 if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)
@@ -109,7 +110,7 @@ namespace WeaponsSystem.MonoBehaviours
             if (weaponData != null)
             {
                 // Didn't find much info, but hopefully this does a deep copy of everything
-                weaponData = Instantiate(weaponData);
+                weaponData = weaponData.Copy();
                 
                 _weaponOnGroundBehaviour.Init(weaponData);
                 if (currentTotalAmmunition > weaponData.MaxAmmunitionCount)
