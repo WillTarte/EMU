@@ -141,5 +141,11 @@ namespace Player
                 Debug.Log("Could not find audio clip for name " + clipName);
             }
         }
+
+        public void PlayGameOverAudio()
+        {
+            enabled = false;
+            PlaySound("playerDiedAudioClip", false);
+        }
     }
 }

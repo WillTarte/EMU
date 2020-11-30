@@ -3,11 +3,14 @@ using UnityEngine.Audio;
 
 namespace Menus
 {
-    [SerializeField] private AudioMixer audioMixer;
-    
-    public void SetVolume(int vol)
+    public class OptionsMenu : MonoBehaviour
     {
-        PlayerPrefs.SetInt("volume", vol);
-        audioMixer.SetFloat("MasterVolume", (-80 + vol * 8)); // volume goes from 0 to -80
+        [SerializeField] private AudioMixer audioMixer;
+    
+        public void SetVolume(int vol)
+        {
+            PlayerPrefs.SetInt("volume", vol);
+            audioMixer.SetFloat("MasterVolume", (-80 + vol * 8)); // volume goes from 0 to -80
+        }
     }
 }
