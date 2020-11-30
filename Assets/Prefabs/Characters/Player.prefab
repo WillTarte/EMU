@@ -121,7 +121,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c1da278fff75f1b439f83efd1c0f4428, type: 3}
   - {fileID: 8300000, guid: cf8b99392b4385442bc754c5ecf64ce7, type: 3}
   - {fileID: 8300000, guid: 9ef724732cf4ff844a6bc8a5e24ab400, type: 3}
-  - {fileID: 8300000, guid: 73c10060cda77fe47b45ae18fe03630c, type: 3}
+  - {fileID: 8300000, guid: 052dbf234fc436344ab5ac8e103d23f5, type: 3}
+  - {fileID: 8300000, guid: ddfc4907f38dd704ab395d431150f757, type: 3}
 --- !u!114 &-8936025592915904648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 26
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

@@ -15,6 +15,7 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
             if (canShoot && weapon.CurrentMagazineAmmunition >= 1)
             {
                 weapon.StartCoroutine(WaitForShot(weapon));
+                weapon.GetComponent<AudioSource>()?.PlayOneShot(weapon.WeaponData.ShootAudioClip);
             }
         }
 

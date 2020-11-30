@@ -61,6 +61,9 @@ namespace Player
         public delegate void OnCommandInput(Command command);
         public event OnCommandInput OnCommandInputted;
 
+        public delegate void OnDamageTaken();
+        public event OnDamageTaken OnDamageTakenEvent;
+
         /// <summary>
         /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
         /// </summary>
@@ -267,7 +270,7 @@ namespace Player
 
         public void LoseHitPoints(int value)
         {
-            if (!_isHurt)
+            if (!_isHurt && !(_currentState is RollState))
             {
                 _isHurt = true;
                 WarningText.enabled = true;
@@ -275,7 +278,9 @@ namespace Player
                 if (_hitPoints - value < 0) _hitPoints = 0;
                 else _hitPoints -= value;
 
+                OnDamageTakenEvent?.Invoke();
                 UpdateHealthBarHUD?.Invoke(_hitPoints);
+                
             }
         }
 

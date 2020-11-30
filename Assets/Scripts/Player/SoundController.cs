@@ -13,17 +13,22 @@ namespace Player
 
         private readonly Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
         private Controller _characterController;
+        private Rigidbody2D _rigidbody;
         private AudioSource _audioSource;
+        private bool _climbing;
+        private bool _loopingClimbingAudioClip;
 
         private void Awake()
         {
             _characterController = GetComponent<Controller>();
             _audioSource = GetComponent<AudioSource>();
+            _rigidbody = GetComponent<Rigidbody2D>();
 
             if (_characterController != null)
             {
                 _characterController.OnStateChanged += PlaySoundOnStateChanged;
                 _characterController.OnCommandInputted += PlaySoundOnCommand;
+                _characterController.OnDamageTakenEvent += PlayDamageTakenAudioClip;
             }
             else
             {
@@ -36,12 +41,53 @@ namespace Player
             }
         }
 
+        private void Update()
+        {
+            // check if not climbing
+            if (!(_characterController.CurrentState is ClimbState))
+            {
+                if (_audioSource.clip != null && _audioSource.clip.name.Equals("playerClimbAudioClip"))
+                {
+                    _audioSource.Stop();
+                }
+                _climbing = false;
+                _loopingClimbingAudioClip = false;
+            }
+            
+            // if just started climbing
+            if (_characterController.CurrentState is ClimbState && !_climbing)
+            {
+                _climbing = true;
+            }
+
+            // if climbing and actually moving
+            if (_climbing && _rigidbody.velocity.y != 0 && !_loopingClimbingAudioClip)
+            {
+                PlaySound("playerClimbAudioClip", true);
+                _loopingClimbingAudioClip = true;
+            }
+            else if (_rigidbody.velocity.y == 0)
+            {
+                if (_audioSource.clip != null && _audioSource.clip.name.Equals("playerClimbAudioClip"))
+                {
+                    _audioSource.Stop();
+                }
+                _loopingClimbingAudioClip = false;
+            }
+        }
+
+        private void PlayDamageTakenAudioClip()
+        {
+            PlaySound("playerDamagedAudioClip", false);
+        }
+
         private void OnDestroy()
         {
             if (_characterController != null)
             {
                 _characterController.OnStateChanged -= PlaySoundOnStateChanged;
                 _characterController.OnCommandInputted -= PlaySoundOnCommand;
+                _characterController.OnDamageTakenEvent -= PlayDamageTakenAudioClip;
             }
         }
 
@@ -54,13 +100,13 @@ namespace Player
                     break;
                 case FallState _:
                 case IdleState _:
-                    if (_audioSource.clip.name.Equals("playerRunAudioClip"))
+                    if (_audioSource.clip != null && _audioSource.clip.name.Equals("playerRunAudioClip"))
                     {
                         _audioSource.Stop();
                     }
                     break;
                 case RollState _:
-                    PlaySound("playerRollAudioClip", true); //todo
+                    PlaySound("playerJumpAudioClip", false); //todo
                     break;
             }
         }
@@ -77,13 +123,6 @@ namespace Player
                     break;
                 case SwitchWeaponCommand _:
                     PlaySound("playerSwitchWeaponAudioClip", false);
-                    break;
-                case ThrowCommand _:
-                    if (_characterController.CurrentState is IdleState ||
-                        _characterController.CurrentState is RunState || _characterController.CurrentState is FallState)
-                    {
-                        PlaySound("playerThrowAudioClip", false);
-                    }
                     break;
             }
         }
