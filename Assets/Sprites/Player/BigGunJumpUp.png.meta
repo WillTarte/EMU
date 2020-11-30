@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 908b33652f65e916b9c8f97d4ead4c22
+guid: 159421aa7c2021973a7e178126abcfd7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -916612993785805816
-    second: NoGunJumpDown_0
+      213: 7846515889028390250
+    second: BigGunJumpUp_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -90,13 +90,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NoGunJumpDown_0
+      name: BigGunJumpUp_0
       rect:
         serializedVersion: 2
         x: 50
         y: 37
-        width: 85
-        height: 115
+        width: 125
+        height: 113
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,8 +104,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 804c3eca6598743f0800000000000000
-      internalID: -916612993785805816
+      spriteID: a6ddef1e0ac64ec60800000000000000
+      internalID: 7846515889028390250
       vertices: []
       indices: 
       edges: []
