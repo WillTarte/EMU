@@ -11,7 +11,6 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         [SerializeField] private float chargeSpeed;
         [SerializeField] private float chargeRange;
-        [SerializeField] private float threshold;
         [SerializeField] private float chargeTime;
         [SerializeField] private float waitTime;
 
@@ -19,53 +18,64 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         #region Private Variables
 
-        private float startMoveTimer = 0.0f;
-        private float endMoveTimer = 0.0f;
+        private float startMoveTime = 0.0f;
+        private float endMoveTime = 0.0f;
         private bool isCharging = false;
         private Vector2 direction;
 
         #endregion
 
-        public override void Move(Transform emuTransform, Transform playerTransform)
+        public override bool Move(Transform emuTransform, Transform playerTransform)
         {
-            if (Time.time < 1)
-            {
-                isCharging = false;
-                startMoveTimer = 0.0f;
-                endMoveTimer = 0.0f;
-                direction = Vector2.zero;
-            }
+            ResetValuesAtStart();
             if (playerTransform != null &&
                 (Vector2.Distance(emuTransform.position, playerTransform.position) < chargeRange ||
                  emuTransform.gameObject.GetComponent<EnemyController>().gotHit()))
             {
-                if (startMoveTimer < Time.time || isCharging)
+                if (startMoveTime < Time.time || isCharging)
                 {
                     if (!isCharging)
                     {
                         direction = (new Vector2(playerTransform.position.x, 0) -
-                                             new Vector2(emuTransform.position.x, 0));
-                        
+                                     new Vector2(emuTransform.position.x, 0));
+
                         isCharging = true;
                     }
 
                     //emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
-                    
+
                     emuTransform.Translate(direction.normalized * chargeSpeed * Time.deltaTime);
-                    
-                    if (endMoveTimer <= startMoveTimer)
+
+                    if (endMoveTime <= startMoveTime)
                     {
-                        endMoveTimer = startMoveTimer + chargeTime;
+                        endMoveTime = startMoveTime + chargeTime;
                     }
                 }
 
-                if (endMoveTimer < Time.time && isCharging)
+                if (endMoveTime < Time.time && isCharging)
                 {
                     isCharging = false;
-                    startMoveTimer = Time.time + waitTime;
+                    startMoveTime = Time.time + waitTime;
                     //emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
                 }
             }
+            return isCharging;
+        }
+
+        private void ResetValuesAtStart()
+        {
+            if (Time.time < 0.2f)
+            {
+                startMoveTime = 0.0f;
+                endMoveTime = 0.0f;
+                isCharging = false;
+                direction = Vector2.zero;
+            }
+        }
+
+        private void JumpToPlayerPlatform()
+        {
+            
         }
     }
 }

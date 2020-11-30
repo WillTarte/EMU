@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: BabeMovementStrategy
   m_EditorClassIdentifier: 
   chargeSpeed: 10
-  chargeRange: 50
-  threshold: 1.25
-  chargeTime: 4
+  chargeRange: 40
+  chargeTime: 3
   waitTime: 2
