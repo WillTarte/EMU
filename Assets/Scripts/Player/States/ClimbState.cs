@@ -12,6 +12,8 @@ namespace Player.States
             Controller.Animator.SetInteger("AnimState", 0);
             
             Controller.Rigidbody.gravityScale = 0.0F;
+            
+            Debug.Log("Climb state");
         }
 
         public override void Update(Command cmd)
@@ -30,6 +32,8 @@ namespace Player.States
                 Controller.ChangeState(new IdleState());
             }
 
+            base.CheckAndHandleFallthrough();
+            
             Controller.MoveX(Input.GetAxisRaw("Horizontal"));
             Controller.MoveY(Input.GetAxisRaw("Vertical"));
         }

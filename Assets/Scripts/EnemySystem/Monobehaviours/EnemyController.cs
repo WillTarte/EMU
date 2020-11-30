@@ -52,7 +52,8 @@ namespace EnemySystem.Monobehaviours
             _gotHit = true;
             if (healthPoints <= 0)
             {
-                Instantiate(bloodEffect, transform.position, transform.rotation);
+                var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
+                Destroy(blood, 0.51f);
                 Destroy(gameObject);
             }
         }

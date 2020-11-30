@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-public class OptionsMenu : MonoBehaviour
+namespace Menus
 {
     [SerializeField] private AudioMixer audioMixer;
     

@@ -10,7 +10,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
     public class KamikazeStrategy : EnemyAttackStrategy
     {
 
-        [SerializeField] private GameObject bloodEffect;
+        [SerializeField] private GameObject explosionEffect;
         [SerializeField] private int explosionRadius;
 
         public override bool Attack(GameObject player, GameObject emu, int damageGiven, bool hasCollided)
@@ -18,7 +18,8 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
             if (player.CompareTag("Player") && hasCollided)
             {
                 DoExplosion(emu, damageGiven);
-                Instantiate(bloodEffect, emu.transform.position, emu.transform.rotation);
+                var blood = Instantiate(explosionEffect, emu.transform.position, emu.transform.rotation);
+                Destroy(blood, 0.5f);
                 return false;
             }
 
