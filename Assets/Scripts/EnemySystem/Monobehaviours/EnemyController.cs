@@ -1,4 +1,6 @@
-﻿using EnemySystem.ScriptableObjects;
+﻿using System;
+using System.Collections;
+using EnemySystem.ScriptableObjects;
 using EnemySystem.ScriptableObjects.EnemyAttackStrategies;
 using EnemySystem.ScriptableObjects.EnemyMovementStrategies;
 using UnityEngine;
@@ -14,6 +16,7 @@ namespace EnemySystem.Monobehaviours
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
         [SerializeField] private float jumpForce = 300;
         [SerializeField] private GameObject bloodEffect;
+        [SerializeField] private AudioClip duckDie;
 
         #endregion
 
@@ -26,8 +29,18 @@ namespace EnemySystem.Monobehaviours
         private bool _gotHit = false;
         private EnemyAttackStrategy _attackStrategy;
         private EnemyMovementStrategy _movementStrategy;
+        private AudioSource _audioSource;
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
 
         #endregion
+
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
+        }
 
         void Start()
         {
@@ -52,13 +65,23 @@ namespace EnemySystem.Monobehaviours
             _gotHit = true;
             if (healthPoints <= 0)
             {
-                var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
-                Destroy(blood, 0.51f);
-                Destroy(gameObject);
+                StartCoroutine(Killed());
             }
         }
 
-        public bool gotHit()
+        private IEnumerator Killed()
+        {
+            _animator.enabled = false;
+            enabled = false;
+            _spriteRenderer.sprite = null;
+            var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
+            _audioSource.PlayOneShot(duckDie, PlayerPrefs.GetInt("volume") / 10.0f);
+            yield return new WaitWhile(() => _audioSource.isPlaying);
+            Destroy(blood);
+            Destroy(gameObject);
+        }
+
+        public bool GotHit()
         {
             return _gotHit;
         }

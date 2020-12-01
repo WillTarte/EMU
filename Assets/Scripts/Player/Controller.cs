@@ -327,11 +327,14 @@ namespace Player
 
         private IEnumerator GameOver()
         {
-            var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
+            SpriteRendererProp.sprite = null;
+            Animator.enabled = false;
             enabled = false;
+            var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
             GetComponent<SoundController>()?.PlayGameOverAudio();
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitWhile(() => GetComponent<AudioSource>().isPlaying);
             Destroy(blood);
+            Destroy(gameObject);
             SceneManager.LoadScene(3);
         }
 
