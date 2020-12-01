@@ -93,12 +93,7 @@ namespace Player
 
             ChangeState(new IdleState());
         }
-
-        private void FixedUpdate()
-        {
-            SetEdgeColliderPoints();
-        }
-
+        
         // Update is called once per frame
         private void Update()
         {
