@@ -1,15 +1,19 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Player.States;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
     public class Controller : MonoBehaviour
     {
+        private readonly float _maxFallthroughTime = 0.5f;
+
         #region Private Variables
 
         [Range(0, 10)] private int _hitPoints = 10;
@@ -17,12 +21,14 @@ namespace Player
         private InputHandler _inputHandler;
         private bool _isHurt;
         private float _timer = 2;
+        private float _fallthroughTimer = 0.0f;
         private List<GameObject> _nearestInteractables = new List<GameObject>(1);
 
         #endregion
 
         #region Interface Variables
 
+        public GameObject bloodEffect;
         public bool IsFullHp => _hitPoints == 10;
 
         public EdgeCollider2D EdgeCollider { get; private set; }
@@ -39,8 +45,11 @@ namespace Player
         public void RemoveInteractable(GameObject interactable) => _nearestInteractables.Remove(interactable);
 
         public bool IsGrounded { get; private set; }
+        public bool IsOnPlatform { get; private set; }
         public bool CanClimb { get; private set; }
         public bool IsFacingRight { get; private set; }
+
+        public bool CanFallthrough { get; set; }
 
         public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
@@ -87,6 +96,7 @@ namespace Player
             WarningText.enabled = false;
 
             IsGrounded = false;
+            IsOnPlatform = false;
             IsFacingRight = true;
 
             SetEdgeColliderPoints();
@@ -114,6 +124,18 @@ namespace Player
                 }
             }
 
+            if (CanFallthrough)
+            {
+                _fallthroughTimer += Time.deltaTime;
+            }
+
+            if (_fallthroughTimer >= _maxFallthroughTime)
+            {
+                _fallthroughTimer = 0.0f;
+
+                CanFallthrough = false;
+            }
+
             _nearestInteractables.Sort(delegate(GameObject o, GameObject o1)
             {
                 var distanceToPlayer0 = Vector2.Distance(transform.position, o.transform.position);
@@ -139,16 +161,30 @@ namespace Player
             var sprite = SpriteRendererProp.sprite;
             Vector2 spriteCenter = sprite.bounds.center;
             Vector2 spriteExtents = sprite.bounds.extents;
-
-            Vector2[] edgeColliderPoints =
+            
+            if (spriteExtents.x > 0.25f) {
+                Vector2[] edgeColliderPoints =
+                    {
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y - spriteExtents.y),
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y + spriteExtents.y),
+                        new Vector2(spriteCenter.x + 0.25f, spriteCenter.y + spriteExtents.y),
+                        new Vector2(spriteCenter.x + 0.25f, spriteCenter.y - spriteExtents.y),
+                        new Vector2(spriteCenter.x - 0.25f, spriteCenter.y - spriteExtents.y),
+                    };
+                EdgeCollider.points = edgeColliderPoints;
+            }
+            else
             {
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
-                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
-                new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
-                new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
-            };
-            EdgeCollider.points = edgeColliderPoints;
+                Vector2[] edgeColliderPoints = 
+                {
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                    new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y + spriteExtents.y),
+                    new Vector2(spriteCenter.x + spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                    new Vector2(spriteCenter.x - spriteExtents.x, spriteCenter.y - spriteExtents.y),
+                };
+                EdgeCollider.points = edgeColliderPoints;
+            }
         }
 
         private void IsHurt()
@@ -271,6 +307,11 @@ namespace Player
                 if (_hitPoints - value < 0) _hitPoints = 0;
                 else _hitPoints -= value;
 
+                if (_hitPoints <= 0)
+                {
+                    StartCoroutine(GameOver());
+                }
+
                 UpdateHealthBarHUD?.Invoke(_hitPoints);
             }
         }
@@ -287,6 +328,14 @@ namespace Player
         {
             _hitPoints = 10;
             ResetHealthBarHUD?.Invoke(_hitPoints);
+        }
+
+        private IEnumerator GameOver()
+        {
+            var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+            Destroy(blood);
+            SceneManager.LoadScene(3);
         }
 
         #endregion
@@ -319,12 +368,18 @@ namespace Player
 
             if (other.gameObject.CompareTag("Ground"))
             {
+                //Debug.Log("On Ground | Bridge");
+
                 IsGrounded = true;
             }
 
             if (other.gameObject.CompareTag("Platform"))
             {
-                IsGrounded = true;
+                if (Rigidbody.velocity.y >= 0.0F)
+                {
+                    IsGrounded = true;
+                    IsOnPlatform = true;
+                }
             }
         }
 
@@ -338,6 +393,7 @@ namespace Player
             if (other.gameObject.CompareTag("Platform"))
             {
                 IsGrounded = false;
+                IsOnPlatform = false;
             }
         }
 
