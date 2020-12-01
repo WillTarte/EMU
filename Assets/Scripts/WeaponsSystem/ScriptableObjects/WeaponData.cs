@@ -38,6 +38,8 @@ namespace WeaponsSystem.ScriptableObjects
             copied.shootStrategy = Instantiate(shootStrategy);
             copied.onGroundSprite = onGroundSprite;
             copied.inInventorySprite = inInventorySprite;
+            copied.shootAudioClip = shootAudioClip;
+            copied.reloadAudioClip = reloadAudioClip;
 
             return copied;
         }
