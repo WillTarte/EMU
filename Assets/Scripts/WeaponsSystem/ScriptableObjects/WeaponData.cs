@@ -24,6 +24,22 @@ namespace WeaponsSystem.ScriptableObjects
         [SerializeField] private Sprite onGroundSprite;
         [SerializeField] private Sprite inInventorySprite;
 
+        public WeaponData Copy()
+        {
+            var copied = CreateInstance<WeaponData>();
+            copied.weaponName = weaponName;
+            copied.magazineCapacity = magazineCapacity;
+            copied.maxAmmunitionCount = maxAmmunitionCount;
+            copied.fireRate = fireRate;
+            copied.reloadTime = reloadTime;
+            copied.projectileData = projectileData;
+            copied.shootStrategy = Instantiate(shootStrategy);
+            copied.onGroundSprite = onGroundSprite;
+            copied.inInventorySprite = inInventorySprite;
+
+            return copied;
+        }
+        
         public WeaponName WeaponName => weaponName;
         public int MagazineCapacity => magazineCapacity;
         public int MaxAmmunitionCount => maxAmmunitionCount;
