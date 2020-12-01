@@ -258,11 +258,7 @@ namespace Player
                 }
             }
         }
-
-        public void ChangeToNoGunAnimation()
-        {
-            Animator.runtimeAnimatorController = NoGunOverrider;
-        }
+        
         public void ChangeToBigGunAnimation()
         {
             Animator.runtimeAnimatorController = BigGunOverrider;

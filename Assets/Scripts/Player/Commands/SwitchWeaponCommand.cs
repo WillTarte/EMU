@@ -17,8 +17,9 @@ namespace Player.Commands
             base.Execute(controller);
 
             controller.InventoryManager.SwitchActiveWeapon(keyPressed);
-            
-            if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.Knife) {
+
+            if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.Knife)
+            {
                 controller.ChangeToKnifeAnimation();
             }
             else if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.AssaultRifle)
