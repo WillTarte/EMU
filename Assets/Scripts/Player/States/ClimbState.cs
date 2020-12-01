@@ -10,6 +10,7 @@ namespace Player.States
             base.Start();
 
             Controller.Animator.SetInteger("AnimState", 0);
+            Controller.Animator.SetBool("Climbing", true);
             
             Controller.Rigidbody.gravityScale = 0.0F;
         }

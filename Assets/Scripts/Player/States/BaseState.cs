@@ -17,6 +17,8 @@ namespace Player.States
         {
             Controller.ResetSpriteFlip();
             
+            Controller.Animator.SetBool("Climbing", false);
+            
             Controller.Rigidbody.gravityScale = 1.0F;
         }
 
