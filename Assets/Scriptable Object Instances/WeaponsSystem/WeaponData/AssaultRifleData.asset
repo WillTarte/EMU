@@ -19,7 +19,7 @@ MonoBehaviour:
   reloadTime: 1.25
   projectileData: {fileID: 11400000, guid: 7d6dd0663f7033d42b82d85a828005b4, type: 2}
   shootStrategy: {fileID: 11400000, guid: 4ca44fd5d94a0ca48b957711bdfbee06, type: 2}
-  onGroundSprite: {fileID: -971063008101321254, guid: 6de0f8b654f3ef742b88e028d4f68618,
+  onGroundSprite: {fileID: -5949048694633569530, guid: f4b0836ebee1e074f84a8c3c05b48ece,
     type: 3}
-  inInventorySprite: {fileID: -971063008101321254, guid: 6de0f8b654f3ef742b88e028d4f68618,
+  inInventorySprite: {fileID: -5949048694633569530, guid: f4b0836ebee1e074f84a8c3c05b48ece,
     type: 3}
