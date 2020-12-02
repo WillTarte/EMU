@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6de0f8b654f3ef742b88e028d4f68618
+guid: 6e36dc34d04d02104b1d1856c9316cc7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -971063008101321254
-    second: BigGun_0
+      213: -3207839822658858621
+    second: SniperJumpUp_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -90,13 +90,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BigGun_0
+      name: SniperJumpUp_0
       rect:
         serializedVersion: 2
-        x: 125
-        y: 188
-        width: 256
-        height: 87
+        x: 50
+        y: 32
+        width: 133
+        height: 118
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,8 +104,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad5399bc6571682f0800000000000000
-      internalID: -971063008101321254
+      spriteID: 381111a5da67b73d0800000000000000
+      internalID: -3207839822658858621
       vertices: []
       indices: 
       edges: []
