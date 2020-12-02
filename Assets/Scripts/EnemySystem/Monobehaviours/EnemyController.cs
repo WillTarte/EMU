@@ -32,6 +32,7 @@ namespace EnemySystem.Monobehaviours
         private AudioSource _audioSource;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
+        private bool _killed;
 
         #endregion
 
@@ -61,10 +62,12 @@ namespace EnemySystem.Monobehaviours
 
         public void ReceiveDamage(int amount)
         {
+            if (_killed) return;
             healthPoints -= amount;
             _gotHit = true;
             if (healthPoints <= 0)
             {
+                _killed = true;
                 StartCoroutine(Killed());
             }
         }

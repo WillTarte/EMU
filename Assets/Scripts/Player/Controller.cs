@@ -331,10 +331,8 @@ namespace Player
             Animator.enabled = false;
             enabled = false;
             var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
-            GetComponent<SoundController>()?.PlayGameOverAudio();
-            yield return new WaitWhile(() => GetComponent<AudioSource>().isPlaying);
+            yield return new WaitForSeconds(1);
             Destroy(blood);
-            Destroy(gameObject);
             SceneManager.LoadScene(3);
         }
 

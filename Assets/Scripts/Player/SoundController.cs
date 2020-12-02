@@ -35,6 +35,11 @@ namespace Player
                 Debug.Log("Unable to subscribe to state changes due to player not having a character controller");
             }
 
+            if (_audioSource != null)
+            {
+                _audioSource.volume = PlayerPrefs.GetInt("volume") / 10.0f;
+            }
+            
             foreach (var clip in audioClips)
             {
                 _audioClips.Add(clip.name, clip);
@@ -106,7 +111,7 @@ namespace Player
                     }
                     break;
                 case RollState _:
-                    PlaySound("playerJumpAudioClip", false); //todo
+                    PlaySound("playerJumpAudioClip", false);
                     break;
             }
         }
@@ -118,11 +123,11 @@ namespace Player
                 case JumpCommand _:
                     if (_characterController.CurrentState is IdleState || _characterController.CurrentState is RunState)
                     {
-                        PlaySound("playerJumpAudioClip", false);
+                        PlaySoundOneShot("playerJumpAudioClip");
                     }
                     break;
                 case SwitchWeaponCommand _:
-                    PlaySound("playerSwitchWeaponAudioClip", false);
+                    PlaySoundOneShot("playerSwitchWeaponAudioClip");
                     break;
             }
         }
@@ -133,7 +138,6 @@ namespace Player
             {
                 _audioSource.clip = clip;
                 _audioSource.loop = loop;
-                _audioSource.volume = PlayerPrefs.GetInt("volume") / 10.0f;
                 _audioSource.Play();
             }
             else
@@ -142,10 +146,16 @@ namespace Player
             }
         }
 
-        public void PlayGameOverAudio()
+        private void PlaySoundOneShot(string clipName)
         {
-            enabled = false;
-            PlaySound("playerDiedAudioClip", false);
+            if (_audioClips.TryGetValue(clipName, out var clip))
+            {
+                AudioSource.PlayClipAtPoint(clip, transform.position, _audioSource.volume);
+            }
+            else
+            {
+                Debug.Log("Could not find audio clip for name " + clipName);
+            }
         }
     }
 }
