@@ -66,7 +66,7 @@ namespace Interactables
                 {
                     var newAmmoCount = Math.Min(activeWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + activeWeapon.CurrentTotalAmmunition, activeWeapon.WeaponData.MaxAmmunitionCount);
                     activeWeapon.CurrentTotalAmmunition = (int) newAmmoCount;
-                    
+                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
                     Destroy(gameObject);
                 } 
                 else if (otherWeapon != null &&
@@ -74,6 +74,7 @@ namespace Interactables
                 {
                     var newAmmoCount = Math.Min(otherWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + otherWeapon.CurrentTotalAmmunition, otherWeapon.WeaponData.MaxAmmunitionCount);
                     otherWeapon.CurrentTotalAmmunition = (int) newAmmoCount;
+                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
                     Destroy(gameObject);
                 }
             }
