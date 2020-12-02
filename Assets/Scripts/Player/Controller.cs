@@ -107,20 +107,17 @@ namespace Player
         {
             IsHurt();
             _currentState?.Update(_inputHandler.HandleInput());
-            if (IsFacingRight
-                ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
-                : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
+            
+            if (InventoryManager.GetActiveWeapon() != null)
             {
-                if (InventoryManager.GetActiveWeapon() != null)
-                {
-                    InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
-                }
-
-                if (InventoryManager.GetThrowableWeapon() != null)
-                {
-                    InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
-                }
+                InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
             }
+
+            if (InventoryManager.GetThrowableWeapon() != null)
+            {
+                InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+            }
+            
 
             if (CanFallthrough)
             {
