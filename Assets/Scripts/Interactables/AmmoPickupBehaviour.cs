@@ -61,29 +61,19 @@ namespace Interactables
                     ? InventoryIndex.Second
                     : InventoryIndex.First;
                 var otherWeapon = playerController.InventoryManager.WeaponSlots[otherWeaponIndex];
-                bool pickedUp = false;
-                
+
                 if (activeWeapon != null && activeWeapon.CurrentTotalAmmunition < activeWeapon.WeaponData.MaxAmmunitionCount)
                 {
-                    var maxReplenishAmount =
-                        (int) Math.Floor(activeWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100f));
-                    activeWeapon.CurrentTotalAmmunition = Math.Min(activeWeapon.CurrentTotalAmmunition + maxReplenishAmount,
-                        activeWeapon.WeaponData.MaxAmmunitionCount);
-                    pickedUp = true;
+                    var newAmmoCount = Math.Min(activeWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + activeWeapon.CurrentTotalAmmunition, activeWeapon.WeaponData.MaxAmmunitionCount);
+                    activeWeapon.CurrentTotalAmmunition = (int) newAmmoCount;
+                    
+                    Destroy(gameObject);
                 } 
                 else if (otherWeapon != null &&
                          otherWeapon.CurrentTotalAmmunition < otherWeapon.WeaponData.MaxAmmunitionCount)
                 {
-                    var maxReplenishAmount =
-                        (int) Math.Floor(activeWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100f));
-                    activeWeapon.CurrentTotalAmmunition = Math.Min(activeWeapon.CurrentTotalAmmunition + maxReplenishAmount,
-                        activeWeapon.WeaponData.MaxAmmunitionCount);
-                    pickedUp = true;
-                }
-
-                if (pickedUp)
-                {
-                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
+                    var newAmmoCount = Math.Min(otherWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + otherWeapon.CurrentTotalAmmunition, otherWeapon.WeaponData.MaxAmmunitionCount);
+                    otherWeapon.CurrentTotalAmmunition = (int) newAmmoCount;
                     Destroy(gameObject);
                 }
             }
