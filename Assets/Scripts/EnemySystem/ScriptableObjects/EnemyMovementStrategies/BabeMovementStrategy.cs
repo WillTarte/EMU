@@ -30,7 +30,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             ResetValuesAtStart();
             if (playerTransform != null &&
                 (Vector2.Distance(emuTransform.position, playerTransform.position) < chargeRange ||
-                 emuTransform.gameObject.GetComponent<EnemyController>().gotHit()))
+                 emuTransform.gameObject.GetComponent<BossController>().battleStarted()))
             {
                 if (startMoveTime < Time.time || isCharging)
                 {
@@ -42,7 +42,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                         isCharging = true;
                     }
 
-                    //emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
+                    emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
 
                     emuTransform.Translate(direction.normalized * chargeSpeed * Time.deltaTime);
 
@@ -56,7 +56,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 {
                     isCharging = false;
                     startMoveTime = Time.time + waitTime;
-                    //emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
+                    emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
                 }
             }
             return isCharging;

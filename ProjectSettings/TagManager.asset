@@ -18,6 +18,7 @@ TagManager:
   - EnemyProjectile
   - HealthPickup
   - AmmoPickup
+  - Boss
   layers:
   - Default
   - TransparentFX
