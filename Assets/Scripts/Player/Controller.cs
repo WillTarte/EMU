@@ -30,16 +30,18 @@ namespace Player
 
         public GameObject bloodEffect;
         public bool IsFullHp => _hitPoints == 10;
-        
+
         public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
-        
+
         public TextMeshProUGUI WarningText;
-        
-        [CanBeNull] public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
+
+        [CanBeNull]
+        public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
+
         public void RemoveInteractable(GameObject interactable) => _nearestInteractables.Remove(interactable);
 
         public bool IsGrounded { get; private set; }
@@ -62,6 +64,11 @@ namespace Player
         [Range(100, 1000)] public float jumpForce = 500.0f;
         [Range(0, 500)] public int fallMultiplier = 10;
 
+        public AnimatorOverrideController NoGunOverrider;
+        public AnimatorOverrideController BigGunOverrider;
+        public AnimatorOverrideController KnifeOverrider;
+        public AnimatorOverrideController ShotgunOverrider;
+        public AnimatorOverrideController SniperOverrider;
 
         /// <summary>
         /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
@@ -96,12 +103,7 @@ namespace Player
 
             ChangeState(new IdleState());
         }
-
-        private void FixedUpdate()
-        {
-            SetEdgeColliderPoints();
-        }
-
+        
         // Update is called once per frame
         private void Update()
         {
@@ -256,7 +258,24 @@ namespace Player
                 }
             }
         }
-
+        
+        public void ChangeToBigGunAnimation()
+        {
+            Animator.runtimeAnimatorController = BigGunOverrider;
+        }
+        public void ChangeToKnifeAnimation()
+        {
+            Animator.runtimeAnimatorController = KnifeOverrider;
+        }
+        public void ChangeToShotgunAnimation()
+        {
+            Animator.runtimeAnimatorController = ShotgunOverrider;
+        }
+        public void ChangeToSniperAnimation()
+        {
+            Animator.runtimeAnimatorController = SniperOverrider;
+        }
+        
         /// <summary>
         /// Method used to change state
         /// </summary>
