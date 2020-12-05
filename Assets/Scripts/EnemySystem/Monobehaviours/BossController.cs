@@ -47,8 +47,7 @@ namespace EnemySystem.Monobehaviours
         {
             StartBattle();
             isMoving = _movementStrategy.Move(gameObject.transform, _player.transform);
-            if (!isMoving)
-                IsFacingPlayer();
+            IsFacingPlayer();
             _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven);
         }
 

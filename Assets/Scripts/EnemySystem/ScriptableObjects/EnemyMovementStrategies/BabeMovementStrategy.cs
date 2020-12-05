@@ -11,14 +11,17 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
     
         //Atomic parameters of babe uwu
         [SerializeField] private float chargeSpeed;
-        [SerializeField] private float chargeRange;
+        [SerializeField] private float jumpSpeedScale;
+        [SerializeField] private float miniJumpForce;
+        [SerializeField] private float superJumpForce;
         [SerializeField] private float attackTime;
         [SerializeField] private float waitTime;
-        [SerializeField]private int jumpRange;
-        [SerializeField]private float chargeJumpRangeX;
-        [SerializeField]private float chargeJumpRangeY;
+        [SerializeField] private int jumpRange;
+        [SerializeField] private float chargeJumpRangeX;
+        [SerializeField] private float chargeJumpRangeY;
         [SerializeField] private float regularGravityScale;
         [SerializeField] private float bringDownGravityScale;
+        [SerializeField] private float bringDownHeight;
         
         #endregion
 
@@ -63,11 +66,10 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                     {
                         ChargeTowardsPlayer(emuTransform, playerTransform);
                     }
-                    
-                    //If Babe is too high in the sky, bring it back
-                    BringBabeDown(emuTransform);
-                    
                 }
+                
+                //If Babe is too high in the sky, bring it back
+                BringBabeDown(emuTransform);
                 
                 //If the timestamp of the new attack is defined, set the timestamp to end it
                 if (endMoveTime <= startMoveTime)
@@ -102,7 +104,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 {
                     emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
                     emuTransform.position =
-                        Vector2.MoveTowards(emuTransform.position, whereToJump, chargeSpeed * 1.5f * Time.deltaTime);
+                        Vector2.MoveTowards(emuTransform.position, whereToJump, chargeSpeed * jumpSpeedScale * Time.deltaTime);
                 }
 
                 //When Babe reach her destination, make her jump
@@ -111,7 +113,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                     whereToJump = Vector2.zero;
                     emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
                     emuTransform.GetComponent<BoxCollider2D>().enabled = false;
-                    emuTransform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 1500));
+                    emuTransform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, superJumpForce));
                 }
         }
 
@@ -122,6 +124,10 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             {
                 direction = (new Vector2(playerTransform.position.x, 0) -
                              new Vector2(emuTransform.position.x, 0));
+                if (direction == Vector2.zero)
+                {
+                    direction = Vector2.left;
+                }
                 chargeAttack = true;
             }
             
@@ -129,7 +135,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             //This is to avoid the player to abuse of the climbing
             if (PlayerIsClimbing(emuTransform, playerTransform) && !chargeJumped && !hasPassedPlayer)
             {
-                emuTransform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 400));
+                emuTransform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, miniJumpForce));
                 chargeJumped = true;
             }
 
@@ -153,8 +159,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         
         private bool PlayerIsOnPlatformAbove(Transform emuTransform, Transform playerTransform)
         {
-            return Mathf.Abs(emuTransform.position.x - playerTransform.position.x) < chargeRange &&
-                   (Mathf.Abs(emuTransform.position.y) - Mathf.Abs(playerTransform.position.y)) > jumpRange;
+            return (Mathf.Abs(emuTransform.position.y) - Mathf.Abs(playerTransform.position.y)) > jumpRange;
         }
 
         private void ResetValuesAtStart()
@@ -173,9 +178,9 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         
         private void BringBabeDown(Transform emuTransform)
         {
-            if (emuTransform.position.y > -10)
+            if (emuTransform.position.y > bringDownHeight)
             {
-                emuTransform.GetComponent<Rigidbody2D>().gravityScale = 10;
+                emuTransform.GetComponent<Rigidbody2D>().gravityScale = bringDownGravityScale;
                 emuTransform.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
