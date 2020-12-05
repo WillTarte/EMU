@@ -23,6 +23,8 @@ namespace WeaponsSystem.ScriptableObjects
         [SerializeField] private WeaponShootStrategy shootStrategy;
         [SerializeField] private Sprite onGroundSprite;
         [SerializeField] private Sprite inInventorySprite;
+        [SerializeField] private AudioClip shootAudioClip;
+        [SerializeField] private AudioClip reloadAudioClip;
 
         public WeaponData Copy()
         {
@@ -36,6 +38,8 @@ namespace WeaponsSystem.ScriptableObjects
             copied.shootStrategy = Instantiate(shootStrategy);
             copied.onGroundSprite = onGroundSprite;
             copied.inInventorySprite = inInventorySprite;
+            copied.shootAudioClip = shootAudioClip;
+            copied.reloadAudioClip = reloadAudioClip;
 
             return copied;
         }
@@ -49,6 +53,8 @@ namespace WeaponsSystem.ScriptableObjects
         public WeaponShootStrategy ShootStrategy => shootStrategy;
         public Sprite OnGroundSprite => onGroundSprite;
         public Sprite InInventorySprite => inInventorySprite;
+        public AudioClip ShootAudioClip => shootAudioClip;
+        public AudioClip ReloadAudioClip => reloadAudioClip;
     }
 
     public enum WeaponName

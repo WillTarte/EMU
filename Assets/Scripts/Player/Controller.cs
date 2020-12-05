@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Player.Commands;
 using Player.States;
 using TMPro;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace Player
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
+        public BaseState CurrentState => _currentState;
 
         public TextMeshProUGUI WarningText;
 
@@ -64,6 +66,15 @@ namespace Player
         [Range(100, 1000)] public float jumpForce = 500.0f;
         [Range(0, 500)] public int fallMultiplier = 10;
 
+        public delegate void OnStateChange(BaseState newState);
+        public event OnStateChange OnStateChanged;
+
+        public delegate void OnCommandInput(Command command);
+        public event OnCommandInput OnCommandInputted;
+
+        public delegate void OnDamageTaken();
+        public event OnDamageTaken OnDamageTakenEvent;
+        
         public AnimatorOverrideController NoGunOverrider;
         public AnimatorOverrideController BigGunOverrider;
         public AnimatorOverrideController KnifeOverrider;
@@ -108,7 +119,12 @@ namespace Player
         private void Update()
         {
             IsHurt();
-            _currentState?.Update(_inputHandler.HandleInput());
+            var input = _inputHandler.HandleInput();
+            if (input != null)
+            {
+                OnCommandInputted?.Invoke(input);
+            }
+            _currentState?.Update(input);
             if (IsFacingRight
                 ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
                 : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
@@ -290,12 +306,13 @@ namespace Player
             {
                 _currentState.Controller = this;
                 _currentState.Start();
+                OnStateChanged?.Invoke(newState);
             }
         }
 
         public void LoseHitPoints(int value)
         {
-            if (!_isHurt)
+            if (!_isHurt && !(_currentState is RollState))
             {
                 _isHurt = true;
                 WarningText.enabled = true;
@@ -303,12 +320,14 @@ namespace Player
                 if (_hitPoints - value < 0) _hitPoints = 0;
                 else _hitPoints -= value;
 
+                OnDamageTakenEvent?.Invoke();
                 if (_hitPoints <= 0)
                 {
                     StartCoroutine(GameOver());
                 }
 
                 UpdateHealthBarHUD?.Invoke(_hitPoints);
+                
             }
         }
 
@@ -328,8 +347,11 @@ namespace Player
 
         private IEnumerator GameOver()
         {
+            SpriteRendererProp.sprite = null;
+            Animator.enabled = false;
+            enabled = false;
             var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1);
             Destroy(blood);
             SceneManager.LoadScene(3);
         }

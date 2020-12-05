@@ -10,7 +10,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
     {
         #region Interface Variables
 
-        [SerializeField] private float shootDistanceRangeMax = 25;
+        [SerializeField] private float shootDistanceRangeMax = 15;
         [SerializeField] private float shootHeightRangeMax = 0.1f;
 
         #endregion
@@ -21,8 +21,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
          */
         public override void Attack(GameObject player, GameObject emu, int damageGiven)
         {
-            if ((Math.Abs(emu.transform.position.x) - Math.Abs(player.transform.position.x) < shootDistanceRangeMax)
-                && (Math.Abs(emu.transform.position.y) - Math.Abs(player.transform.position.y) < shootHeightRangeMax))
+            if (Vector2.Distance(player.transform.position, emu.transform.position) < shootDistanceRangeMax)
             {
                 var weapon = emu.GetComponentInChildren<WeaponBehaviourScript>();
                 weapon.WeaponData.ShootStrategy.Shoot(weapon);

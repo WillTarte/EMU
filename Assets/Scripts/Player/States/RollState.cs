@@ -20,6 +20,11 @@ namespace Player.States
         public override void Update(Command cmd)
         {
             base.Update(cmd);
+            
+            if (cmd is SwitchWeaponCommand)
+            {
+                cmd.Execute(Controller);
+            }
 
             Controller.MoveX(XAxisRaw);
         }

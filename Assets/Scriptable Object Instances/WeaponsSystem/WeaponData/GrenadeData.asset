@@ -21,3 +21,5 @@ MonoBehaviour:
   shootStrategy: {fileID: 11400000, guid: 7426f97a7eb42584085fc91655007fb1, type: 2}
   onGroundSprite: {fileID: 21300000, guid: be7b30935b6fbde488e75ac8f1238f1d, type: 3}
   inInventorySprite: {fileID: 21300000, guid: be7b30935b6fbde488e75ac8f1238f1d, type: 3}
+  shootAudioClip: {fileID: 8300000, guid: 73c10060cda77fe47b45ae18fe03630c, type: 3}
+  reloadAudioClip: {fileID: 0}

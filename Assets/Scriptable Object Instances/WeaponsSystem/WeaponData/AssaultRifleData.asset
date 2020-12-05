@@ -23,3 +23,5 @@ MonoBehaviour:
     type: 3}
   inInventorySprite: {fileID: -5949048694633569530, guid: f4b0836ebee1e074f84a8c3c05b48ece,
     type: 3}
+  shootAudioClip: {fileID: 8300000, guid: cc68f9b97c8111a49b9d326e058f413f, type: 3}
+  reloadAudioClip: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}

@@ -9,6 +9,7 @@ namespace Interactables
 
         [SerializeField] private Vector2 pickupTriggerSize;
         [SerializeField] private int amount;
+        [SerializeField] private AudioClip pickupSoundClip;
 
         private Rigidbody2D _rigidbody;
         private GameObject _trigger;
@@ -48,6 +49,7 @@ namespace Interactables
             {
                 return;
             }
+            AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
             playerController.RestoreHitPoints(amount);
             Destroy(gameObject);
         }

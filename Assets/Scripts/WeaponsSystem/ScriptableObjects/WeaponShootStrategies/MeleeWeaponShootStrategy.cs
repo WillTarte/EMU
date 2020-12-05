@@ -32,6 +32,7 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
             if (canAttack)
             {
                 weapon.StartCoroutine(WaitForAttack(weapon));
+                weapon.GetComponent<AudioSource>()?.PlayOneShot(weapon.WeaponData.ShootAudioClip);
             }
         }
 
