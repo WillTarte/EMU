@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab1fc7dfab4e6d46accd05fb4ddd0e5, type: 3}
   m_Name: BabeMovementStrategy
   m_EditorClassIdentifier: 
-  chargeSpeed: 10
-  chargeRange: 40
-  chargeTime: 3
-  waitTime: 2
+  chargeSpeed: 15
+  chargeRange: 30
+  chargeTime: 2
+  waitTime: 1.5
