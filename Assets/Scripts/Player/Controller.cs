@@ -133,12 +133,13 @@ namespace Player
                 {
                     InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
                 }
-
-                if (InventoryManager.GetThrowableWeapon() != null)
-                {
-                    InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
-                }
             }
+
+            if (InventoryManager.GetThrowableWeapon() != null)
+            {
+                InventoryManager.GetThrowableWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+            }
+            
 
             if (CanFallthrough)
             {

@@ -92,7 +92,8 @@ namespace WeaponsSystem.MonoBehaviours
                 }
             }
 
-            Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity);
+            Destroy(Instantiate(explosionVFXPrefab, transform.position, Quaternion.identity), 0.5f);
+            
             Destroy(gameObject);
         }
     }

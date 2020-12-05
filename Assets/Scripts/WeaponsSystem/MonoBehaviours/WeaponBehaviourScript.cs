@@ -17,7 +17,7 @@ namespace WeaponsSystem.MonoBehaviours
         private WeaponOnGroundBehaviour _weaponOnGroundBehaviour;
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody;
-        private Vector2 _direction;
+        private Vector2 _direction = Vector2.right;
 
         /// <summary>
         /// Returns the world space position of where the weapon's muzzle is
@@ -38,7 +38,7 @@ namespace WeaponsSystem.MonoBehaviours
                     }
                     return parent.transform.position;
                 }
-                return (Vector2) transform.position + (_direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
+                return (Vector2) transform.position + (Direction * new Vector2(_spriteRenderer.sprite.bounds.extents.x, _spriteRenderer.sprite.bounds.extents.y));
             }
         }
 
@@ -69,17 +69,7 @@ namespace WeaponsSystem.MonoBehaviours
         public Vector2 Direction
         {
             get => _direction;
-            set
-            {
-                _direction = value;
-                if (_direction == Vector2.left)
-                {
-                    _spriteRenderer.flipX = true;
-                } else if (_direction.Equals(Vector2.right))
-                {
-                    _spriteRenderer.flipX = false;
-                }
-            }
+            set => _direction = value;
         }
 
         public WeaponState WeaponStateProp
@@ -156,11 +146,6 @@ namespace WeaponsSystem.MonoBehaviours
             StopAllCoroutines();
         }
 
-        public void Init(Vector2 direction)
-        {
-            this.Direction = direction;
-        }
-    
         public void Shoot()
         {
             if (weaponState != WeaponState.Active)
