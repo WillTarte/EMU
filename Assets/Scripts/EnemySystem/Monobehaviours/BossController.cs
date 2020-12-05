@@ -13,7 +13,6 @@ namespace EnemySystem.Monobehaviours
         
         [SerializeField] public int healthPoints;
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
-        [SerializeField] private float jumpForce = 300;
         [SerializeField] private GameObject bloodEffect;
 
         #endregion
@@ -21,13 +20,11 @@ namespace EnemySystem.Monobehaviours
         #region Private Variables
     
         private GameObject _player;
-        private Vector3 _lastPosition;
-        private float _timer = 2;
         private bool _startBattle = false;
         private EnemyAttackStrategy _attackStrategy;
         private EnemyMovementStrategy _movementStrategy;
         private bool isMoving = false;
-        private float startBattleRange = 50;
+        private float startBattleRange = 30;
 
         #endregion
 
@@ -50,10 +47,9 @@ namespace EnemySystem.Monobehaviours
         {
             StartBattle();
             isMoving = _movementStrategy.Move(gameObject.transform, _player.transform);
-            _timer -= Time.deltaTime;
-            IsFacingPlayer();
+            if (!isMoving)
+                IsFacingPlayer();
             _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven);
-            _lastPosition = gameObject.transform.position;
         }
 
         public void ReceiveDamage(int amount)

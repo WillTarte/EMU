@@ -5,6 +5,7 @@ public class BossHealthBar : MonoBehaviour
     private Slider _slider;
     private float _currentHealthPoints;
     private float _maxHealthPoints;
+    
     void Start()
     {
         _slider = this.GetComponent<Slider>();

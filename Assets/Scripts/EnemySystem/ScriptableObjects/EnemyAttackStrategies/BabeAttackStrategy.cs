@@ -16,13 +16,12 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
                 Vector2.Distance(emu.transform.position, player.transform.position) < rangeOfMeleeAttack)
             {
                 var playerController = player.GetComponent<Controller>();
-                //emu.gameObject.GetComponent<Animator>().SetBool("IsAttacking", true);
+                emu.gameObject.GetComponent<Animator>().SetBool("IsAttacking", true);
                 playerController.LoseHitPoints(damageGiven);
             }
             else
             {
-                //emu.gameObject.GetComponent<Animator>().SetBool("IsAttacking", false);
-                
+                emu.gameObject.GetComponent<Animator>().SetBool("IsAttacking", false);
             }
         }
     }
