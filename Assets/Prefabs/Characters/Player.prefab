@@ -108,6 +108,11 @@ MonoBehaviour:
   speed: 5
   jumpForce: 350.72
   fallMultiplier: 10
+  NoGunOverrider: {fileID: 22100000, guid: 10fe0275e85409ad59525f616473350e, type: 2}
+  BigGunOverrider: {fileID: 22100000, guid: f4f0cea7009e4e92494a89eab6122b47, type: 2}
+  KnifeOverrider: {fileID: 22100000, guid: 290c2df76ed506711bdcb0ceeaebfa30, type: 2}
+  ShotgunOverrider: {fileID: 22100000, guid: 9c8edbf58eedea350b5c92dfef0565d9, type: 2}
+  SniperOverrider: {fileID: 22100000, guid: f840700e69e8cf845adc986ffe2c2359, type: 2}
 --- !u!114 &5378711305919054807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +175,7 @@ Animator:
   m_GameObject: {fileID: 29354406410690242}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3c2a5b7097b0fe44394328c0bdb9252e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6327030ae306d62dca41979d10ac3c09, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
