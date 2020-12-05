@@ -16,7 +16,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         [SerializeField] private float superJumpForce;
         [SerializeField] private float attackTime;
         [SerializeField] private float waitTime;
-        [SerializeField] private int jumpRange;
+        [SerializeField] private float jumpRange;
         [SerializeField] private float chargeJumpRangeX;
         [SerializeField] private float chargeJumpRangeY;
         [SerializeField] private float regularGravityScale;

@@ -11,7 +11,7 @@ namespace EnemySystem.Monobehaviours
     {
         #region Interface Variables
         
-        [SerializeField] public int healthPoints;
+        [SerializeField] private int healthPoints;
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
         [SerializeField] private GameObject bloodEffect;
 
