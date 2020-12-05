@@ -129,7 +129,10 @@ namespace Player
                 ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
                 : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
             {
-                InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+                if (InventoryManager.GetActiveWeapon() != null)
+                {
+                    InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
+                }
             }
 
             if (InventoryManager.GetThrowableWeapon() != null)
