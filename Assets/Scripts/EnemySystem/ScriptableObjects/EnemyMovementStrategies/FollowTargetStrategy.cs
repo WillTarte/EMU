@@ -20,7 +20,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             if (Vector2.Distance(emuTransform.position, playerTransform.position) < threshold) return;
             if (playerTransform != null &&
                 (Vector2.Distance(emuTransform.position, playerTransform.position) < followRange  ||
-                 emuTransform.gameObject.GetComponent<EnemyController>().gotHit()))
+                 emuTransform.gameObject.GetComponent<EnemyController>().GotHit()))
             {
                 emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
                 emuTransform.position =

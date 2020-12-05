@@ -5,11 +5,19 @@ namespace Menus
 {
     public class OptionsMenu : MonoBehaviour
     {
-        [SerializeField] private AudioMixer audioMixer;
-    
         public void SetVolume(int vol)
         {
-            audioMixer.SetFloat("MasterVolume", (-80 + vol * 8)); // volume goes from 0 to -80
+            PlayerPrefs.SetInt("volume", vol);
+            var audioGO = GameObject.Find("MenuThemeSong");
+            if (audioGO != null)
+            {
+                var audioSource = audioGO.GetComponent<AudioSource>();
+                if (audioSource != null)
+                {
+                   audioSource.volume = vol / 10.0f;
+                }
+            }
+                
         }
     }
 }

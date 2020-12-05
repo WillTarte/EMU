@@ -10,7 +10,7 @@ namespace Interactables
     public class ChestBehaviourScript : MonoBehaviour
     {
         private const string GameobjectName = "ChestInteractTrigger";
-
+        
         [SerializeField] private HealthPickupParams healthPickupParams;
         [SerializeField] private AmmoPickupParams ammoPickupParams;
         [SerializeField] private List<WeaponPickupParams> weaponPickupList;
@@ -18,6 +18,7 @@ namespace Interactables
         [SerializeField] private GameObject weaponPrefab;
         [SerializeField] private GameObject ammoPickupPrefab;
         [SerializeField] private GameObject healthPickupPrefab;
+        [SerializeField] private AudioClip openSoundClip;
         [SerializeField] private Sprite openSprite;
         [SerializeField] private Sprite closedSprite;
         [SerializeField] private GameObject promptPrefab;
@@ -56,6 +57,8 @@ namespace Interactables
             }
             else
             {
+                GetComponent<AudioSource>()?.PlayOneShot(openSoundClip, PlayerPrefs.GetInt("volume") / 10.0f);
+                
                 for (var i = 0; i < healthPickupParams.numberOfPickups; i++)
                 {
                     var pickup = Instantiate(healthPickupPrefab, (Vector2) transform.position + new Vector2(0f, 0.5f),
