@@ -10,6 +10,7 @@ namespace Player.States
             base.Start();
 
             Controller.Animator.SetInteger("AnimState", 0);
+            Controller.Animator.SetBool("Climbing", true);
             
             Controller.Rigidbody.gravityScale = 0.0F;
             
@@ -21,6 +22,11 @@ namespace Player.States
             base.Update(cmd);
 
             Controller.UpdateTextureDirection();
+
+            if (cmd is SwitchWeaponCommand)
+            {
+                cmd.Execute(Controller);
+            }
             
             if (!Controller.CanClimb)
             {

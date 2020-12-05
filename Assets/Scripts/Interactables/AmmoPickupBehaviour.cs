@@ -11,6 +11,7 @@ namespace Interactables
 
         [SerializeField] private Vector2 pickupTriggerSize;
         [SerializeField] private int percentageToReplenish;
+        [SerializeField] private AudioClip pickupSoundClip;
 
         private Rigidbody2D _rigidbody;
         private GameObject _trigger;
@@ -65,14 +66,15 @@ namespace Interactables
                 {
                     var newAmmoCount = Math.Min(activeWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + activeWeapon.CurrentTotalAmmunition, activeWeapon.WeaponData.MaxAmmunitionCount);
                     activeWeapon.CurrentTotalAmmunition = (int) newAmmoCount;
-                    
+                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
                     Destroy(gameObject);
                 } 
                 else if (otherWeapon != null &&
                          otherWeapon.CurrentTotalAmmunition < otherWeapon.WeaponData.MaxAmmunitionCount)
                 {
-                    var newAmmoCount = Math.Min(activeWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + activeWeapon.CurrentTotalAmmunition, otherWeapon.WeaponData.MaxAmmunitionCount);
+                    var newAmmoCount = Math.Min(otherWeapon.WeaponData.MaxAmmunitionCount * (percentageToReplenish / 100.0f) + otherWeapon.CurrentTotalAmmunition, otherWeapon.WeaponData.MaxAmmunitionCount);
                     otherWeapon.CurrentTotalAmmunition = (int) newAmmoCount;
+                    AudioSource.PlayClipAtPoint(pickupSoundClip, transform.position, PlayerPrefs.GetInt("volume") / 10.0f);
                     Destroy(gameObject);
                 }
             }

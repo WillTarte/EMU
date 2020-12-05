@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Player.Commands;
 using Player.States;
 using TMPro;
 using UnityEngine;
@@ -30,16 +31,19 @@ namespace Player
 
         public GameObject bloodEffect;
         public bool IsFullHp => _hitPoints == 10;
-        
+
         public EdgeCollider2D EdgeCollider { get; private set; }
         public Rigidbody2D Rigidbody { get; private set; }
         public SpriteRenderer SpriteRendererProp { get; private set; }
         public Animator Animator { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
-        
+        public BaseState CurrentState => _currentState;
+
         public TextMeshProUGUI WarningText;
-        
-        [CanBeNull] public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
+
+        [CanBeNull]
+        public GameObject NearestInteractable => _nearestInteractables.Count > 0 ? _nearestInteractables[0] : null;
+
         public void RemoveInteractable(GameObject interactable) => _nearestInteractables.Remove(interactable);
 
         public bool IsGrounded { get; private set; }
@@ -62,6 +66,20 @@ namespace Player
         [Range(100, 1000)] public float jumpForce = 500.0f;
         [Range(0, 500)] public int fallMultiplier = 10;
 
+        public delegate void OnStateChange(BaseState newState);
+        public event OnStateChange OnStateChanged;
+
+        public delegate void OnCommandInput(Command command);
+        public event OnCommandInput OnCommandInputted;
+
+        public delegate void OnDamageTaken();
+        public event OnDamageTaken OnDamageTakenEvent;
+        
+        public AnimatorOverrideController NoGunOverrider;
+        public AnimatorOverrideController BigGunOverrider;
+        public AnimatorOverrideController KnifeOverrider;
+        public AnimatorOverrideController ShotgunOverrider;
+        public AnimatorOverrideController SniperOverrider;
 
         /// <summary>
         /// Events listened by the HUD to update the HUD health bar. Delegates allows to pass variable using events.
@@ -96,19 +114,20 @@ namespace Player
 
             ChangeState(new IdleState());
         }
-
-        private void FixedUpdate()
-        {
-            SetEdgeColliderPoints();
-        }
-
+        
         // Update is called once per frame
         private void Update()
         {
             IsHurt();
-            _currentState?.Update(_inputHandler.HandleInput());
-            
-            if (InventoryManager.GetActiveWeapon() != null)
+            var input = _inputHandler.HandleInput();
+            if (input != null)
+            {
+                OnCommandInputted?.Invoke(input);
+            }
+            _currentState?.Update(input);
+            if (IsFacingRight
+                ? !Vector2.right.Equals(InventoryManager.GetActiveWeapon()?.Direction)
+                : !Vector2.left.Equals(InventoryManager.GetActiveWeapon()?.Direction))
             {
                 InventoryManager.GetActiveWeapon().Direction = IsFacingRight ? Vector2.right : Vector2.left;
             }
@@ -253,7 +272,24 @@ namespace Player
                 }
             }
         }
-
+        
+        public void ChangeToBigGunAnimation()
+        {
+            Animator.runtimeAnimatorController = BigGunOverrider;
+        }
+        public void ChangeToKnifeAnimation()
+        {
+            Animator.runtimeAnimatorController = KnifeOverrider;
+        }
+        public void ChangeToShotgunAnimation()
+        {
+            Animator.runtimeAnimatorController = ShotgunOverrider;
+        }
+        public void ChangeToSniperAnimation()
+        {
+            Animator.runtimeAnimatorController = SniperOverrider;
+        }
+        
         /// <summary>
         /// Method used to change state
         /// </summary>
@@ -268,12 +304,13 @@ namespace Player
             {
                 _currentState.Controller = this;
                 _currentState.Start();
+                OnStateChanged?.Invoke(newState);
             }
         }
 
         public void LoseHitPoints(int value)
         {
-            if (!_isHurt)
+            if (!_isHurt && !(_currentState is RollState))
             {
                 _isHurt = true;
                 WarningText.enabled = true;
@@ -281,12 +318,14 @@ namespace Player
                 if (_hitPoints - value < 0) _hitPoints = 0;
                 else _hitPoints -= value;
 
+                OnDamageTakenEvent?.Invoke();
                 if (_hitPoints <= 0)
                 {
                     StartCoroutine(GameOver());
                 }
 
                 UpdateHealthBarHUD?.Invoke(_hitPoints);
+                
             }
         }
 
@@ -306,8 +345,11 @@ namespace Player
 
         private IEnumerator GameOver()
         {
+            SpriteRendererProp.sprite = null;
+            Animator.enabled = false;
+            enabled = false;
             var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1);
             Destroy(blood);
             SceneManager.LoadScene(3);
         }

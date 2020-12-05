@@ -145,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupTriggerSize: {x: 2, y: 2}
   amount: 0
+  pickupSoundClip: {fileID: 8300000, guid: 86f46b201e2e9a340b14600b9155252c, type: 3}

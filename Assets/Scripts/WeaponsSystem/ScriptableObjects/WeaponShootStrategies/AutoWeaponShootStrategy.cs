@@ -21,6 +21,7 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
             if (canShoot && weapon.CurrentMagazineAmmunition > 0)
             {
                 weapon.StartCoroutine(WaitForShot(weapon));
+                weapon.GetComponent<AudioSource>()?.PlayOneShot(weapon.WeaponData.ShootAudioClip);
             }
         }
     
@@ -38,6 +39,7 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
             if (canReload && weapon.CurrentTotalAmmunition >= 1 && weapon.CurrentMagazineAmmunition < weapon.WeaponData.MagazineCapacity)
             {
                 weapon.StartCoroutine(WaitForReload(weapon));
+                weapon.GetComponent<AudioSource>()?.PlayOneShot(weapon.WeaponData.ReloadAudioClip);
             }
         }
     
