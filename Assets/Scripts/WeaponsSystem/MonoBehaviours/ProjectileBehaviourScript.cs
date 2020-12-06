@@ -59,6 +59,11 @@ namespace WeaponsSystem.MonoBehaviours
                 other.gameObject.GetComponent<EnemyController>()?.ReceiveDamage(_projectileData.ProjectileBaseDamage);
                 Destroy(gameObject);
             }
+            else if (!_shouldDamagePlayer && other.CompareTag("Boss"))
+            {
+                other.gameObject.GetComponent<BossController>()?.ReceiveDamage(_projectileData.ProjectileBaseDamage);
+                Destroy(gameObject);
+            }
             else if (_shouldDamagePlayer && other.CompareTag("Player"))
             {
                 var player = other.GetComponent<Controller>();

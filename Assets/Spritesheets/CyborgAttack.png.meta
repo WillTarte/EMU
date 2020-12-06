@@ -1,0 +1,704 @@
+fileFormatVersion: 2
+guid: 87e3d0e869163b946a1609f66e354e0a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2736203564658658705
+    second: CyborgAttack_0
+  - first:
+      213: 3034201666746540083
+    second: CyborgAttack_1
+  - first:
+      213: 706250167988875739
+    second: CyborgAttack_2
+  - first:
+      213: 8495647043517765659
+    second: CyborgAttack_3
+  - first:
+      213: -3964055096795673899
+    second: CyborgAttack_4
+  - first:
+      213: -9010137278449529640
+    second: CyborgAttack_5
+  - first:
+      213: 3833896648771287598
+    second: CyborgAttack_6
+  - first:
+      213: 2328816899892367982
+    second: CyborgAttack_7
+  - first:
+      213: 1544341067675225500
+    second: CyborgAttack_8
+  - first:
+      213: -1520401188093308078
+    second: CyborgAttack_9
+  - first:
+      213: 7465177080628543800
+    second: CyborgAttack_10
+  - first:
+      213: -204645947740383614
+    second: CyborgAttack_11
+  - first:
+      213: 8548940641576041535
+    second: CyborgAttack_12
+  - first:
+      213: -1125365283254239309
+    second: CyborgAttack_13
+  - first:
+      213: -7147912093778069133
+    second: CyborgAttack_14
+  - first:
+      213: 2551193429920865104
+    second: CyborgAttack_15
+  - first:
+      213: 6104476541653228603
+    second: CyborgAttack_16
+  - first:
+      213: 4177316498406142790
+    second: CyborgAttack_17
+  - first:
+      213: -8817693365747002381
+    second: CyborgAttack_18
+  - first:
+      213: 4093178801459537153
+    second: CyborgAttack_19
+  - first:
+      213: 8991368474643112182
+    second: CyborgAttack_20
+  - first:
+      213: -4064360334574663988
+    second: CyborgAttack_21
+  - first:
+      213: -7987011935019506195
+    second: CyborgAttack_22
+  - first:
+      213: 6245959649700901978
+    second: CyborgAttack_23
+  - first:
+      213: -5962024871088615853
+    second: CyborgAttack_24
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CyborgAttack_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 810
+        width: 134
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f62fc5fda5d070ad0800000000000000
+      internalID: -2736203564658658705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_1
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 810
+        width: 134
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 330635b0756ab1a20800000000000000
+      internalID: 3034201666746540083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_2
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 810
+        width: 134
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd1798139ca1dc900800000000000000
+      internalID: 706250167988875739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_3
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 810
+        width: 136
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1859f569f996e570800000000000000
+      internalID: 8495647043517765659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_4
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 810
+        width: 156
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5daca6554e8dcf8c0800000000000000
+      internalID: -3964055096795673899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_5
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 608
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dcc28c02ef85f280800000000000000
+      internalID: -9010137278449529640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_6
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 608
+        width: 156
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2ab29f60bcb43530800000000000000
+      internalID: 3833896648771287598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_7
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 608
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e62d201c1ae915020800000000000000
+      internalID: 2328816899892367982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_8
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 608
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9d44dec40a9e6510800000000000000
+      internalID: 1544341067675225500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_9
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 608
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 253dd93cc2376eae0800000000000000
+      internalID: -1520401188093308078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_10
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 408
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 831804ca003a99760800000000000000
+      internalID: 7465177080628543800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_11
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 408
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28616344893f82df0800000000000000
+      internalID: -204645947740383614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_12
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 408
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3c3a032830f3a670800000000000000
+      internalID: 8548940641576041535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_13
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 408
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bff211cc36e160f0800000000000000
+      internalID: -1125365283254239309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_14
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 408
+        width: 156
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379b3ac62d38dcc90800000000000000
+      internalID: -7147912093778069133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_15
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 210
+        width: 156
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05b5ebf58e8a76320800000000000000
+      internalID: 2551193429920865104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_16
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 210
+        width: 156
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c12fc521577b450800000000000000
+      internalID: 6104476541653228603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_17
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 210
+        width: 156
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64370e1193fc8f930800000000000000
+      internalID: 4177316498406142790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_18
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 210
+        width: 156
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f3d45c1a9241a580800000000000000
+      internalID: -8817693365747002381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_19
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 210
+        width: 136
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105a72fee64edc830800000000000000
+      internalID: 4093178801459537153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_20
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 10
+        width: 134
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0afb74df1c7cc70800000000000000
+      internalID: 8991368474643112182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_21
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 10
+        width: 134
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc64d724fcd7897c0800000000000000
+      internalID: -4064360334574663988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_22
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 10
+        width: 134
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de56b5c46fe682190800000000000000
+      internalID: -7987011935019506195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_23
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 10
+        width: 134
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5478d9753b1ea650800000000000000
+      internalID: 6245959649700901978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyborgAttack_24
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 10
+        width: 134
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e08b8c7f1a24da0800000000000000
+      internalID: -5962024871088615853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

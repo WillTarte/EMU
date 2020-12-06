@@ -1,4 +1,5 @@
 ﻿using Player;
+using EnemySystem.Monobehaviours;
 using UnityEngine;
 
 namespace HUD
@@ -6,17 +7,23 @@ namespace HUD
     public class Controller : MonoBehaviour
     {
         public HealthBar HealthBar;
+        public BossHealthBar BossHealthBar;
         public Inventory Inventory;
 
         //Used to access hitPoints of player
         private Player.Controller _playerController;
+        //Used to access hitPoints of boss
+        private BossController _bossController;
         //Used to access the weapons owned by player
         private InventoryManager _playerInventoryManager;
-        
+
         void Start()
         {
             _playerController = GameObject.FindWithTag("Player").GetComponent<Player.Controller>();
             SetUpHealthBarObservers();
+            
+            _bossController = GameObject.FindWithTag("Boss").GetComponent<BossController>();
+            SetUpBossHealthBarObservers();
             
             _playerInventoryManager = GameObject.FindWithTag("Player").GetComponent<InventoryManager>();
             UpdateFullInventory();
@@ -37,6 +44,12 @@ namespace HUD
             _playerController.UpdateHealthBarHUD += UpdateHealthBar;
             _playerController.ResetHealthBarHUD += ResetHealthBar;
         }
+        
+        //Enables all the listeners needed for the HUD boss health bar
+        private void SetUpBossHealthBarObservers()
+        {
+            _bossController.UpdateBossHealthBarHUD += UpdateBossHealthBar;
+        }
 
         //Populate the HUD inventory
         private void UpdateFullInventory()
@@ -55,5 +68,12 @@ namespace HUD
         {
             HealthBar.ResetHealthBar(hitPoints);
         }
+        
+        //Modify the HUD boss health bar
+        private void UpdateBossHealthBar(int hitPoints)
+        {
+            BossHealthBar.UpdateBossHealthBar(hitPoints);
+        }
+        
     }
 }

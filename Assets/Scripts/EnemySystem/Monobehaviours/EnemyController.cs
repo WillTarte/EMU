@@ -25,7 +25,6 @@ namespace EnemySystem.Monobehaviours
         private GameObject _player;
         private Vector3 _lastPosition;
         private float _timer = 2;
-        private bool _hasCollided;
         private bool _gotHit = false;
         private EnemyAttackStrategy _attackStrategy;
         private EnemyMovementStrategy _movementStrategy;
@@ -56,7 +55,7 @@ namespace EnemySystem.Monobehaviours
             _timer -= Time.deltaTime;
             CheckIfStuck();
             IsFacingPlayer();
-            _hasCollided = _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven, _hasCollided);
+            _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven);
             _lastPosition = gameObject.transform.position;
         }
 
@@ -100,16 +99,6 @@ namespace EnemySystem.Monobehaviours
                 gameObject.GetComponentInChildren<WeaponBehaviourScript>().Direction =
                     gameObject.GetComponent<SpriteRenderer>().flipX ? Vector2.right : Vector2.left;
             }
-        }
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (col.gameObject.CompareTag("Player"))
-            {
-                _hasCollided = true;
-            }
-
-            //enemyBehaviourData.enemyAttackStrategy.Attack(col, enemyBehaviourData.damageGiven);
         }
 
         /**

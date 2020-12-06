@@ -12,18 +12,18 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
 
         [SerializeField] private GameObject explosionEffect;
         [SerializeField] private int explosionRadius;
+        
+        private float rangeOfMeleeAttack = 1.5f;
 
-        public override bool Attack(GameObject player, GameObject emu, int damageGiven, bool hasCollided)
+        public override void Attack(GameObject player, GameObject emu, int damageGiven)
         {
-            if (player.CompareTag("Player") && hasCollided)
+            if (player.CompareTag("Player") &&
+                Vector2.Distance(emu.transform.position, player.transform.position) < rangeOfMeleeAttack)
             {
                 DoExplosion(emu, damageGiven);
                 var blood = Instantiate(explosionEffect, emu.transform.position, emu.transform.rotation);
                 Destroy(blood, 0.5f);
-                return false;
             }
-
-            return hasCollided;
         }
         
         private void DoExplosion(GameObject emu, int damageGiven)

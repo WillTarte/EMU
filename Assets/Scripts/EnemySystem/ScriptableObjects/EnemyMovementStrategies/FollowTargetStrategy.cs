@@ -15,9 +15,10 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         #endregion
 
-        public override void Move(Transform emuTransform, Transform playerTransform)
+        public override bool Move(Transform emuTransform, Transform playerTransform)
         {
-            if (Vector2.Distance(emuTransform.position, playerTransform.position) < threshold) return;
+            //This prevents the emu to be on top of the player
+            if (Vector2.Distance(emuTransform.position, playerTransform.position) < threshold) return false;
             if (playerTransform != null &&
                 (Vector2.Distance(emuTransform.position, playerTransform.position) < followRange  ||
                  emuTransform.gameObject.GetComponent<EnemyController>().GotHit()))
@@ -25,10 +26,12 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
                 emuTransform.position =
                     Vector2.MoveTowards(emuTransform.position, playerTransform.position, followSpeed * Time.deltaTime);
+                return true;
             }
             else
             {
                 emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
+                return false;
             }
         }
     }

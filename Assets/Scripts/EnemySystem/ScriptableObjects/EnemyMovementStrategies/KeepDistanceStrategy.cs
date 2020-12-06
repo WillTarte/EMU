@@ -13,19 +13,21 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         #endregion
 
-        public override void Move(Transform emuTransform, Transform playerTransform)
+        public override bool Move(Transform emuTransform, Transform playerTransform)
         {
             if (Vector2.Distance(emuTransform.position, playerTransform.position) < minDistanceBuffer)
             {
                 emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
                 
-                Vector3 movementDirection = new Vector3(emuTransform.position.x, 0, 0) -
-                                            new Vector3(playerTransform.position.x, 0, 0);
+                Vector2 movementDirection = new Vector2(emuTransform.position.x, 0) -
+                                            new Vector2(playerTransform.position.x, 0);
                 emuTransform.Translate(movementDirection.normalized * speed * Time.deltaTime);
+                return true;
             }
             else
             {
                 emuTransform.gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
+                return false;
             }
         }
     }
