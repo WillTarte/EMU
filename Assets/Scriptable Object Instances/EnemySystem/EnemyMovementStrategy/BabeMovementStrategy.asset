@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: BabeMovementStrategy
   m_EditorClassIdentifier: 
   chargeSpeed: 15
+  jumpSpeedScale: 1.5
   miniJumpForce: 400
   superJumpForce: 1500
   attackTime: 2.5
   waitTime: 1.5
   jumpRange: 4
-  chargeRange: 30
   chargeJumpRangeX: 6
   chargeJumpRangeY: 1.5
   regularGravityScale: 1
