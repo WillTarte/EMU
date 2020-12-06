@@ -19,7 +19,7 @@ MonoBehaviour:
   reloadTime: 0
   projectileData: {fileID: 11400000, guid: 4519e46b87b033d46a2d187da22ddcdd, type: 2}
   shootStrategy: {fileID: 11400000, guid: 4ca44fd5d94a0ca48b957711bdfbee06, type: 2}
-  onGroundSprite: {fileID: 21300000, guid: a75445bb16444f14f96fdf9c734945cc, type: 3}
-  inInventorySprite: {fileID: 21300000, guid: a75445bb16444f14f96fdf9c734945cc, type: 3}
+  onGroundSprite: {fileID: 21300000, guid: a649d72df6b6d354cae4312b34075c31, type: 3}
+  inInventorySprite: {fileID: 21300000, guid: a649d72df6b6d354cae4312b34075c31, type: 3}
   shootAudioClip: {fileID: 8300000, guid: cc68f9b97c8111a49b9d326e058f413f, type: 3}
   reloadAudioClip: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
