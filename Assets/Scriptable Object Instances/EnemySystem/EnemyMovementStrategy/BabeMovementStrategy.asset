@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab1fc7dfab4e6d46accd05fb4ddd0e5, type: 3}
   m_Name: BabeMovementStrategy
   m_EditorClassIdentifier: 
-  chargeSpeed: 15
+  chargeSpeed: 12
   jumpSpeedScale: 1.5
   miniJumpForce: 400
-  superJumpForce: 1500
+  superJumpForce: 1300
   attackTime: 2.5
   waitTime: 1.5
   jumpRange: 4
