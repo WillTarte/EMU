@@ -5,6 +5,7 @@ namespace Menus
 {
     public class GameOverMenu : MonoBehaviour
     {
+       
         public void TryAgain()
         {
             SceneManager.LoadScene(Indestructibles.LastLevel);

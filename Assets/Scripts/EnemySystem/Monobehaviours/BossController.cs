@@ -1,8 +1,8 @@
-﻿using System.Runtime.InteropServices;
 using EnemySystem.ScriptableObjects;
 using EnemySystem.ScriptableObjects.EnemyAttackStrategies;
 using EnemySystem.ScriptableObjects.EnemyMovementStrategies;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using WeaponsSystem.MonoBehaviours;
 
 namespace EnemySystem.Monobehaviours
@@ -13,7 +13,6 @@ namespace EnemySystem.Monobehaviours
         
         [SerializeField] private int healthPoints;
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
-        [SerializeField] private GameObject bloodEffect;
 
         #endregion
 
@@ -57,9 +56,8 @@ namespace EnemySystem.Monobehaviours
             UpdateBossHealthBarHUD(healthPoints);
             if (healthPoints <= 0)
             {
-                var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
-                Destroy(blood, 0.51f);
-                Destroy(gameObject);
+                // [ insert narration here ]
+                LevelTransition();
             }
         }
 
@@ -90,6 +88,16 @@ namespace EnemySystem.Monobehaviours
             {
                 _startBattle = true;
                 UpdateBossHealthBarHUD(healthPoints);
+            }
+        }
+
+        private void LevelTransition()
+        {
+            if (gameObject.name == "Babe")
+            {
+                Destroy(gameObject);
+                Indestructibles.LastLevel = 2;
+                SceneManager.LoadScene(Indestructibles.LastLevel);
             }
         }
 
