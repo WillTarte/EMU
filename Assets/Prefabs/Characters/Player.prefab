@@ -105,8 +105,8 @@ MonoBehaviour:
   bloodEffect: {fileID: 475600541225742035, guid: cb3213415a62c3c4d8246a4d6500e6d1,
     type: 3}
   WarningText: {fileID: 0}
-  speed: 5
-  jumpForce: 350.72
+  speed: 6
+  jumpForce: 600
   fallMultiplier: 10
   NoGunOverrider: {fileID: 22100000, guid: 10fe0275e85409ad59525f616473350e, type: 2}
   BigGunOverrider: {fileID: 22100000, guid: f4f0cea7009e4e92494a89eab6122b47, type: 2}
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 582fa47188c8ef74bbd69fa64b8ec19d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
