@@ -46,7 +46,7 @@ namespace Player
 
         public void RemoveInteractable(GameObject interactable) => _nearestInteractables.Remove(interactable);
 
-        public bool IsGrounded { get; private set; }
+        public bool IsGrounded { get; set; }
         public bool IsOnPlatform { get; private set; }
         public bool CanClimb { get; private set; }
         public bool IsFacingRight { get; private set; }
@@ -384,17 +384,17 @@ namespace Player
 
         private void OnCollisionStay2D(Collision2D other)
         {
-
             if (other.gameObject.CompareTag("Ground"))
             {
-                //Debug.Log("On Ground | Bridge");
-
-                IsGrounded = true;
+                if (Rigidbody.velocity.y == 0.0F)
+                {
+                    IsGrounded = true;
+                }
             }
 
             if (other.gameObject.CompareTag("Platform"))
             {
-                if (Rigidbody.velocity.y >= 0.0F)
+                if (Rigidbody.velocity.y == 0.0F)
                 {
                     IsGrounded = true;
                     IsOnPlatform = true;
