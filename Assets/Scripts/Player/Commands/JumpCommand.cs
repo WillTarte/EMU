@@ -10,6 +10,7 @@ namespace Player.Commands
 
             controller.Animator.SetTrigger("Jump");
             controller.Rigidbody.AddForce(new Vector2(0.0F, controller.jumpForce));
+            controller.IsGrounded = false;
         }
     }   
 }
