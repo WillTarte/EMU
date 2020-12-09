@@ -1,4 +1,7 @@
-﻿using EnemySystem.Monobehaviours;
+﻿using System;
+using System.Collections;
+using EnemySystem.Monobehaviours;
+using Player;
 using UnityEngine;
 
 namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
@@ -20,6 +23,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         [SerializeField] private float pushRadius;
         [SerializeField] private float teleportationDelay;
         [SerializeField] private float timeOnFloor;
+        [SerializeField] private float timePlayerPushed;
 
         
         #endregion
@@ -28,6 +32,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         
         private float nextMoveTime;
         private float teleportationTime;
+        private float enablePlayerMovementTime;
 
         private bool isFlying;
         private bool isTeleporting;
@@ -51,13 +56,12 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             if (playerTransform != null && emuTransform.gameObject.GetComponent<BossController>().battleStarted())
             {
                 PushPlayerAway(emuTransform, playerTransform);
-                
+
                 if (nextMoveTime < Time.time)
                 {
                     TeleportToPlayer(emuTransform, playerTransform);
                     return true;
                 }
-                
             }
 
             return false;
@@ -106,23 +110,51 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 emuTransform.GetChild(1).gameObject.SetActive(true);
                 if (!playerHasBeenPushed && PlayerInPushRadius(emuTransform, playerTransform))
                 {
-                    Vector2 direction = Vector2.MoveTowards(playerTransform.position, emuTransform.position, pushStrength);
-                    playerTransform.GetComponent<Rigidbody2D>().AddForce(-direction);
+                    Vector2 direction = emuTransform.position - playerTransform.position;
+                    if (direction.x != 0)
+                    {
+                        direction = new Vector2(Math.Sign(direction.x) * -pushStrength, 0);
+                    }
+                    else
+                    {
+                        if (CloserToRightEdge(emuTransform))
+                        {
+                            direction =  new Vector2(-pushStrength, 0);
+                        }
+                        else
+                        {
+                            direction =  new Vector2(pushStrength, 0);
+                        }
+                    }
+                    playerTransform.GetComponent<Rigidbody2D>().AddForce(direction);
                     playerHasBeenPushed = true;
+                    enablePlayerMovementTime = Time.time + timePlayerPushed;
+                    playerTransform.GetComponent<Controller>().setPlayerInputsEnabled(false);
                 }
             }
             else
             {
                 emuTransform.GetChild(1).gameObject.SetActive(false);
+            }
+            
+            if (enablePlayerMovementTime < Time.time && playerHasBeenPushed)
+            {
+                playerTransform.GetComponent<Controller>().setPlayerInputsEnabled(true);
+                playerTransform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 playerHasBeenPushed = false;
             }
         }
 
         private bool PlayerInPushRadius(Transform emuTransform, Transform playerTransform)
         {
-            return Vector2.Distance(emuTransform.position, playerTransform.position) < 2;
+            return Vector2.Distance(emuTransform.position, playerTransform.position) < pushRadius;
         }
-        
+
+        private bool CloserToRightEdge(Transform emuTransform)
+        {
+            return emuTransform.position.x - platformStartX <= platformEndX - emuTransform.position.x;
+        }
+
         private void ResetValuesAtStart()
         {
             if (Time.time < 0.1f)
@@ -133,6 +165,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 playerHasBeenPushed = false;
                 nextMoveTime = 0;
                 teleportationTime = 0;
+                enablePlayerMovementTime = 0;
                 whereToFall = Vector2.zero;
                 startPosition = Vector2.zero;
             }

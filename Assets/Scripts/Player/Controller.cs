@@ -24,6 +24,7 @@ namespace Player
         private float _timer = 2;
         private float _fallthroughTimer = 0.0f;
         private List<GameObject> _nearestInteractables = new List<GameObject>(1);
+        private bool playerInputsEnabled = true;
 
         #endregion
 
@@ -53,10 +54,10 @@ namespace Player
 
         public bool CanFallthrough { get; set; }
 
-        public bool IsPressingLeft => Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-        public bool IsPressingRight => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-        public bool IsPressingUp => Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        public bool IsPressingDown => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        public bool IsPressingLeft => (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && playerInputsEnabled;
+        public bool IsPressingRight => (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && playerInputsEnabled;
+        public bool IsPressingUp => (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && playerInputsEnabled;
+        public bool IsPressingDown => (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && playerInputsEnabled;
 
         #endregion
 
@@ -242,14 +243,20 @@ namespace Player
 
         public void MoveX(float fixedSpeed)
         {
-            float moveBy = fixedSpeed * speed;
-            Rigidbody.velocity = new Vector2(moveBy, Rigidbody.velocity.y);
+            if (playerInputsEnabled)
+            {
+                float moveBy = fixedSpeed * speed;
+                Rigidbody.velocity = new Vector2(moveBy, Rigidbody.velocity.y); 
+            }
         }
 
         public void MoveY(float fixedSpeed)
         {
-            float moveBy = fixedSpeed * speed;
-            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, moveBy);
+            if (playerInputsEnabled)
+            {
+                float moveBy = fixedSpeed * speed;
+                Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, moveBy);
+            }
         }
 
         public void ResetSpriteFlip()
@@ -355,6 +362,12 @@ namespace Player
             yield return new WaitForSeconds(1);
             Destroy(blood);
             SceneManager.LoadScene(3);
+        }
+        
+        
+        public void setPlayerInputsEnabled(bool value)
+        {
+            playerInputsEnabled = value;
         }
 
         #endregion

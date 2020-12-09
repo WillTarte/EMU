@@ -19,6 +19,7 @@ MonoBehaviour:
   regularGravityScale: 0
   bringDownGravityScale: 10
   pushStrength: 600
-  pushRadius: 2
+  pushRadius: 3
   teleportationDelay: 1
   timeOnFloor: 5
+  timePlayerPushed: 0.5

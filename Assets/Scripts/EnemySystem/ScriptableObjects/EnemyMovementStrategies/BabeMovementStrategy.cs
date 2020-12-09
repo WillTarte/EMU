@@ -1,4 +1,5 @@
-﻿using EnemySystem.Monobehaviours;
+﻿using System.Collections;
+using EnemySystem.Monobehaviours;
 using UnityEngine;
 
 namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
