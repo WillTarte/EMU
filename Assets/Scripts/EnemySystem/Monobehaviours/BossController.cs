@@ -52,6 +52,8 @@ namespace EnemySystem.Monobehaviours
 
         public void ReceiveDamage(int amount)
         {
+            if (isMoving && gameObject.name == "CyborgEmu")
+                return;
             healthPoints -= amount;
             UpdateBossHealthBarHUD(healthPoints);
             if (healthPoints <= 0)
@@ -68,7 +70,9 @@ namespace EnemySystem.Monobehaviours
 
         private void IsFacingPlayer()
         {
-            if (!isMoving)
+            if (isMoving && gameObject.name != "CyborgEmu")
+                return;
+            else
             {
                 var emuPosition = gameObject.transform.position;
                 var playerPosition = _player.transform.position;
@@ -78,7 +82,7 @@ namespace EnemySystem.Monobehaviours
                 {
                     gameObject.GetComponentInChildren<WeaponBehaviourScript>().Direction =
                         gameObject.GetComponent<SpriteRenderer>().flipX ? Vector2.right : Vector2.left;
-                } 
+                }
             }
         }
 
