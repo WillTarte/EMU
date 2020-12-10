@@ -1,6 +1,7 @@
 using EnemySystem.ScriptableObjects;
 using EnemySystem.ScriptableObjects.EnemyAttackStrategies;
 using EnemySystem.ScriptableObjects.EnemyMovementStrategies;
+using GameSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeaponsSystem.MonoBehaviours;
@@ -97,6 +98,7 @@ namespace EnemySystem.Monobehaviours
             {
                 Destroy(gameObject);
                 Indestructibles.LastLevel = 2;
+                Indestructibles.respawnPos = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
                 SceneManager.LoadScene(Indestructibles.LastLevel);
             }
         }

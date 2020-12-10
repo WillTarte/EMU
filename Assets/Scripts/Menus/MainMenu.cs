@@ -14,7 +14,8 @@ namespace Menus
         public void PlayGame()
         {
             Indestructibles.LastLevel = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Indestructibles.respawnPos = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
+            SceneManager.LoadScene(Indestructibles.LastLevel);
         }
 
         public void QuitGame()
