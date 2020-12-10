@@ -13,6 +13,7 @@ namespace EnemySystem.Monobehaviours
         
         [SerializeField] private int healthPoints;
         [SerializeField] private EnemyBehaviourData enemyBehaviourData;
+        [SerializeField] float startBattleRange;
 
         #endregion
 
@@ -22,8 +23,7 @@ namespace EnemySystem.Monobehaviours
         private bool _startBattle = false;
         private EnemyAttackStrategy _attackStrategy;
         private EnemyMovementStrategy _movementStrategy;
-        private bool isMoving = false;
-        private float startBattleRange = 30;
+        private bool _isMoving = false;
 
         #endregion
 
@@ -45,7 +45,7 @@ namespace EnemySystem.Monobehaviours
         void Update()
         {
             StartBattle();
-            isMoving = _movementStrategy.Move(gameObject.transform, _player.transform);
+            _isMoving = _movementStrategy.Move(gameObject.transform, _player.transform);
             IsFacingPlayer();
             _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven);
         }
@@ -53,7 +53,7 @@ namespace EnemySystem.Monobehaviours
         public void ReceiveDamage(int amount)
         {
             //CyborgEmu can't receive damage while moving
-            if (isMoving && gameObject.name == "CyborgEmu")
+            if (_isMoving && gameObject.name == "CyborgEmu")
                 return;
             healthPoints -= amount;
             UpdateBossHealthBarHUD(healthPoints);
@@ -69,10 +69,15 @@ namespace EnemySystem.Monobehaviours
             return _startBattle;
         }
 
+        public bool isMoving()
+        {
+            return _isMoving;
+        }
+
         private void IsFacingPlayer()
         {
             //Only Babe shouldn't flip while moving
-            if (isMoving && gameObject.name == "Babe")
+            if (_isMoving && gameObject.name == "Babe")
                 return;
             else
             {
@@ -90,11 +95,26 @@ namespace EnemySystem.Monobehaviours
 
         private void StartBattle()
         {
-            if (Vector2.Distance(gameObject.transform.position, _player.transform.position) < startBattleRange && !_startBattle)
+            if (gameObject.name == "Babe")
             {
-                _startBattle = true;
-                UpdateBossHealthBarHUD(healthPoints);
+                if (Vector2.Distance(gameObject.transform.position, _player.transform.position) < startBattleRange && !_startBattle)
+                {
+                    _startBattle = true;
+                    UpdateBossHealthBarHUD(healthPoints);
+                }
             }
+            else
+            {
+                if (Mathf.Abs(gameObject.transform.position.x - _player.transform.position.x) < startBattleRange && 
+                    Mathf.Abs(gameObject.transform.position.y - _player.transform.position.y) < 0.5 && 
+                    !_startBattle)
+                {
+                    GameObject.Find("Grid").transform.GetChild(0).gameObject.SetActive(true);
+                    _startBattle = true;
+                    UpdateBossHealthBarHUD(healthPoints);
+                }
+            }
+
         }
 
         private void LevelTransition()

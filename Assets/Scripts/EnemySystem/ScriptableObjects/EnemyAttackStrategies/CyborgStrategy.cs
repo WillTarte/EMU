@@ -1,4 +1,5 @@
 ﻿using System;
+using EnemySystem.Monobehaviours;
 using Player;
 using UnityEngine;
 using WeaponsSystem.MonoBehaviours;
@@ -20,18 +21,20 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
         {
             // get the initial height at the third frame to let emu2 reach the floor if the collider
             // is a little bit in the air
-            if (_onStart && _thirdFrame == 0)
+            if (player != null && emu.GetComponent<BossController>().battleStarted())
             {
-                _initialPosition = emu.transform.position;
-                _lastPosition = _initialPosition;
-                _onStart = false;
+                if (_onStart && _thirdFrame == 0)
+                {
+                    _initialPosition = emu.transform.position;
+                    _lastPosition = _initialPosition;
+                    _onStart = false;
+                }
+
+                _thirdFrame--;
+
+                SquashAttack(player, emu, damageGiven);
+                ShootAttack(emu);
             }
-
-            _thirdFrame--;
-
-            SquashAttack(player, emu, damageGiven);
-            ShootAttack(emu);
-           
         }
 
         private void SquashAttack(GameObject player, GameObject emu, int damageGiven)
@@ -57,7 +60,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
                              Math.Abs(_lastPosition.y - emuPos.y) < 0.1;
             var isGrounded = Math.Abs(_initialPosition.y - emuPos.y) < 1;
 
-            if (isImmobile && isGrounded)
+            if (isImmobile && isGrounded && !emu.GetComponent<BossController>().isMoving())
             {
                 var weapon = emu.GetComponentInChildren<WeaponBehaviourScript>();
                 if (weapon.CurrentMagazineAmmunition == 0)

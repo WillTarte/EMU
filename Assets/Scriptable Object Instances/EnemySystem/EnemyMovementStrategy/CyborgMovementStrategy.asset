@@ -17,7 +17,7 @@ MonoBehaviour:
   flyingMaxY: 5
   flyingStrength: 3
   regularGravityScale: 0
-  bringDownGravityScale: 10
+  bringDownGravityScale: 2
   pushStrength: 600
   pushRadius: 3
   teleportationDelay: 1
