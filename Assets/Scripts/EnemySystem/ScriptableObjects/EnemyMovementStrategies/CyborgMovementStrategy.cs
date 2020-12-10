@@ -142,12 +142,13 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                             direction = new Vector2(pushStrength, 0);
                         }
                     }
-
-                    playerTransform.GetComponent<Rigidbody2D>().AddForce(direction);
-                    playerHasBeenPushed = true;
+                    
                     //The player inputs are disabled while being pushed away
                     enablePlayerMovementTime = Time.time + timePlayerPushed;
                     playerTransform.GetComponent<Controller>().setPlayerInputsEnabled(false);
+                    
+                    playerTransform.GetComponent<Rigidbody2D>().AddForce(direction);
+                    playerHasBeenPushed = true;
                 }
             }
             else
