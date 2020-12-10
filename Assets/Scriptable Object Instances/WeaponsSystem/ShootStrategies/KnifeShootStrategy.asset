@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: KnifeShootStrategy
   m_EditorClassIdentifier: 
   meleeShapeType: 0
-  attackRate: 1
-  baseAttackDamage: 5
+  attackRate: 2
+  baseAttackDamage: 4
   canAttack: 1
   size: {x: 2, y: 2}
   direction: {x: 0, y: 0}
-  distance: 10
+  distance: 0.5
   angle: 0
   radius: 0
