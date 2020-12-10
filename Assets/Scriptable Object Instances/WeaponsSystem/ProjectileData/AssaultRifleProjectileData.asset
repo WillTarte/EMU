@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssaultRifleProjectileData
   m_EditorClassIdentifier: 
   projectileSprite: {fileID: 21300000, guid: 1f0ddbe62cc6710429a85f2fcf28e1e6, type: 3}
-  projectileSpeed: 10
+  projectileSpeed: 15
   projectileBaseDamage: 1
   projectilePrefab: {fileID: 3998066587341369951, guid: e642545ee404a2949bce7a923922b921,
     type: 3}
