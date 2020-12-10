@@ -122,7 +122,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             if (nextMoveTime < Time.time)
             {
                 //Start the shield animation
-                emuTransform.GetChild(1).gameObject.SetActive(true);
+                emuTransform.GetChild(2).gameObject.SetActive(true);
                 //Push the player away if he is in range
                 if (!playerHasBeenPushed && PlayerInPushRadius(emuTransform, playerTransform))
                 {
@@ -153,7 +153,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             else
             {
                 //Remove shield animation, once the boss is done moving
-                emuTransform.GetChild(1).gameObject.SetActive(false);
+                emuTransform.GetChild(2).gameObject.SetActive(false);
             }
 
             if (enablePlayerMovementTime < Time.time && playerHasBeenPushed)
