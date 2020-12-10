@@ -9,7 +9,7 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
         menuName = "ScriptableObjects/EnemyAttack/Cyborg", order = 3)]
     public class CyborgStrategy : EnemyAttackStrategy
     {
-        private const float RangeOfMeleeAttack = 2f;
+        private const float RangeOfMeleeAttack = 3f;
         private Vector2 _initialPosition = new Vector2(0, 0);
         private Vector2 _lastPosition = new Vector2(0, 0);
         private bool _onStart = true;
