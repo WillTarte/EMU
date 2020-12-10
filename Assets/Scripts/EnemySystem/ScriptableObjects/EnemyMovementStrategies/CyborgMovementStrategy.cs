@@ -44,6 +44,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         
         //Avoid pushing the player multiple times at once
         private bool playerHasBeenPushed;
+        private static readonly int Idle = Animator.StringToHash("Idle");
 
         #endregion
 
@@ -75,6 +76,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             //Prepare the boss to start flying
             if (!isFlying)
             {
+                emuTransform.gameObject.GetComponent<Animator>().SetBool(Idle, true);
                 emuTransform.gameObject.GetComponent<Rigidbody2D>().gravityScale = regularGravityScale;
                 startPosition = emuTransform.position;
                 isFlying = true;
@@ -105,6 +107,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             //Once the movement is over, reset the bools and set the time of the next movement
             if (isFalling && emuTransform.position.y <= startPosition.y)
             {
+                emuTransform.gameObject.GetComponent<Animator>().SetBool(Idle, false);
                 nextMoveTime = Time.time + timeOnFloor;
                 isFalling = false;
                 isFlying = false;

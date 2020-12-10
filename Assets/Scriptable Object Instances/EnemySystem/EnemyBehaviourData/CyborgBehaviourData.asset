@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04aef09d12885f46b07c84c5c2d2017, type: 3}
   m_Name: CyborgBehaviourData
   m_EditorClassIdentifier: 
-  enemyBehaviourName: 0
-  enemyAttackStrategy: {fileID: 11400000, guid: 88e86f48e1193664586fb7e2269ab3df,
+  enemyBehaviourName: 1
+  enemyAttackStrategy: {fileID: 11400000, guid: 49d2507197dfafd43b0baf658ce5ab5c,
     type: 2}
   enemyMovementStrategy: {fileID: 11400000, guid: cb1a2b8c1eed71d4e819c3df84b4d79a,
     type: 2}
