@@ -52,6 +52,7 @@ namespace EnemySystem.Monobehaviours
 
         public void ReceiveDamage(int amount)
         {
+            //CyborgEmu can't receive damage while moving
             if (isMoving && gameObject.name == "CyborgEmu")
                 return;
             healthPoints -= amount;
@@ -70,7 +71,8 @@ namespace EnemySystem.Monobehaviours
 
         private void IsFacingPlayer()
         {
-            if (isMoving && gameObject.name != "CyborgEmu")
+            //Only Babe shouldn't flip while moving
+            if (isMoving && gameObject.name == "Babe")
                 return;
             else
             {

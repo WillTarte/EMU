@@ -30,18 +30,22 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
         #region Private Variables
         
+        //Variables used to coordinates CyborgEmu movements
         private float nextMoveTime;
         private float teleportationTime;
         private float enablePlayerMovementTime;
 
+        //Variables used to define CyborgEmu movements
         private bool isFlying;
         private bool isTeleporting;
         private bool isFalling;
 
-        private bool playerHasBeenPushed;
-
+        //Variables used for CyborgEmu movements
         private Vector2 whereToFall;
         private Vector2 startPosition;
+        
+        //Avoid pushing the player multiple times at once
+        private bool playerHasBeenPushed;
 
         #endregion
 
@@ -55,20 +59,22 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
 
             if (playerTransform != null && emuTransform.gameObject.GetComponent<BossController>().battleStarted())
             {
+                //Push the player away if too close of the boss
                 PushPlayerAway(emuTransform, playerTransform);
 
                 if (nextMoveTime < Time.time)
                 {
-                    TeleportToPlayer(emuTransform, playerTransform);
-                    return true;
+                    //Make the boss change position on the platform
+                    return TeleportToPlayer(emuTransform, playerTransform);
                 }
             }
 
             return false;
         }
         
-        private void TeleportToPlayer(Transform emuTransform, Transform playerTransform)
+        private bool TeleportToPlayer(Transform emuTransform, Transform playerTransform)
         {
+            //Prepare the boss to start flying
             if (!isFlying)
             {
                 emuTransform.gameObject.GetComponent<Rigidbody2D>().gravityScale = regularGravityScale;
@@ -76,16 +82,19 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 isFlying = true;
             }
 
+            //Make the boss rise up
             if (emuTransform.position.y < startPosition.y + flyingMaxY && !isTeleporting)
             {
                 emuTransform.position = new Vector2(emuTransform.position.x, emuTransform.position.y + flyingStrength * Time.deltaTime);
             }
+            //Once the boss is high enough, set the time the teleport will occur
             else if (!isTeleporting)
             {
                 teleportationTime = Time.time + teleportationDelay;
                 isTeleporting = true;
             }
 
+            //Teleport the emu on top of the player and let it fall on him
             if (isTeleporting && teleportationTime < Time.time && !isFalling)
             {
                 whereToFall = playerTransform.position;
@@ -94,6 +103,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 isFalling = true;
             }
 
+            //Once the movement is over, reset the bools and set the time of the next movement
             if (isFalling && emuTransform.position.y <= startPosition.y)
             {
                 nextMoveTime = Time.time + timeOnFloor;
@@ -101,13 +111,17 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 isFlying = false;
                 isTeleporting = false;
             }
+
+            return true;
         }
 
         private void PushPlayerAway(Transform emuTransform, Transform playerTransform)
         {
             if (nextMoveTime < Time.time)
             {
+                //Start the shield animation
                 emuTransform.GetChild(1).gameObject.SetActive(true);
+                //Push the player away if he is in range
                 if (!playerHasBeenPushed && PlayerInPushRadius(emuTransform, playerTransform))
                 {
                     Vector2 direction = emuTransform.position - playerTransform.position;
@@ -128,17 +142,20 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                     }
                     playerTransform.GetComponent<Rigidbody2D>().AddForce(direction);
                     playerHasBeenPushed = true;
+                    //The player inputs are disabled while being pushed away
                     enablePlayerMovementTime = Time.time + timePlayerPushed;
                     playerTransform.GetComponent<Controller>().setPlayerInputsEnabled(false);
                 }
             }
             else
             {
+                //Remove shield animation, once the boss is done moving
                 emuTransform.GetChild(1).gameObject.SetActive(false);
             }
             
             if (enablePlayerMovementTime < Time.time && playerHasBeenPushed)
             {
+                //Enable player movements and stop the push vector
                 playerTransform.GetComponent<Controller>().setPlayerInputsEnabled(true);
                 playerTransform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 playerHasBeenPushed = false;
