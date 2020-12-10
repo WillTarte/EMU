@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using EnemySystem.Monobehaviours;
 using Player;
 using UnityEngine;
@@ -11,7 +10,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
     public class CyborgMovementStrategy : EnemyMovementStrategy
     {
         #region Interface Variables
-        
+
         //Atomic parameters of cyborg emu
         [SerializeField] private float platformStartX;
         [SerializeField] private float platformEndX;
@@ -25,7 +24,6 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
         [SerializeField] private float timeOnFloor;
         [SerializeField] private float timePlayerPushed;
 
-        
         #endregion
 
         #region Private Variables
@@ -54,7 +52,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             //Unity caches the values of Strategies variables
             //This is to make sure the variables are reset each time that you run the game in Unity
             #if UNITY_EDITOR
-                ResetValuesAtStart();
+            ResetValuesAtStart();
             #endif
 
             if (playerTransform != null && emuTransform.gameObject.GetComponent<BossController>().battleStarted())
@@ -85,7 +83,8 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
             //Make the boss rise up
             if (emuTransform.position.y < startPosition.y + flyingMaxY && !isTeleporting)
             {
-                emuTransform.position = new Vector2(emuTransform.position.x, emuTransform.position.y + flyingStrength * Time.deltaTime);
+                emuTransform.position = new Vector2(emuTransform.position.x,
+                    emuTransform.position.y + flyingStrength * Time.deltaTime);
             }
             //Once the boss is high enough, set the time the teleport will occur
             else if (!isTeleporting)
@@ -133,13 +132,14 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                     {
                         if (CloserToRightEdge(emuTransform))
                         {
-                            direction =  new Vector2(-pushStrength, 0);
+                            direction = new Vector2(-pushStrength, 0);
                         }
                         else
                         {
-                            direction =  new Vector2(pushStrength, 0);
+                            direction = new Vector2(pushStrength, 0);
                         }
                     }
+
                     playerTransform.GetComponent<Rigidbody2D>().AddForce(direction);
                     playerHasBeenPushed = true;
                     //The player inputs are disabled while being pushed away
@@ -152,7 +152,7 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 //Remove shield animation, once the boss is done moving
                 emuTransform.GetChild(1).gameObject.SetActive(false);
             }
-            
+
             if (enablePlayerMovementTime < Time.time && playerHasBeenPushed)
             {
                 //Enable player movements and stop the push vector
@@ -187,6 +187,5 @@ namespace EnemySystem.ScriptableObjects.EnemyMovementStrategies
                 startPosition = Vector2.zero;
             }
         }
-
     }
 }
