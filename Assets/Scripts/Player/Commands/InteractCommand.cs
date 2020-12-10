@@ -21,19 +21,19 @@ namespace Player.Commands
                 controller.InventoryManager.AddWeapon(controller.NearestInteractable);
                 controller.RemoveInteractable(controller.NearestInteractable);
                 
-                if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.Knife)
+                if (controller.InventoryManager.GetActiveWeapon()?.WeaponData.WeaponName == WeaponName.Knife)
                 {
                     controller.ChangeToKnifeAnimation();
                 }
-                else if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.AssaultRifle)
+                else if (controller.InventoryManager.GetActiveWeapon()?.WeaponData.WeaponName == WeaponName.AssaultRifle)
                 {
                     controller.ChangeToBigGunAnimation();
                 }
-                else if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.Shotgun)
+                else if (controller.InventoryManager.GetActiveWeapon()?.WeaponData.WeaponName == WeaponName.Shotgun)
                 {
                     controller.ChangeToShotgunAnimation();
                 }
-                else if (controller.InventoryManager.GetActiveWeapon().WeaponData.WeaponName == WeaponName.Sniper)
+                else if (controller.InventoryManager.GetActiveWeapon()?.WeaponData.WeaponName == WeaponName.Sniper)
                 {
                     controller.ChangeToSniperAnimation();
                 }
