@@ -97,7 +97,7 @@ namespace EnemySystem.Monobehaviours
             if (gameObject.name == "Babe")
             {
                 Destroy(gameObject);
-                Indestructibles.LastLevel = 2;
+                Indestructibles.LastLevel++;
                 Indestructibles.respawnPos = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
                 SceneManager.LoadScene(Indestructibles.LastLevel);
             }

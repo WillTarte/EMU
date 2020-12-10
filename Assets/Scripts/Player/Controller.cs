@@ -96,6 +96,7 @@ namespace Player
         // Start is called before the first frame update
         private void Start()
         {
+            Indestructibles.LastLevel = SceneManager.GetActiveScene().buildIndex;
             if (Indestructibles.respawnPos != new Vector2(0.0f,0.0f))
             {
                 transform.position = Indestructibles.respawnPos;
