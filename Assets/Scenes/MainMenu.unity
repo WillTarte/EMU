@@ -1951,6 +1951,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 534816851}
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 98580899}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &712575785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4881,12 +4892,7 @@ MonoBehaviour:
     Hugo Spehner      - Lead Developer
 
     William
-    Tarte     - In house DJ Tiesto & Developer
-
-    4 Non Blondes     - What''s Up
-    (game won song)
-
-    (Slackcircus cover)  '
+    Tarte     - In house DJ Tiesto & Developer'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: db973d1efbf1c6445836aeb3e45cbd99, type: 2}
   m_sharedMaterial: {fileID: -8360961005017120560, guid: db973d1efbf1c6445836aeb3e45cbd99,
@@ -5709,6 +5715,17 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 534816851}
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 712575782}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
