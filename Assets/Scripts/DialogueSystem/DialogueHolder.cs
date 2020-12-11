@@ -5,9 +5,8 @@ namespace DialogueSystem
 {
     public class DialogueHolder : MonoBehaviour
     {
-        private void OnEnable()
+        private void Start()
         {
-            
             StartCoroutine(DialogueSequence());
         }
         
@@ -15,7 +14,6 @@ namespace DialogueSystem
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                
                 Deactivate();
                 transform.GetChild(i).gameObject.SetActive(true);
                 yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
