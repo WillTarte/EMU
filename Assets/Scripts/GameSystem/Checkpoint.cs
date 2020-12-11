@@ -30,7 +30,7 @@ namespace GameSystem
                 }
             }
         }
-
+    
         void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player") && !enabled)
@@ -40,6 +40,7 @@ namespace GameSystem
                 CheckpointText.enabled = true;
                 Indestructibles.respawnPos = transform.position;
                 GetComponent<SpriteRenderer>().sprite = enabledSprite;
+                GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
         }
     }
