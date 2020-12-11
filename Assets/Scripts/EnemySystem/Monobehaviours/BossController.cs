@@ -1,7 +1,6 @@
 using EnemySystem.ScriptableObjects;
 using EnemySystem.ScriptableObjects.EnemyAttackStrategies;
 using EnemySystem.ScriptableObjects.EnemyMovementStrategies;
-using GameSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeaponsSystem.MonoBehaviours;
@@ -120,12 +119,20 @@ namespace EnemySystem.Monobehaviours
 
         private void LevelTransition()
         {
-            if (gameObject.name == "Babe")
+            switch (gameObject.name)
             {
-                Destroy(gameObject);
-                Indestructibles.LastLevel++;
-                Indestructibles.respawnPos = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
-                SceneManager.LoadScene(Indestructibles.LastLevel);
+                case "Babe":
+                    Destroy(gameObject);
+                    Indestructibles.LastLevel++;
+                    Indestructibles.respawnPos = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
+                    SceneManager.LoadScene(Indestructibles.LastLevel);
+                    break;
+                case "CyborgEmu":
+                    Destroy(gameObject);
+                    Indestructibles.LastLevel = 1;
+                    Indestructibles.respawnPos = Indestructibles.defaultSpawns[0];
+                    SceneManager.LoadScene(4);
+                    break;
             }
         }
 

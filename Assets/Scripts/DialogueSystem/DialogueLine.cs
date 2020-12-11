@@ -10,21 +10,21 @@ namespace DialogueSystem
     public class DialogueLine : Dialogue
     {
         private TextMeshProUGUI textHolder;
+        private Image imageHolder;
         [Header ("Text")]
         [SerializeField] private string input;
         [SerializeField] private float delay;
         [Header ("Image")]
         [SerializeField] private Sprite sprite;
-        [SerializeField] private Image imageHolder;
+        
         private void Awake()
         {
+            imageHolder = gameObject.transform.parent.parent.GetChild(0).GetComponent<Image>();
             textHolder = GetComponent<TextMeshProUGUI>();
             textHolder.text = "";
-            
-            gameObject.SetActive(false);
         }
         
-        private void OnEnable()
+        private void Start()
         {
             imageHolder.sprite = sprite;
             imageHolder.preserveAspect = true;

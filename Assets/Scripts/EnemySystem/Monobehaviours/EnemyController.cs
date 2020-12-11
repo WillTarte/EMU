@@ -23,14 +23,16 @@ namespace EnemySystem.Monobehaviours
 
         private GameObject _player;
         private Vector3 _lastPosition;
-        private float _timer = 2;
-        private bool _gotHit = false;
+        private float _timer = 3;
+        private bool _gotHit;
         private EnemyAttackStrategy _attackStrategy;
         private EnemyMovementStrategy _movementStrategy;
         private AudioSource _audioSource;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         private bool _killed;
+        private Rigidbody2D _rigidbody;
+        private bool Grounded => _rigidbody.velocity.y == 0;
 
         #endregion
 
@@ -39,6 +41,7 @@ namespace EnemySystem.Monobehaviours
             _audioSource = GetComponent<AudioSource>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
+            _rigidbody = GetComponent<Rigidbody2D>();
         }
 
         void Start()
@@ -50,12 +53,12 @@ namespace EnemySystem.Monobehaviours
 
         void Update()
         {
-            _movementStrategy.Move(gameObject.transform, _player.transform);
             _timer -= Time.deltaTime;
+            _lastPosition = gameObject.transform.position;
+            _movementStrategy.Move(gameObject.transform, _player.transform);
             CheckIfStuck();
             IsFacingPlayer();
             _attackStrategy.Attack(_player, gameObject, enemyBehaviourData.damageGiven);
-            _lastPosition = gameObject.transform.position;
         }
 
         public void ReceiveDamage(int amount)
@@ -72,6 +75,7 @@ namespace EnemySystem.Monobehaviours
 
         private IEnumerator Killed()
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             _animator.enabled = false;
             enabled = false;
             _spriteRenderer.sprite = null;
@@ -103,9 +107,12 @@ namespace EnemySystem.Monobehaviours
         /**
          * Make the emu jump if it hits an object on the x-axis
          */
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionStay2D(Collision2D other)
         {
-            JumpOverObstacle(other);
+            if (Grounded)
+            {
+                JumpOverObstacle(other);
+            }
         }
 
         private void JumpOverObstacle(Collision2D other)
@@ -116,7 +123,7 @@ namespace EnemySystem.Monobehaviours
                     && point2D.normal.x > 0.5f
                     || point2D.normal.x < -0.5f)
                 {
-                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
+                    _rigidbody.AddForce(new Vector2(0.0f, jumpForce));
                     break;
                 }
             }
@@ -126,10 +133,10 @@ namespace EnemySystem.Monobehaviours
         {
             if (_timer < 0
                 && Vector3.Distance(_lastPosition, gameObject.transform.position) < 0.05
-                && Vector3.Distance(_lastPosition, gameObject.transform.position) > 0.0)
+                && Vector3.Distance(_lastPosition, gameObject.transform.position) > 0.0 && Grounded)
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
-                _timer = 2;
+                _rigidbody.AddForce(new Vector2(0.0f, jumpForce));
+                _timer = 3;
             }
         }
     }
