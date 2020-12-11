@@ -55,6 +55,34 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
             canShoot = true;
             canReload = true;
         }
+        
+        protected override void SpawnProjectile(WeaponBehaviourScript weapon)
+        {
+            var projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab,
+                weapon.WeaponShootLocation, Quaternion.identity);
+
+            // calculates the angle required to shoot towards the player
+            if (weapon.transform.parent.CompareTag("Boss"))
+            {
+                var player = GameObject.FindWithTag("Player");
+                var emu2 = GameObject.FindWithTag("Boss");
+
+                var direction = player.transform.position - emu2.transform.position;
+                var angleRads = Mathf.Atan2(direction.y, direction.x);
+                var projDir =
+                    Vector2.ClampMagnitude(
+                        new Vector2(weapon.Direction.x, (float) Math.Tan(angleRads) * weapon.Direction.x), 1.0f);
+                projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData,
+                    projDir, !weapon.transform.parent.CompareTag("Player"));
+            }
+            else
+            {
+                projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData,
+                    weapon.Direction, !weapon.transform.parent.CompareTag("Player"));
+            }
+
+            projectile.SetActive(true);
+        }
 
         private void Awake()
         {
