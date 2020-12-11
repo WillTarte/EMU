@@ -43,6 +43,9 @@ namespace Interactables
             {
                 _promptInstance = Instantiate(_promptPrefab, transform.parent.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
                 _promptInstance.GetComponent<TextMesh>().fontSize = _promptTextSize;
+                _promptInstance.GetComponent<MeshRenderer>().sortingLayerName = "Foreground";
+                _promptInstance.GetComponent<MeshRenderer>().sortingOrder = 4;
+
             }
         }
 

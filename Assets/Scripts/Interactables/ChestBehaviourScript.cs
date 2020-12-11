@@ -35,7 +35,7 @@ namespace Interactables
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = _isOpen ? openSprite : closedSprite;
             
-            _triggerCollider = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName};
+            _triggerCollider = new GameObject {layer = LayerMask.NameToLayer("Trigger"), name = GameobjectName, };
             _triggerCollider.transform.parent = transform;
             _triggerCollider.tag = "InteractTrigger";
             _triggerCollider.AddComponent<BoxCollider2D>();

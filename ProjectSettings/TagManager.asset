@@ -57,12 +57,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: First
-    uniqueID: 829774851
+  - name: Background1
+    uniqueID: 3254951001
     locked: 0
-  - name: Second
-    uniqueID: 4219016239
+  - name: Background2
+    uniqueID: 1352436491
     locked: 0
-  - name: Third
-    uniqueID: 350150017
+  - name: MainLayerBack
+    uniqueID: 511434725
+    locked: 0
+  - name: MainLayerMiddle
+    uniqueID: 2212047407
+    locked: 0
+  - name: MainLayerFront
+    uniqueID: 6492291
+    locked: 0
+  - name: Foreground
+    uniqueID: 3317097575
     locked: 0
