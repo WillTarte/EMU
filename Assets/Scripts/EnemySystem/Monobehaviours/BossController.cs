@@ -1,7 +1,6 @@
 using EnemySystem.ScriptableObjects;
 using EnemySystem.ScriptableObjects.EnemyAttackStrategies;
 using EnemySystem.ScriptableObjects.EnemyMovementStrategies;
-using GameSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeaponsSystem.MonoBehaviours;
