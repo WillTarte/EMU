@@ -7,7 +7,7 @@ namespace DialogueSystem
 {
     using TMPro;
     
-    public class DialogueLine : Dialogue
+    public class DialogueLine : MonoBehaviour
     {
         private TextMeshProUGUI textHolder;
         private Image imageHolder;
@@ -24,11 +24,17 @@ namespace DialogueSystem
             textHolder.text = "";
         }
         
-        private void Start()
+        public IEnumerator WriteText()
         {
             imageHolder.sprite = sprite;
             imageHolder.preserveAspect = true;
-            StartCoroutine(WriteText(input, textHolder, delay));
+            foreach (var c in input)
+            {
+                textHolder.text += c;
+                
+                yield return new WaitForSeconds(delay);
+            }
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
