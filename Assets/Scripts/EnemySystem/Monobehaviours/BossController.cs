@@ -1,6 +1,7 @@
 using EnemySystem.ScriptableObjects;
 using EnemySystem.ScriptableObjects.EnemyAttackStrategies;
 using EnemySystem.ScriptableObjects.EnemyMovementStrategies;
+using GameSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeaponsSystem.MonoBehaviours;
@@ -122,7 +123,8 @@ namespace EnemySystem.Monobehaviours
             if (gameObject.name == "Babe")
             {
                 Destroy(gameObject);
-                Indestructibles.LastLevel = 2;
+                Indestructibles.LastLevel++;
+                Indestructibles.respawnPos = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
                 SceneManager.LoadScene(Indestructibles.LastLevel);
             }
         }

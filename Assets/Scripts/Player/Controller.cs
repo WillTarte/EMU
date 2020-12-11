@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameSystem;
 using JetBrains.Annotations;
 using Player.Commands;
 using Player.States;
@@ -14,9 +15,9 @@ namespace Player
     public class Controller : MonoBehaviour
     {
         private readonly float _maxFallthroughTime = 0.5f;
-
+        
         #region Private Variables
-
+        
         [Range(0, 10)] private int _hitPoints = 10;
         private BaseState _currentState;
         private InputHandler _inputHandler;
@@ -97,6 +98,16 @@ namespace Player
         // Start is called before the first frame update
         private void Start()
         {
+            Indestructibles.LastLevel = SceneManager.GetActiveScene().buildIndex;
+            if (Indestructibles.respawnPos != new Vector2(0.0f,0.0f))
+            {
+                transform.position = Indestructibles.respawnPos;
+            }
+            else
+            {
+                transform.position = Indestructibles.defaultSpawns[Indestructibles.LastLevel - 1];
+            }
+            
             _inputHandler = new InputHandler();
 
             EdgeCollider = GetComponent<EdgeCollider2D>();
@@ -361,7 +372,7 @@ namespace Player
             var blood = Instantiate(bloodEffect, transform.position, transform.rotation);
             yield return new WaitForSeconds(1);
             Destroy(blood);
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(Indestructibles.LastLevel);
         }
         
         
