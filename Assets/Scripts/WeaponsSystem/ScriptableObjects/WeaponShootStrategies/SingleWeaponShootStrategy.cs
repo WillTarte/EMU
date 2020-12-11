@@ -52,14 +52,7 @@ namespace WeaponsSystem.ScriptableObjects.WeaponShootStrategies
             canShoot = true;
             canReload = true;
         }
-    
-        protected override void SpawnProjectile(WeaponBehaviourScript weapon)
-        {
-            GameObject projectile = Instantiate(weapon.WeaponData.ProjectileData.ProjectilePrefab, weapon.WeaponShootLocation, Quaternion.identity);
-            projectile.GetComponent<ProjectileBehaviourScript>().Init(weapon.WeaponData.ProjectileData, weapon.Direction, !weapon.transform.parent.CompareTag("Player"));
-            projectile.SetActive(true);
-        }
-    
+
         private void Awake()
         {
             canShoot = DefaultCanShootValue;

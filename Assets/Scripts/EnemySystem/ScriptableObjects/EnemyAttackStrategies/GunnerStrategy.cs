@@ -24,6 +24,10 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
             if (Vector2.Distance(player.transform.position, emu.transform.position) < shootDistanceRangeMax)
             {
                 var weapon = emu.GetComponentInChildren<WeaponBehaviourScript>();
+                if (weapon.CurrentMagazineAmmunition == 0)
+                {
+                    weapon.WeaponData.ShootStrategy.Reload(weapon);
+                }
                 weapon.WeaponData.ShootStrategy.Shoot(weapon);
             }
         }
