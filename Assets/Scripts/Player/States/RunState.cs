@@ -24,6 +24,8 @@ namespace Player.States
             {
                 cmd.Execute(Controller);
             }
+            
+            Controller.Animator.SetInteger("AnimState", 1);
 
             Controller.UpdateTextureDirection();
             Controller.MoveX(Input.GetAxisRaw("Horizontal"));
