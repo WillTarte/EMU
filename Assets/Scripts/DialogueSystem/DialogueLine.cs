@@ -22,15 +22,12 @@ namespace DialogueSystem
             imageHolder = gameObject.transform.parent.parent.GetChild(0).GetComponent<Image>();
             textHolder = GetComponent<TextMeshProUGUI>();
             textHolder.text = "";
-            
-            gameObject.SetActive(false);
         }
         
-        private void OnEnable()
+        private void Start()
         {
             imageHolder.sprite = sprite;
             imageHolder.preserveAspect = true;
-            Debug.Log(input);
             StartCoroutine(WriteText(input, textHolder, delay));
         }
     }

@@ -54,7 +54,7 @@ namespace WeaponsSystem.MonoBehaviours
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Boss"))
             {
                 DoExplosion();
             }
@@ -80,6 +80,10 @@ namespace WeaponsSystem.MonoBehaviours
                 if (hit.CompareTag("Enemy"))
                 {
                     hit.gameObject.GetComponent<EnemyController>()?.ReceiveDamage(_projectileData.ProjectileBaseDamage);
+                }
+                else if (hit.CompareTag("Boss"))
+                {
+                    hit.GetComponent<BossController>().ReceiveDamage(_projectileData.ProjectileBaseDamage);
                 }
                 else if (hit.CompareTag("Player"))
                 {
