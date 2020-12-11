@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupTriggerSize: {x: 2, y: 2}
-  percentageToReplenish: 0
+  percentageToReplenish: 25
   pickupSoundClip: {fileID: 8300000, guid: 4dc0506cc8e327f40b72f688c379bafd, type: 3}

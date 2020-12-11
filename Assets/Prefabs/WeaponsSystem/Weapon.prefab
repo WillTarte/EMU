@@ -145,10 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58e9adf38d7a6846ba4d06fbc4d34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: b81b19b276d5f3c48a741e6a14cd656d, type: 2}
   weaponState: 0
-  currentMagazineAmmunition: 0
-  currentTotalAmmunition: 0
+  currentMagazineAmmunition: 1
+  currentTotalAmmunition: 1
 --- !u!114 &49826601344462349
 MonoBehaviour:
   m_ObjectHideFlags: 0

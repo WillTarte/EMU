@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using GameSystem;
 using JetBrains.Annotations;
 using Player.Commands;
 using Player.States;
