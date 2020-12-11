@@ -110,7 +110,7 @@ namespace EnemySystem.Monobehaviours
                     Mathf.Abs(gameObject.transform.position.y - _player.transform.position.y) < 0.5 && 
                     !_startBattle)
                 {
-                    GameObject.Find("Grid").transform.GetChild(0).gameObject.SetActive(true);
+                    GameObject.Find("Grid")?.transform.Find("BossBlocks")?.gameObject.SetActive(true);
                     _startBattle = true;
                     UpdateBossHealthBarHUD(healthPoints);
                 }
