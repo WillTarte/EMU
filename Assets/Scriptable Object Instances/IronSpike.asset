@@ -34,7 +34,7 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 1
+  m_ColliderType: 2
   TileSprite: {fileID: -1929834416523346238, guid: e1a2afb1f8f971842a05df992837888d,
     type: 3}
   TileAssociatedPrefab: {fileID: 1185636220084658051, guid: 437a317da3deaee4b9729cec546c0a58,
