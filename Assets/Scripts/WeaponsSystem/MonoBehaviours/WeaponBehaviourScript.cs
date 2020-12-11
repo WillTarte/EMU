@@ -34,7 +34,7 @@ namespace WeaponsSystem.MonoBehaviours
                     if (gameObject.transform.parent.CompareTag("Player"))
                     {
                         return (Vector2) parent.transform.position +
-                               new Vector2(sprite.bounds.extents.x, sprite.bounds.extents.y);
+                               new Vector2(sprite.bounds.extents.x, 0);
                     }
                     return parent.transform.position;
                 }

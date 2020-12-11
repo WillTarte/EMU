@@ -135,6 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aliveTime: 3.5
   explosionRadius: 4
-  force: {x: 9, y: 7}
+  force: {x: 11, y: 7}
   explosionVFXPrefab: {fileID: 475600541225742035, guid: 4e019812b0c252647b2abddef2d83b2f,
     type: 3}
