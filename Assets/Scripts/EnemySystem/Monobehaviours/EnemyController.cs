@@ -75,6 +75,7 @@ namespace EnemySystem.Monobehaviours
 
         private IEnumerator Killed()
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             _animator.enabled = false;
             enabled = false;
             _spriteRenderer.sprite = null;
