@@ -40,6 +40,10 @@ namespace Interactables
                 {
                     hit.GetComponent<EnemyController>()?.ReceiveDamage(damageAmount);
                 }
+                else if (hit.CompareTag("Boss"))
+                {
+                    hit.GetComponent<BossController>().ReceiveDamage(damageAmount);
+                }
                 else if (hit.CompareTag("Player"))
                 {
                     var playerController = hit.GetComponent<Controller>();
