@@ -17,7 +17,7 @@ MonoBehaviour:
   maxAmmunitionCount: 9999
   fireRate: 0.7
   reloadTime: 0
-  projectileData: {fileID: 11400000, guid: 7d6dd0663f7033d42b82d85a828005b4, type: 2}
+  projectileData: {fileID: 11400000, guid: 210e4f3c99a798d4788957c1dff3458c, type: 2}
   shootStrategy: {fileID: 11400000, guid: 4ca44fd5d94a0ca48b957711bdfbee06, type: 2}
   onGroundSprite: {fileID: -5949048694633569530, guid: f4b0836ebee1e074f84a8c3c05b48ece,
     type: 3}
