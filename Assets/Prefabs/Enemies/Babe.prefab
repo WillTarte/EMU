@@ -72,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingLayerID: -977869721
+  m_SortingLayer: 6
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7757228988888353742, guid: 8d5f2daa046939f4f9f291622b39581b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -148,8 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 100
   enemyBehaviourData: {fileID: 11400000, guid: 1f12270e173668a468af7d38fc6f9530, type: 2}
-  jumpForce: 300
-  bloodEffect: {fileID: 0}
+  startBattleRange: 0
 --- !u!95 &3141809483069115859
 Animator:
   serializedVersion: 3
