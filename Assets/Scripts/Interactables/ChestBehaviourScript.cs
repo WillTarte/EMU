@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using WeaponsSystem.MonoBehaviours;
@@ -100,6 +101,8 @@ namespace Interactables
 
         static WeaponDataDictionary()
         {
+            // I'll leave this here in case
+            /*#if UNITY_EDITOR
             weaponDataDictionary = new Dictionary<WeaponName, WeaponData>()
             {
                 {WeaponName.AssaultRifle, (WeaponData) AssetDatabase.LoadAssetAtPath("Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/AssaultRifleData.asset", typeof(WeaponData))},
@@ -108,6 +111,18 @@ namespace Interactables
                 {WeaponName.Knife, (WeaponData) AssetDatabase.LoadAssetAtPath("Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/KnifeData.asset", typeof(WeaponData))},
                 {WeaponName.Grenade, (WeaponData) AssetDatabase.LoadAssetAtPath("Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/GrenadeData.asset", typeof(WeaponData))}
             };
+            #else*/
+            Debug.Log(Path.Combine(Application.streamingAssetsPath, "/AssetBundles/scriptableobjectinstances"));
+            var assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/scriptableobjectinstances"));
+            weaponDataDictionary = new Dictionary<WeaponName, WeaponData>()
+            {
+                {WeaponName.AssaultRifle, assetBundle.LoadAsset<WeaponData>("AssaultRifleData")},
+                {WeaponName.Sniper, assetBundle.LoadAsset<WeaponData>("SniperData")},
+                {WeaponName.Shotgun, assetBundle.LoadAsset<WeaponData>("ShotgunData")},
+                {WeaponName.Knife, assetBundle.LoadAsset<WeaponData>("KnifeData")},
+                {WeaponName.Grenade, assetBundle.LoadAsset<WeaponData>("GrenadeData")}
+            };
+            //#endif
         }
     }
 

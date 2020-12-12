@@ -1,0 +1,126 @@
+ManifestFileVersion: 0
+CRC: 457271088
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f0ba35c582c2acf79967ae461fce7a10
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 39255a6f1659302a979a65edb9e44bbc
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: ce397d909fa048f0aa0b4c5082e63b54, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d7c455a07aa848dcbda3d18a3c3493e8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 696c93f09ed24364bb322118c6879af7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 76d77c81201e33f4b90eaeb4cccebce8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 690ace13da474fe2a899b9209cbb941a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dbfa6e24526d8ab4c99acd1b739053ad, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 96a6253426304dc8b6bb1c3e66614e5d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 759fa2a4914f0c3479b492a8fa71ee1c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8f06c1c46c3fb4b449862c559702cb2a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4a5f3fc496077e34f8a3e0d659c931b5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ec3d819572134bec8a698905ef4fcff2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e157d1566e1d48a0b1e321c2da271606, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 86eb02663673d86488a14c8eb581eb94, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 40995d67ffa7b3f4098b06179b2fad8d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a04aef09d12885f46b07c84c5c2d2017, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f89b99393d84492c8cfa7097e3e19757, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8cba1c5b4ab53d245845427d67d7317f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9720499b211290547922097a1cb20194, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5ab1fc7dfab4e6d46accd05fb4ddd0e5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc4a16dd9d1056b4697c74627f9f13b5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aa72f39fc72547a69be79d69485364a3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7db4e2bfa67747a98c335a595639fb91, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Scriptable Object Instances/EnemySystem/EnemyMovementStrategy/FollowTargetMelee.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyAttackStrategies/CyborgAttackStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/Enemy/EnemyAutoWeaponData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/KnifeData.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyBehaviourData/MeleeBehaviour.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyAttackStrategies/MeleeAttackStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ProjectileData/SniperProjectileData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/ShotgunData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ProjectileData/ShotgunShellData.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyAttackStrategies/KamikazeAttackStrategy.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyBehaviourData/KamikazeBehaviourData.asset
+- Assets/Scriptable Object Instances/IronSpike.asset
+- Assets/Scriptable Object Instances/BreakableBridgeTile.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ShootStrategies/AssaultRifleShootStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ProjectileData/AssaultRifleProjectileData.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyAttackStrategies/GunnerAttackStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ShootStrategies/ShotgunShootStrategy.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyAttackStrategies/BabeAttackStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ShootStrategies/KnifeShootStrategy.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyMovementStrategy/KeepDistanceStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ShootStrategies/GrenadeShootStrategy.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyBehaviourData/GunnerBehaviourData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ProjectileData/Enemy/EnemyProjectileData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/AssaultRifleData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ProjectileData/Enemy/CyborgLaser.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyMovementStrategy/CyborgMovementStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/Enemy/CyborgData.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyMovementStrategy/FollowTargetKamikaze.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyMovementStrategy/BabeMovementStrategy.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/GrenadeData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/WeaponData/SniperData.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyBehaviourData/BabeBehaviourData.asset
+- Assets/Scriptable Object Instances/EnemySystem/EnemyBehaviourData/CyborgBehaviourData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ProjectileData/GrenadeProjectileData.asset
+- Assets/Scriptable Object Instances/WeaponsSystem/ShootStrategies/SniperShootStrategy.asset
+Dependencies: []
