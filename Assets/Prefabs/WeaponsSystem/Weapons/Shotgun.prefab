@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 5508119621658172469, guid: 86d05a2cf08b946469945e619525533a,
         type: 3}
       propertyPath: m_Name
-      value: Weapon (2)
+      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5508119621658172469, guid: 86d05a2cf08b946469945e619525533a,
         type: 3}
@@ -86,12 +86,12 @@ PrefabInstance:
     - target: {fileID: 8559511042453291940, guid: 86d05a2cf08b946469945e619525533a,
         type: 3}
       propertyPath: currentMagazineAmmunition
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8559511042453291940, guid: 86d05a2cf08b946469945e619525533a,
         type: 3}
       propertyPath: currentTotalAmmunition
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86d05a2cf08b946469945e619525533a, type: 3}

@@ -16,7 +16,7 @@ namespace DialogueSystem
             {
                 Deactivate();
                 transform.GetChild(i).gameObject.SetActive(true);
-                yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
+                yield return StartCoroutine(transform.GetChild(i).GetComponent<DialogueLine>().WriteText());
             }
             gameObject.transform.parent.gameObject.SetActive(false);
         }

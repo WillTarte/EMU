@@ -15,6 +15,8 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
         private Vector2 _lastPosition = new Vector2(0, 0);
         private bool _onStart = true;
         private int _thirdFrame = 2;
+        private float _waitBeforeFirstShot = 0.3f;
+        private float _startShootingTime = 0f;
         private static readonly int Attacking = Animator.StringToHash("Attacking");
 
         public override void Attack(GameObject player, GameObject emu, int damageGiven)
@@ -67,13 +69,18 @@ namespace EnemySystem.ScriptableObjects.EnemyAttackStrategies
                 {
                     weapon.WeaponData.ShootStrategy.Reload(weapon);
                 }
-                emu.gameObject.GetComponent<Animator>().SetBool(Attacking, true);
-                weapon.WeaponData.ShootStrategy.Shoot(weapon);
+
+                if (_startShootingTime <= Time.time)
+                {
+                    emu.gameObject.GetComponent<Animator>().SetBool(Attacking, true);
+                    weapon.WeaponData.ShootStrategy.Shoot(weapon);
+                }
             }
             else
             {
                 _lastPosition = emuPos;
                 emu.gameObject.GetComponent<Animator>().SetBool(Attacking, false);
+                _startShootingTime = Time.time + _waitBeforeFirstShot;
             }
         }
     }
